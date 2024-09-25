@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Game">
+      <UniqueIdentifier>{f69fa607-8632-49a0-8625-8170e1fafc9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{6050fc03-e01e-4d6f-a167-9ecbc4d5de4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Scene">
+      <UniqueIdentifier>{ff900a72-378b-47ff-8a53-bf3dff6339d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Scene\Scene">
+      <UniqueIdentifier>{cf47c654-6e1d-4408-b328-25ad9770b474}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Window">
+      <UniqueIdentifier>{37d18c9c-b993-457f-bf67-2e10475a65e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\File">
+      <UniqueIdentifier>{85fcc163-5b66-4ce1-94dd-9ad5ba6057e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Scene\SceneManager">
+      <UniqueIdentifier>{c8f4b05b-ef7d-45f0-8ea3-d68d3c880952}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Window\Icon">
+      <UniqueIdentifier>{d9aeac34-9444-4332-9a08-111596a8fed6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Window\Window">
+      <UniqueIdentifier>{de93ba80-a1c1-4c38-91a2-92f5d2fce232}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Start">
+      <UniqueIdentifier>{5680086a-9598-4561-aa9e-72664bd6302f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="File.cpp">
+      <Filter>Engine\File</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Engine\Scene\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Icon.cpp">
+      <Filter>Engine\Window\Icon</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Engine\Window\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Start.cpp">
+      <Filter>Game\Start</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Scene.h">
+      <Filter>Engine\Scene\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="File.h">
+      <Filter>Engine\File</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Engine\Scene\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Icon.h">
+      <Filter>Engine\Window\Icon</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Engine\Window\Window</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

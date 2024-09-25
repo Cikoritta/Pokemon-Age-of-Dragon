@@ -1,0 +1,4 @@
+create_size.x = "1280";
+create_size.y = "720";
+framerate_limit = "60";
+style = "4";
