@@ -35,7 +35,7 @@ namespace Style
     /// \brief Enumeration of the window styles
     ///
     ////////////////////////////////////////////////////////////
-    enum Style
+    enum
     {
         None       = 0,      //!< No border / title bar (this flag and all others are mutually exclusive)
         Titlebar   = 1 << 0, //!< Title bar + fixed border

@@ -14,6 +14,9 @@ public:
 	SceneManager(Scene* first_scene);
 
 
+	static void 			returnStart();
+
+
 	static void				setScene(Scene* scene);
 
 	static Scene*			getScene();

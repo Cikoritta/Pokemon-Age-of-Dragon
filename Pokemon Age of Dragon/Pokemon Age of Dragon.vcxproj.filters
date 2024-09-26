@@ -31,6 +31,24 @@
     <Filter Include="Game\Start">
       <UniqueIdentifier>{5680086a-9598-4561-aa9e-72664bd6302f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Drawable">
+      <UniqueIdentifier>{4bce76df-ff26-49b4-a95c-0fed266da20e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scene">
+      <UniqueIdentifier>{eccb3f39-3412-408a-ba6c-ff36cf2598be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scene\MainMenu">
+      <UniqueIdentifier>{2f617e63-c04b-4a73-8d7a-154cebd59657}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Drawable\Sprite">
+      <UniqueIdentifier>{a5acaf86-0427-4c92-b485-9400017f408e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Drawable\Text">
+      <UniqueIdentifier>{1a76a64e-3073-42a1-bf5a-f9882a256b7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Drawable\Drawable">
+      <UniqueIdentifier>{5f2d4b29-6095-4ea9-9038-21d748210cfa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="File.cpp">
@@ -48,6 +66,15 @@
     <ClCompile Include="Start.cpp">
       <Filter>Game\Start</Filter>
     </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>Game\Scene\MainMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleSprite.cpp">
+      <Filter>Engine\Drawable\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleText.cpp">
+      <Filter>Engine\Drawable\Text</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -64,6 +91,18 @@
     </ClInclude>
     <ClInclude Include="Window.h">
       <Filter>Engine\Window\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>Game\Scene\MainMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="Drawable.h">
+      <Filter>Engine\Drawable\Drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleSprite.h">
+      <Filter>Engine\Drawable\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleText.h">
+      <Filter>Engine\Drawable\Text</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -15,6 +15,12 @@ SceneManager::SceneManager(Scene* first_scene)
 }
 
 
+void SceneManager::returnStart()
+{
+	start_completed = false;
+}
+
+
 void SceneManager::setScene(Scene* scene)
 {
 	current_scene = scene;

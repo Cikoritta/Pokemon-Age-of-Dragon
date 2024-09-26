@@ -135,15 +135,22 @@
   <ItemGroup>
     <ClCompile Include="File.cpp" />
     <ClCompile Include="Icon.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SimpleSprite.cpp" />
+    <ClCompile Include="SimpleText.cpp" />
     <ClCompile Include="Start.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Drawable.h" />
     <ClInclude Include="File.h" />
     <ClInclude Include="Icon.h" />
+    <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SimpleSprite.h" />
+    <ClInclude Include="SimpleText.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
