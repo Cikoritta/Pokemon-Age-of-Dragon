@@ -6,6 +6,8 @@ class MainMenu : public Scene
 {
 	SimpleSprite sprite1;
 
+	SimpleSprite sprite2;
+
 	void texture() override;
 
 	void sprite() override;

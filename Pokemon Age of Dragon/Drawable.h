@@ -22,9 +22,14 @@ protected:
 
 	sf::Vector2f size = sf::Vector2f(0.0f, 0.0f);
 
+
+	sf::Sprite* start_position = nullptr;
+
 public:
 
 	virtual void		 setPosition(float x, float y) = 0;
+
+	virtual void		 setPosition(sf::Sprite* start_position, float x, float y) = 0;
 
 	sf::Vector2f		 getPosition()
 	{
