@@ -3,25 +3,13 @@
 
 void MainMenu::texture()
 {
-	sprite1.setTexture("Data/Textures/MainMenu/exit_background.png");
-	sprite2.setFont("Data/Textures/Font/Retron2000.ttf");
+	sprite1.setTexture("Data/Textures/MainMenu/image.png", sf::IntRect(0,0,200,200));
 }
 
 void MainMenu::sprite()
 {
 	sprite1.setPosition(0.5f, 0.5f);
 	sprite1.setOrigin(0.5f, 0.5f);
-	sprite1.setScale(5.0f, 5.0f);
-
-	sprite2.setString(L"Hello");
-	sprite2.getText()->setFillColor(sf::Color::Black);
-	sprite2.setPosition(sprite1.getSprite(), 1.0f, 1.0f);
-	sprite2.setOrigin(0.5f, 0.5f);
-	
-
-	a.setFillColor(sf::Color::Red);
-	a.setPosition(100, 100);
-	a.setSize(sf::Vector2f(1,1));
 }
 
 
@@ -32,19 +20,35 @@ void MainMenu::start()
 
 void MainMenu::update()
 {
-	
+	sprite1.longAnimate(LongAnimation(0.1f, 200, 200, false));
+
+	if (bol)
+	{
+		sprite1.longAnimate(LongAnimation(0.2f, 200, 200, false));
+	}
 }
 
 void MainMenu::events()
 {
-	
+	if (event->type == event->KeyReleased && event->key.code == sf::Keyboard::F1)
+	{
+		bol = true;
+	}
+	if (event->type == event->KeyReleased && event->key.code == sf::Keyboard::F2)
+	{
+		sprite1.repeatAnimation();
+	}
+	if (event->type == event->KeyReleased && event->key.code == sf::Keyboard::F3)
+	{
+		printf( "%d %d %f %d\n", sprite1.getCurrentAnimation().pixel_interval_x, sprite1.getCurrentAnimation().pixel_interval_y, sprite1.getCurrentAnimation().time_interval, sprite1.getCurrentAnimation().repeat);
+	}
+	if (event->type == event->KeyReleased && event->key.code == sf::Keyboard::F4)
+	{
+		sprite1.setState(!sprite1.getState());
+	}
 }
 
 void MainMenu::render()
 {
 	sprite1.draw();
-
-	sprite2.draw();
-
-	Window::getWindow()->draw(a);
 }

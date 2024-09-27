@@ -49,6 +49,15 @@
     <Filter Include="Engine\Drawable\Drawable">
       <UniqueIdentifier>{5f2d4b29-6095-4ea9-9038-21d748210cfa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Drawable\Sprite\SimpleSprite">
+      <UniqueIdentifier>{a062de99-d716-4936-983f-e43f8ddcd551}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Drawable\Text\SimpleText">
+      <UniqueIdentifier>{eb8fa271-91b3-435a-bc88-247388a01110}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Drawable\Sprite\AnimatedSprite">
+      <UniqueIdentifier>{a532f844-0978-4d6b-af80-4d8a3f5977b1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="File.cpp">
@@ -70,10 +79,13 @@
       <Filter>Game\Scene\MainMenu</Filter>
     </ClCompile>
     <ClCompile Include="SimpleSprite.cpp">
-      <Filter>Engine\Drawable\Sprite</Filter>
+      <Filter>Engine\Drawable\Sprite\SimpleSprite</Filter>
     </ClCompile>
     <ClCompile Include="SimpleText.cpp">
-      <Filter>Engine\Drawable\Text</Filter>
+      <Filter>Engine\Drawable\Text\SimpleText</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedSprite.cpp">
+      <Filter>Engine\Drawable\Sprite\AnimatedSprite</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -99,10 +111,13 @@
       <Filter>Engine\Drawable\Drawable</Filter>
     </ClInclude>
     <ClInclude Include="SimpleSprite.h">
-      <Filter>Engine\Drawable\Sprite</Filter>
+      <Filter>Engine\Drawable\Sprite\SimpleSprite</Filter>
     </ClInclude>
     <ClInclude Include="SimpleText.h">
-      <Filter>Engine\Drawable\Text</Filter>
+      <Filter>Engine\Drawable\Text\SimpleText</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedSprite.h">
+      <Filter>Engine\Drawable\Sprite\AnimatedSprite</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

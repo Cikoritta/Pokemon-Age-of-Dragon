@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnimatedSprite.cpp" />
     <ClCompile Include="File.cpp" />
     <ClCompile Include="Icon.cpp" />
     <ClCompile Include="MainMenu.cpp" />
@@ -143,6 +144,7 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimatedSprite.h" />
     <ClInclude Include="Drawable.h" />
     <ClInclude Include="File.h" />
     <ClInclude Include="Icon.h" />

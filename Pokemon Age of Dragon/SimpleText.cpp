@@ -29,11 +29,29 @@ void SimpleText::setPosition(float x, float y)
 {
     position = sf::Vector2f(x, y);
 
-    float position_x = (Window::getWindow()->getSize().x * x) - (getSize().x * getOrigin().x);
-    real_position.x = Window::getWindow()->getSize().x * x;
+    float position_x; float position_y;
 
-    float position_y = (Window::getWindow()->getSize().y * y) - (getSize().y * getOrigin().y);
-    real_position.y = Window::getWindow()->getSize().y * y;
+    if (x > 0.0000f)
+    {
+        position_x = (Window::getWindow()->getSize().x * x) - (getSize().x * getOrigin().x);
+        real_position.x = Window::getWindow()->getSize().x * x;
+    }
+    else
+    {
+        position_x = Window::getWindow()->getSize().x - (getSize().x * getOrigin().x);
+        real_position.x = Window::getWindow()->getSize().x;
+    }
+
+    if (y > 0.0000f)
+    {
+        position_y = (Window::getWindow()->getSize().y * y) - (getSize().y * getOrigin().y);
+        real_position.y = Window::getWindow()->getSize().y * y;
+    }
+    else
+    {
+        position_y = Window::getWindow()->getSize().y - (getSize().y * getOrigin().y);
+        real_position.y = Window::getWindow()->getSize().y;
+    }
 
     text.setPosition(position_x, position_y);
 }
@@ -44,11 +62,29 @@ void SimpleText::setPosition(sf::Sprite* start_position, float x, float y)
 
     this->start_position = start_position;
 
-    float position_x = ((start_position->getPosition().x + (start_position->getGlobalBounds().width * x)) - text.getGlobalBounds().left) - (text.getGlobalBounds().width * getOrigin().x);
-    real_position.x = start_position->getPosition().x + (start_position->getGlobalBounds().width * x);
+    float position_x; float position_y;
 
-    float position_y = ((start_position->getPosition().y + (start_position->getGlobalBounds().height * y)) - text.getGlobalBounds().top) - (text.getGlobalBounds().height * getOrigin().y);
-	real_position.y = start_position->getPosition().y + (start_position->getGlobalBounds().height * y);
+    if (x > 0.0000f)
+    {
+        position_x = ((start_position->getPosition().x + (start_position->getGlobalBounds().width * x)) - (text.getGlobalBounds().width * getOrigin().x) - text.getLocalBounds().left);
+        real_position.x = start_position->getPosition().x + (start_position->getGlobalBounds().width * x);
+    }
+    else
+    {
+        position_x = start_position->getPosition().x - (text.getGlobalBounds().width * getOrigin().x) - text.getLocalBounds().left;
+        real_position.x = start_position->getPosition().x - text.getLocalBounds().left;
+    }
+
+    if (y > 0.0000f)
+    {
+        position_y = ((start_position->getPosition().y + (start_position->getGlobalBounds().height * y)) - (text.getGlobalBounds().height * getOrigin().y) - text.getLocalBounds().top);
+        real_position.y = start_position->getPosition().y + (start_position->getGlobalBounds().height * y);
+    }
+    else
+    {
+        position_y = start_position->getPosition().y - (text.getGlobalBounds().height * getOrigin().y) - text.getLocalBounds().top;
+        real_position.y = start_position->getPosition().y - text.getLocalBounds().top;
+    }
 
     text.setPosition(position_x, position_y);
 }

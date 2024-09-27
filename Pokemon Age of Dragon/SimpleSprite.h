@@ -3,6 +3,8 @@
 
 class SimpleSprite : public Drawable
 {
+protected:
+
 	sf::Sprite		sprite;
 
 	sf::Texture		texture;

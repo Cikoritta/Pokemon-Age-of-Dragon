@@ -31,6 +31,7 @@ public:
 
 	virtual void		 setPosition(sf::Sprite* start_position, float x, float y) = 0;
 
+
 	sf::Vector2f		 getPosition()
 	{
 		return position;
