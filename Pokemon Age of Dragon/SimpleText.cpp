@@ -42,10 +42,12 @@ void SimpleText::setPosition(sf::Sprite* start_position, float x, float y)
 {
     position = sf::Vector2f(x, y);
 
-    float position_x = (start_position->getPosition().x + (start_position->getGlobalBounds().width * x)) - (getSize().x * getOrigin().x);
+    this->start_position = start_position;
+
+    float position_x = ((start_position->getPosition().x + (start_position->getGlobalBounds().width * x)) - text.getGlobalBounds().left) - (text.getGlobalBounds().width * getOrigin().x);
     real_position.x = start_position->getPosition().x + (start_position->getGlobalBounds().width * x);
 
-    float position_y = (start_position->getPosition().y + (start_position->getGlobalBounds().height * y)) - (getSize().y * getOrigin().y);
+    float position_y = ((start_position->getPosition().y + (start_position->getGlobalBounds().height * y)) - text.getGlobalBounds().top) - (text.getGlobalBounds().height * getOrigin().y);
 	real_position.y = start_position->getPosition().y + (start_position->getGlobalBounds().height * y);
 
     text.setPosition(position_x, position_y);

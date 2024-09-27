@@ -1,12 +1,17 @@
 #pragma once
 #include "Scene.h"
 #include "SimpleSprite.h"
+#include "SimpleText.h"
+
+#include <SFML/Graphics.hpp>
 
 class MainMenu : public Scene
 {
 	SimpleSprite sprite1;
 
-	SimpleSprite sprite2;
+	SimpleText sprite2;
+
+	sf::RectangleShape a;
 
 	void texture() override;
 
