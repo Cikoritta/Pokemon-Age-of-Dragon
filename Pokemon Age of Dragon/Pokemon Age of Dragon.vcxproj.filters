@@ -58,6 +58,12 @@
     <Filter Include="Engine\Drawable\Sprite\AnimatedSprite">
       <UniqueIdentifier>{a532f844-0978-4d6b-af80-4d8a3f5977b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Drawable\Sprite\SplitSprite">
+      <UniqueIdentifier>{d2bb2331-3407-4547-894e-152490df562f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Drawable\Moving">
+      <UniqueIdentifier>{cf67ddbd-2c72-4612-b3f5-3cadd382f420}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="File.cpp">
@@ -86,6 +92,9 @@
     </ClCompile>
     <ClCompile Include="AnimatedSprite.cpp">
       <Filter>Engine\Drawable\Sprite\AnimatedSprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Moving.cpp">
+      <Filter>Engine\Drawable\Moving</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +127,15 @@
     </ClInclude>
     <ClInclude Include="AnimatedSprite.h">
       <Filter>Engine\Drawable\Sprite\AnimatedSprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Engine\Drawable\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Engine\Drawable\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Moving.h">
+      <Filter>Engine\Drawable\Moving</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

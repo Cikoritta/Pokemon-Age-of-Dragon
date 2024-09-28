@@ -30,23 +30,23 @@ void SimpleSprite::setPosition(float x, float y)
     if (x > 0.0000f)
     {
         position_x = (Window::getWindow()->getSize().x * x) - (getSize().x * getOrigin().x);
-        real_position.x = Window::getWindow()->getSize().x * x;
+        real_position.x = (float)Window::getWindow()->getSize().x * x;
     }
     else
     {
         position_x = Window::getWindow()->getSize().x - (getSize().x * getOrigin().x);
-        real_position.x = Window::getWindow()->getSize().x;
+        real_position.x = (float)Window::getWindow()->getSize().x;
     }
 
     if (y > 0.0000f)
     {
         position_y = (Window::getWindow()->getSize().y * y) - (getSize().y * getOrigin().y);
-        real_position.y = Window::getWindow()->getSize().y * y;
+        real_position.y = (float)Window::getWindow()->getSize().y * y;
     }
     else
     {
         position_y = Window::getWindow()->getSize().y - (getSize().y * getOrigin().y);
-        real_position.y = Window::getWindow()->getSize().y;
+        real_position.y = (float)Window::getWindow()->getSize().y;
     }
 
     sprite.setPosition(position_x, position_y);
@@ -120,6 +120,124 @@ void SimpleSprite::setScale(float x, float y)
 sf::Vector2f SimpleSprite::getSize()
 {
     return sf::Vector2f(sprite.getGlobalBounds().width, sprite.getGlobalBounds().height);
+}
+
+void SimpleSprite::move(Move move)
+{
+    if (!move_end)
+    {
+        if (!clock_restart)
+        {
+            if (sprite.getPosition().x < current_move.position.x)
+            {
+                move_direction.x = true;
+            }
+            if (sprite.getPosition().y < current_move.position.y)
+            {
+                move_direction.y = true;
+            }
+
+            distance = sf::Vector2f(abs(current_move.position.x - sprite.getPosition().x), abs(current_move.position.y - sprite.getPosition().y));
+
+            scale_factor = fmax(distance.x, distance.y) / fmin(distance.x, distance.y);
+            
+            end_position = sf::Vector2f(current_move.position.x - (getSize().x * getOrigin().x), current_move.position.y - (getSize().y * getOrigin().y));
+
+            if (distance.x > distance.y)
+            {
+                x_larger_y = true;
+            }
+
+            clock.restart();
+
+            clock_restart = true;
+        }
+
+        if (clock.getElapsedTime().asSeconds() >= current_move.time_interval)
+        {
+            if ((move_direction.x && sprite.getPosition().x < end_position.x) || (!move_direction.x && sprite.getPosition().x > end_position.x))
+            {
+                if (x_larger_y)
+                {
+                    if (move_direction.x)
+                    {
+                        sprite.setPosition(sprite.getPosition().x + (current_move.pixel_interval * scale_factor), sprite.getPosition().y);
+                    }
+                    else
+                    {
+                        sprite.setPosition(sprite.getPosition().x - (current_move.pixel_interval * scale_factor), sprite.getPosition().y);
+                    }
+                }
+                else
+                {
+                    if (move_direction.x)
+                    {
+                        sprite.setPosition(sprite.getPosition().x + current_move.pixel_interval, sprite.getPosition().y);
+                    }
+                    else
+                    {
+                        sprite.setPosition(sprite.getPosition().x - current_move.pixel_interval, sprite.getPosition().y);
+                    }
+                }
+            }
+            else
+            {
+                move_end_direction.x = true;
+            }
+
+            if ((move_direction.y && sprite.getPosition().y < end_position.y) || (!move_direction.y && sprite.getPosition().y > end_position.y))
+            {
+                if (x_larger_y)
+                {
+                    if (move_direction.y)
+                    {
+                        sprite.setPosition(sprite.getPosition().x, sprite.getPosition().y + current_move.pixel_interval);
+                    }
+                    else
+                    {
+                        sprite.setPosition(sprite.getPosition().x, sprite.getPosition().y - current_move.pixel_interval);
+                    }
+                }
+                else
+                {
+                    if (move_direction.y)
+                    {
+                        sprite.setPosition(sprite.getPosition().x, sprite.getPosition().y + (current_move.pixel_interval * scale_factor));
+                    }
+                    else
+                    {
+                        sprite.setPosition(sprite.getPosition().x, sprite.getPosition().y - (current_move.pixel_interval * scale_factor));
+                    }
+                }
+            }
+            else
+            {
+                move_end_direction.y = true;
+            }
+
+            
+
+            clock.restart();
+        }
+
+        if (move_end_direction.x && move_end_direction.y)
+        {
+            sprite.setPosition(current_move.position.x - (getSize().x * getOrigin().x), current_move.position.y - (getSize().y * getOrigin().y));
+
+            previous_move = move.getID();
+
+            move_end = true;
+        }
+    }
+    else
+    {
+        if (current_move.getID() != move.getID() && previous_move != move.getID())
+        {
+            current_move = move;
+
+			move_end = false;
+        }
+    }
 }
 
 void SimpleSprite::draw()

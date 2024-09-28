@@ -1,7 +1,8 @@
 #pragma once
 #include "Drawable.h"
+#include "Moving.h"
 
-class SimpleSprite : public Drawable
+class SimpleSprite : public Drawable, public Moving
 {
 protected:
 
@@ -26,6 +27,9 @@ public:
 	void			setScale(float x, float y) override;
 
 	sf::Vector2f	getSize() override;
+
+
+	void			move(Move move) override;
 
 
 	void			draw() override;

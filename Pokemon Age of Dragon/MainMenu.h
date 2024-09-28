@@ -1,14 +1,12 @@
 #pragma once
 #include "Scene.h"
-#include "SimpleSprite.h"
-#include "SimpleText.h"	
-#include "AnimatedSprite.h"
+#include "Sprite.h"
 
 class MainMenu : public Scene
 {
-	AnimatedSprite sprite1;
+	SimpleSprite sprite1;
 
-	bool bol = false;
+	bool move = false;
 
 	void texture() override;
 

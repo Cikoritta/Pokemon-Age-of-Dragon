@@ -20,31 +20,19 @@ void MainMenu::start()
 
 void MainMenu::update()
 {
-	sprite1.longAnimate(LongAnimation(0.1f, 200, 200, false));
-
-	if (bol)
+	if (move)
 	{
-		sprite1.longAnimate(LongAnimation(0.2f, 200, 200, false));
+		sprite1.move(Move(Window::getWindow()->getSize().x , Window::getWindow()->getSize().y, 0.001f, 1));
 	}
+
+	printf( "%d\n", sprite1.isMoveEnd());
 }
 
 void MainMenu::events()
 {
 	if (event->type == event->KeyReleased && event->key.code == sf::Keyboard::F1)
 	{
-		bol = true;
-	}
-	if (event->type == event->KeyReleased && event->key.code == sf::Keyboard::F2)
-	{
-		sprite1.repeatAnimation();
-	}
-	if (event->type == event->KeyReleased && event->key.code == sf::Keyboard::F3)
-	{
-		printf( "%d %d %f %d\n", sprite1.getCurrentAnimation().pixel_interval_x, sprite1.getCurrentAnimation().pixel_interval_y, sprite1.getCurrentAnimation().time_interval, sprite1.getCurrentAnimation().repeat);
-	}
-	if (event->type == event->KeyReleased && event->key.code == sf::Keyboard::F4)
-	{
-		sprite1.setState(!sprite1.getState());
+		move = true;
 	}
 }
 
