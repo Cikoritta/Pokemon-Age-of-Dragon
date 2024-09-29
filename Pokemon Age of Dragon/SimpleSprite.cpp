@@ -137,7 +137,27 @@ void SimpleSprite::move(Move move)
                 move_direction.y = true;
             }
 
-            distance = sf::Vector2f(abs(current_move.position.x - sprite.getPosition().x), abs(current_move.position.y - sprite.getPosition().y));
+            if ((sprite.getPosition().x > current_move.position.x) && sprite.getPosition().y > current_move.position.y)
+            {
+                distance = sf::Vector2f(abs(sprite.getPosition().x - current_move.position.x) + (getSize().x * getOrigin().x), abs(sprite.getPosition().y - current_move.position.y) + (getSize().y * getOrigin().y));
+            }
+            else if ((sprite.getPosition().x < current_move.position.x) && sprite.getPosition().y < current_move.position.y)
+            {
+                distance = sf::Vector2f(abs(sprite.getPosition().x - current_move.position.x) - (getSize().x * getOrigin().x), abs(sprite.getPosition().y - current_move.position.y) - (getSize().y * getOrigin().y));
+            }
+            else if ((sprite.getPosition().x < current_move.position.x) && sprite.getPosition().y > current_move.position.y)
+            {
+                distance = sf::Vector2f(abs(sprite.getPosition().x - current_move.position.x) - (getSize().x * getOrigin().x), abs(sprite.getPosition().y - current_move.position.y) + (getSize().y * getOrigin().y));
+            }
+            else if((sprite.getPosition().x > current_move.position.x) && sprite.getPosition().y < current_move.position.y)
+            {
+                distance = sf::Vector2f(abs(sprite.getPosition().x - current_move.position.x) + (getSize().x * getOrigin().x), abs(sprite.getPosition().y - current_move.position.y) - (getSize().y * getOrigin().y));
+            }
+            else
+            {
+                distance = sf::Vector2f(abs(sprite.getPosition().x - current_move.position.x), abs(sprite.getPosition().y - current_move.position.y));
+            }
+
 
             scale_factor = fmax(distance.x, distance.y) / fmin(distance.x, distance.y);
             
@@ -180,10 +200,6 @@ void SimpleSprite::move(Move move)
                     }
                 }
             }
-            else
-            {
-                move_end_direction.x = true;
-            }
 
             if ((move_direction.y && sprite.getPosition().y < end_position.y) || (!move_direction.y && sprite.getPosition().y > end_position.y))
             {
@@ -212,7 +228,7 @@ void SimpleSprite::move(Move move)
             }
             else
             {
-                move_end_direction.y = true;
+                move_end = true;
             }
 
             
@@ -220,9 +236,9 @@ void SimpleSprite::move(Move move)
             clock.restart();
         }
 
-        if (move_end_direction.x && move_end_direction.y)
+        if (move_end)
         {
-            sprite.setPosition(current_move.position.x - (getSize().x * getOrigin().x), current_move.position.y - (getSize().y * getOrigin().y));
+            sprite.setPosition(end_position);
 
             previous_move = move.getID();
 

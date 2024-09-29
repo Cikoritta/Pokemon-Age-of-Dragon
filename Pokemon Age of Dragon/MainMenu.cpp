@@ -22,7 +22,7 @@ void MainMenu::update()
 {
 	if (move)
 	{
-		sprite1.move(Move(Window::getWindow()->getSize().x , Window::getWindow()->getSize().y, 0.001f, 1));
+		sprite1.move(Move(sprite1.getP, Window::getWindow()->getSize().y, 0.001f, 3));
 	}
 
 	printf( "%d\n", sprite1.isMoveEnd());
