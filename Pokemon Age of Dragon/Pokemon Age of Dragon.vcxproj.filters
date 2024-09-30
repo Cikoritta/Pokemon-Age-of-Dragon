@@ -93,8 +93,8 @@
     <ClCompile Include="AnimatedSprite.cpp">
       <Filter>Engine\Drawable\Sprite\AnimatedSprite</Filter>
     </ClCompile>
-    <ClCompile Include="Moving.cpp">
-      <Filter>Engine\Drawable\Moving</Filter>
+    <ClCompile Include="SplitSprite.cpp">
+      <Filter>Engine\Drawable\Sprite\SplitSprite</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +136,9 @@
     </ClInclude>
     <ClInclude Include="Moving.h">
       <Filter>Engine\Drawable\Moving</Filter>
+    </ClInclude>
+    <ClInclude Include="SplitSprite.h">
+      <Filter>Engine\Drawable\Sprite\SplitSprite</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

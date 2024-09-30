@@ -5,7 +5,9 @@
 
 class MainMenu : public Scene
 {
-	
+	SplitSprite sprite1;
+
+	SimpleText text1;
 
 	void texture() override;
 

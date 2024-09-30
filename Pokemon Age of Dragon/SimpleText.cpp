@@ -53,7 +53,7 @@ void SimpleText::setPosition(float x, float y)
         real_position.y = Window::getWindow()->getSize().y;
     }
 
-    text.setPosition(position_x, position_y);
+    text.setPosition((int)position_x, (int)position_y);
 }
 
 void SimpleText::setPosition(sf::Sprite* start_position, float x, float y)
@@ -86,7 +86,42 @@ void SimpleText::setPosition(sf::Sprite* start_position, float x, float y)
         real_position.y = start_position->getPosition().y - text.getLocalBounds().top;
     }
 
-    text.setPosition(position_x, position_y);
+    text.setPosition((int)position_x, (int)position_y);
+}
+
+void SimpleText::setPosition(sf::Vector2f position, sf::Vector2f size, float x, float y)
+{
+    position = sf::Vector2f(x, y);
+
+    this->start_position = new sf::Sprite();
+
+	this->start_position->setPosition(position);
+
+    float position_x; float position_y;
+
+    if (x > 0.0000f)
+    {
+        position_x = (start_position->getPosition().x + (size.x * x)) - (getSize().x * getOrigin().x);
+        real_position.x = start_position->getPosition().x + (size.x * x);
+    }
+    else
+    {
+        position_x = position.x - (getSize().x * getOrigin().x);
+        real_position.x = position.x;
+    }
+
+    if (y > 0.0000f)
+    {
+        position_y = (start_position->getPosition().y + (size.y * y)) - (getSize().y * getOrigin().y);
+        real_position.y = start_position->getPosition().y + (size.y * y);
+    }
+    else
+    {
+        position_y = start_position->getPosition().y - (getSize().y * getOrigin().y);
+        real_position.y = start_position->getPosition().y;
+    }
+
+    text.setPosition((int)position_x, (int)position_y);
 }
 
 void SimpleText::setOrigin(float x, float y)

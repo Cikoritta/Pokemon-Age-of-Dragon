@@ -137,10 +137,10 @@
     <ClCompile Include="File.cpp" />
     <ClCompile Include="Icon.cpp" />
     <ClCompile Include="MainMenu.cpp" />
-    <ClCompile Include="Moving.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SimpleSprite.cpp" />
     <ClCompile Include="SimpleText.cpp" />
+    <ClCompile Include="SplitSprite.cpp" />
     <ClCompile Include="Start.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
@@ -155,6 +155,7 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SimpleSprite.h" />
     <ClInclude Include="SimpleText.h" />
+    <ClInclude Include="SplitSprite.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="Window.h" />
