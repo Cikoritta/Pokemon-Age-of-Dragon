@@ -45,9 +45,9 @@ protected:
 
 	sf::Vector2<bool> move_direction;
 
-	sf::Vector2f distance;
+	sf::Vector2f distance = sf::Vector2f(1.0f, 1.0f);
 
-	sf::Vector2f end_position;
+	sf::Vector2f end_position = sf::Vector2f(0.0f, 0.0f);
 
 
 	sf::Vector2<bool> move_end_direction = sf::Vector2<bool>(false, false);

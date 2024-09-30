@@ -4,9 +4,10 @@
 
 class MainMenu : public Scene
 {
-	SimpleSprite sprite1;
+	AnimatedSprite sprite1;
 
 	bool move = false;
+	bool move2 = false;
 
 	void texture() override;
 

@@ -128,36 +128,26 @@ void SimpleSprite::move(Move move)
     {
         if (!clock_restart)
         {
-            if (sprite.getPosition().x < current_move.position.x)
+            if (sprite.getPosition().x + (getSize().x * getOrigin().x) < current_move.position.x)
             {
                 move_direction.x = true;
-            }
-            if (sprite.getPosition().y < current_move.position.y)
-            {
-                move_direction.y = true;
-            }
 
-            if ((sprite.getPosition().x > current_move.position.x) && sprite.getPosition().y > current_move.position.y)
-            {
-                distance = sf::Vector2f(abs(sprite.getPosition().x - current_move.position.x) + (getSize().x * getOrigin().x), abs(sprite.getPosition().y - current_move.position.y) + (getSize().y * getOrigin().y));
-            }
-            else if ((sprite.getPosition().x < current_move.position.x) && sprite.getPosition().y < current_move.position.y)
-            {
-                distance = sf::Vector2f(abs(sprite.getPosition().x - current_move.position.x) - (getSize().x * getOrigin().x), abs(sprite.getPosition().y - current_move.position.y) - (getSize().y * getOrigin().y));
-            }
-            else if ((sprite.getPosition().x < current_move.position.x) && sprite.getPosition().y > current_move.position.y)
-            {
-                distance = sf::Vector2f(abs(sprite.getPosition().x - current_move.position.x) - (getSize().x * getOrigin().x), abs(sprite.getPosition().y - current_move.position.y) + (getSize().y * getOrigin().y));
-            }
-            else if((sprite.getPosition().x > current_move.position.x) && sprite.getPosition().y < current_move.position.y)
-            {
-                distance = sf::Vector2f(abs(sprite.getPosition().x - current_move.position.x) + (getSize().x * getOrigin().x), abs(sprite.getPosition().y - current_move.position.y) - (getSize().y * getOrigin().y));
+                distance.x = abs(sprite.getPosition().x - current_move.position.x) - (getSize().x * getOrigin().x);
             }
             else
             {
-                distance = sf::Vector2f(abs(sprite.getPosition().x - current_move.position.x), abs(sprite.getPosition().y - current_move.position.y));
+                distance.x = abs(sprite.getPosition().x - current_move.position.x) + (getSize().x * getOrigin().x);
             }
+            if (sprite.getPosition().y + (getSize().y * getOrigin().y) < current_move.position.y)
+            {
+                move_direction.y = true;
 
+				distance.y = abs(sprite.getPosition().y - current_move.position.y) - (getSize().y * getOrigin().y);
+            }
+            else
+            {
+                distance.y = abs(sprite.getPosition().y - current_move.position.y) + (getSize().y * getOrigin().y);
+            }
 
             scale_factor = fmax(distance.x, distance.y) / fmin(distance.x, distance.y);
             
@@ -247,9 +237,19 @@ void SimpleSprite::move(Move move)
     }
     else
     {
+        float id1 = current_move.getID();
+
+		float id2 = move.getID();
+
         if (current_move.getID() != move.getID() && previous_move != move.getID())
         {
             current_move = move;
+
+            x_larger_y = false;
+
+            clock_restart = false;
+
+            move_direction = sf::Vector2<bool>(false, false);
 
 			move_end = false;
         }
