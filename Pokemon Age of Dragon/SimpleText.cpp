@@ -139,6 +139,136 @@ void SimpleText::setTamplate(sf::Text* text)
     this->text.setStyle(text->getStyle());
 }
 
+void SimpleText::move(Move move)
+{
+    if (!move_end)
+    {
+        if (!clock_restart)
+        {
+            if (text.getPosition().x + (getSize().x * getOrigin().x) < current_move.position.x)
+            {
+                move_direction.x = true;
+
+                distance.x = abs(text.getPosition().x - current_move.position.x) - (getSize().x * getOrigin().x);
+            }
+            else
+            {
+                distance.x = abs(text.getPosition().x - current_move.position.x) + (getSize().x * getOrigin().x);
+            }
+            if (text.getPosition().y + (getSize().y * getOrigin().y) < current_move.position.y)
+            {
+                move_direction.y = true;
+
+                distance.y = abs(text.getPosition().y - current_move.position.y) - (getSize().y * getOrigin().y);
+            }
+            else
+            {
+                distance.y = abs(text.getPosition().y - current_move.position.y) + (getSize().y * getOrigin().y);
+            }
+
+            scale_factor = fmax(distance.x, distance.y) / fmin(distance.x, distance.y);
+
+            end_position = sf::Vector2f(current_move.position.x - (getSize().x * getOrigin().x), current_move.position.y - (getSize().y * getOrigin().y));
+
+            if (distance.x > distance.y)
+            {
+                x_larger_y = true;
+            }
+
+            clock.restart();
+
+            clock_restart = true;
+        }
+
+        if (clock.getElapsedTime().asSeconds() >= current_move.time_interval)
+        {
+            if ((move_direction.x && text.getPosition().x < end_position.x) || (!move_direction.x && text.getPosition().x > end_position.x))
+            {
+                if (x_larger_y)
+                {
+                    if (move_direction.x)
+                    {
+                        text.setPosition(text.getPosition().x + (current_move.pixel_interval * scale_factor), text.getPosition().y);
+                    }
+                    else
+                    {
+                        text.setPosition(text.getPosition().x - (current_move.pixel_interval * scale_factor), text.getPosition().y);
+                    }
+                }
+                else
+                {
+                    if (move_direction.x)
+                    {
+                        text.setPosition(text.getPosition().x + current_move.pixel_interval, text.getPosition().y);
+                    }
+                    else
+                    {
+                        text.setPosition(text.getPosition().x - current_move.pixel_interval, text.getPosition().y);
+                    }
+                }
+            }
+
+            if ((move_direction.y && text.getPosition().y < end_position.y) || (!move_direction.y && text.getPosition().y > end_position.y))
+            {
+                if (x_larger_y)
+                {
+                    if (move_direction.y)
+                    {
+                        text.setPosition(text.getPosition().x, text.getPosition().y + current_move.pixel_interval);
+                    }
+                    else
+                    {
+                        text.setPosition(text.getPosition().x, text.getPosition().y - current_move.pixel_interval);
+                    }
+                }
+                else
+                {
+                    if (move_direction.y)
+                    {
+                        text.setPosition(text.getPosition().x, text.getPosition().y + (current_move.pixel_interval * scale_factor));
+                    }
+                    else
+                    {
+                        text.setPosition(text.getPosition().x, text.getPosition().y - (current_move.pixel_interval * scale_factor));
+                    }
+                }
+            }
+            else
+            {
+                move_end = true;
+            }
+
+
+
+            clock.restart();
+        }
+
+        if (move_end)
+        {
+            text.setPosition(end_position);
+
+            previous_move = move.getID();
+
+            move_end = true;
+        }
+    }
+    else
+    {
+        if (current_move.getID() != move.getID() && previous_move != move.getID())
+        {
+            current_move = move;
+
+            x_larger_y = false;
+
+            clock_restart = false;
+
+            move_direction = sf::Vector2<bool>(false, false);
+
+            move_end = false;
+        }
+    }
+}
+
 
 void SimpleText::draw()
 {

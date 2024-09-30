@@ -237,10 +237,6 @@ void SimpleSprite::move(Move move)
     }
     else
     {
-        float id1 = current_move.getID();
-
-		float id2 = move.getID();
-
         if (current_move.getID() != move.getID() && previous_move != move.getID())
         {
             current_move = move;

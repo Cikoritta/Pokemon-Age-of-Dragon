@@ -1,7 +1,8 @@
 #pragma once
 #include "Drawable.h"
+#include "Moving.h"
 
-class SimpleText : public Drawable
+class SimpleText : public Drawable, public Moving
 {
 	sf::Text		text;
 
@@ -31,6 +32,9 @@ public:
 
 
 	void			setTamplate(sf::Text* text);
+
+
+	void			move(Move move) override;
 
 
 	void			draw() override;
