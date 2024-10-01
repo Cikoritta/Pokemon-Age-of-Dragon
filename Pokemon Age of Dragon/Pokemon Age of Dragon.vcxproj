@@ -136,6 +136,7 @@
     <ClCompile Include="AnimatedSprite.cpp" />
     <ClCompile Include="File.cpp" />
     <ClCompile Include="Icon.cpp" />
+    <ClCompile Include="Input.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SimpleSprite.cpp" />
@@ -146,13 +147,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedSprite.h" />
+    <ClInclude Include="Base.h" />
     <ClInclude Include="Drawable.h" />
     <ClInclude Include="File.h" />
     <ClInclude Include="Icon.h" />
+    <ClInclude Include="Input.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Moving.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="Scenes.h" />
     <ClInclude Include="SimpleSprite.h" />
     <ClInclude Include="SimpleText.h" />
     <ClInclude Include="SplitSprite.h" />

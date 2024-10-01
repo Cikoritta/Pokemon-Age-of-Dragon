@@ -1,7 +1,8 @@
 #pragma once
-#include "Scene.h"
+#include "Scenes.h"
 #include "Sprite.h"
 #include "Text.h"
+#include "Input.h"
 
 class MainMenu : public Scene
 {

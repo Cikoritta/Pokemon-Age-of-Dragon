@@ -7,32 +7,8 @@
     <Filter Include="Engine">
       <UniqueIdentifier>{6050fc03-e01e-4d6f-a167-9ecbc4d5de4d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Scene">
-      <UniqueIdentifier>{ff900a72-378b-47ff-8a53-bf3dff6339d1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Scene\Scene">
-      <UniqueIdentifier>{cf47c654-6e1d-4408-b328-25ad9770b474}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Window">
-      <UniqueIdentifier>{37d18c9c-b993-457f-bf67-2e10475a65e0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\File">
-      <UniqueIdentifier>{85fcc163-5b66-4ce1-94dd-9ad5ba6057e4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Scene\SceneManager">
-      <UniqueIdentifier>{c8f4b05b-ef7d-45f0-8ea3-d68d3c880952}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Window\Icon">
-      <UniqueIdentifier>{d9aeac34-9444-4332-9a08-111596a8fed6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Window\Window">
-      <UniqueIdentifier>{de93ba80-a1c1-4c38-91a2-92f5d2fce232}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Start">
       <UniqueIdentifier>{5680086a-9598-4561-aa9e-72664bd6302f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Drawable">
-      <UniqueIdentifier>{4bce76df-ff26-49b4-a95c-0fed266da20e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\Scene">
       <UniqueIdentifier>{eccb3f39-3412-408a-ba6c-ff36cf2598be}</UniqueIdentifier>
@@ -40,43 +16,76 @@
     <Filter Include="Game\Scene\MainMenu">
       <UniqueIdentifier>{2f617e63-c04b-4a73-8d7a-154cebd59657}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Drawable\Sprite">
+    <Filter Include="Engine\Public">
+      <UniqueIdentifier>{e9898af1-1da9-440f-8ac8-8f3522bd1fb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Private">
+      <UniqueIdentifier>{3ee4036a-1426-49cf-95ae-7c796983ff8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Private\File">
+      <UniqueIdentifier>{85fcc163-5b66-4ce1-94dd-9ad5ba6057e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Private\Drawable">
+      <UniqueIdentifier>{4bce76df-ff26-49b4-a95c-0fed266da20e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Private\Drawable\Sprite">
       <UniqueIdentifier>{a5acaf86-0427-4c92-b485-9400017f408e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Drawable\Text">
-      <UniqueIdentifier>{1a76a64e-3073-42a1-bf5a-f9882a256b7f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Drawable\Drawable">
-      <UniqueIdentifier>{5f2d4b29-6095-4ea9-9038-21d748210cfa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Drawable\Sprite\SimpleSprite">
+    <Filter Include="Engine\Private\Drawable\Sprite\SimpleSprite">
       <UniqueIdentifier>{a062de99-d716-4936-983f-e43f8ddcd551}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Drawable\Text\SimpleText">
-      <UniqueIdentifier>{eb8fa271-91b3-435a-bc88-247388a01110}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Drawable\Sprite\AnimatedSprite">
+    <Filter Include="Engine\Private\Drawable\Sprite\AnimatedSprite">
       <UniqueIdentifier>{a532f844-0978-4d6b-af80-4d8a3f5977b1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Drawable\Sprite\SplitSprite">
+    <Filter Include="Engine\Private\Drawable\Sprite\SplitSprite">
       <UniqueIdentifier>{d2bb2331-3407-4547-894e-152490df562f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Drawable\Moving">
+    <Filter Include="Engine\Private\Drawable\Text">
+      <UniqueIdentifier>{1a76a64e-3073-42a1-bf5a-f9882a256b7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Private\Drawable\Text\SimpleText">
+      <UniqueIdentifier>{eb8fa271-91b3-435a-bc88-247388a01110}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Private\Drawable\Drawable">
+      <UniqueIdentifier>{5f2d4b29-6095-4ea9-9038-21d748210cfa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Private\Drawable\Moving">
       <UniqueIdentifier>{cf67ddbd-2c72-4612-b3f5-3cadd382f420}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Private\Scene">
+      <UniqueIdentifier>{ff900a72-378b-47ff-8a53-bf3dff6339d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Private\Scene\Scene">
+      <UniqueIdentifier>{cf47c654-6e1d-4408-b328-25ad9770b474}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Private\Scene\SceneManager">
+      <UniqueIdentifier>{c8f4b05b-ef7d-45f0-8ea3-d68d3c880952}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Private\Window">
+      <UniqueIdentifier>{37d18c9c-b993-457f-bf67-2e10475a65e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Private\Window\Icon">
+      <UniqueIdentifier>{d9aeac34-9444-4332-9a08-111596a8fed6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Private\Window\Window">
+      <UniqueIdentifier>{de93ba80-a1c1-4c38-91a2-92f5d2fce232}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Private\Input">
+      <UniqueIdentifier>{8f4eb355-b146-4eb5-bcc6-5b21e98ea7db}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="File.cpp">
-      <Filter>Engine\File</Filter>
+      <Filter>Engine\Private\File</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
-      <Filter>Engine\Scene\SceneManager</Filter>
+      <Filter>Engine\Private\Scene\SceneManager</Filter>
     </ClCompile>
     <ClCompile Include="Icon.cpp">
-      <Filter>Engine\Window\Icon</Filter>
+      <Filter>Engine\Private\Window\Icon</Filter>
     </ClCompile>
     <ClCompile Include="Window.cpp">
-      <Filter>Engine\Window\Window</Filter>
+      <Filter>Engine\Private\Window\Window</Filter>
     </ClCompile>
     <ClCompile Include="Start.cpp">
       <Filter>Game\Start</Filter>
@@ -85,60 +94,72 @@
       <Filter>Game\Scene\MainMenu</Filter>
     </ClCompile>
     <ClCompile Include="SimpleSprite.cpp">
-      <Filter>Engine\Drawable\Sprite\SimpleSprite</Filter>
+      <Filter>Engine\Private\Drawable\Sprite\SimpleSprite</Filter>
     </ClCompile>
     <ClCompile Include="SimpleText.cpp">
-      <Filter>Engine\Drawable\Text\SimpleText</Filter>
+      <Filter>Engine\Private\Drawable\Text\SimpleText</Filter>
     </ClCompile>
     <ClCompile Include="AnimatedSprite.cpp">
-      <Filter>Engine\Drawable\Sprite\AnimatedSprite</Filter>
+      <Filter>Engine\Private\Drawable\Sprite\AnimatedSprite</Filter>
     </ClCompile>
     <ClCompile Include="SplitSprite.cpp">
-      <Filter>Engine\Drawable\Sprite\SplitSprite</Filter>
+      <Filter>Engine\Private\Drawable\Sprite\SplitSprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Engine\Private\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
-      <Filter>Engine\Scene\Scene</Filter>
+      <Filter>Engine\Private\Scene\Scene</Filter>
     </ClInclude>
     <ClInclude Include="File.h">
-      <Filter>Engine\File</Filter>
+      <Filter>Engine\Private\File</Filter>
     </ClInclude>
     <ClInclude Include="SceneManager.h">
-      <Filter>Engine\Scene\SceneManager</Filter>
+      <Filter>Engine\Private\Scene\SceneManager</Filter>
     </ClInclude>
     <ClInclude Include="Icon.h">
-      <Filter>Engine\Window\Icon</Filter>
+      <Filter>Engine\Private\Window\Icon</Filter>
     </ClInclude>
     <ClInclude Include="Window.h">
-      <Filter>Engine\Window\Window</Filter>
+      <Filter>Engine\Private\Window\Window</Filter>
     </ClInclude>
     <ClInclude Include="MainMenu.h">
       <Filter>Game\Scene\MainMenu</Filter>
     </ClInclude>
     <ClInclude Include="Drawable.h">
-      <Filter>Engine\Drawable\Drawable</Filter>
+      <Filter>Engine\Private\Drawable\Drawable</Filter>
     </ClInclude>
     <ClInclude Include="SimpleSprite.h">
-      <Filter>Engine\Drawable\Sprite\SimpleSprite</Filter>
+      <Filter>Engine\Private\Drawable\Sprite\SimpleSprite</Filter>
     </ClInclude>
     <ClInclude Include="SimpleText.h">
-      <Filter>Engine\Drawable\Text\SimpleText</Filter>
+      <Filter>Engine\Private\Drawable\Text\SimpleText</Filter>
     </ClInclude>
     <ClInclude Include="AnimatedSprite.h">
-      <Filter>Engine\Drawable\Sprite\AnimatedSprite</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Engine\Drawable\Sprite</Filter>
-    </ClInclude>
-    <ClInclude Include="Text.h">
-      <Filter>Engine\Drawable\Text</Filter>
+      <Filter>Engine\Private\Drawable\Sprite\AnimatedSprite</Filter>
     </ClInclude>
     <ClInclude Include="Moving.h">
-      <Filter>Engine\Drawable\Moving</Filter>
+      <Filter>Engine\Private\Drawable\Moving</Filter>
     </ClInclude>
     <ClInclude Include="SplitSprite.h">
-      <Filter>Engine\Drawable\Sprite\SplitSprite</Filter>
+      <Filter>Engine\Private\Drawable\Sprite\SplitSprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Engine\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Engine\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Base.h">
+      <Filter>Engine\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes.h">
+      <Filter>Engine\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Engine\Public</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

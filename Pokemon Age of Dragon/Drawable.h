@@ -14,6 +14,8 @@ protected:
 
 	sf::Vector2f origin = sf::Vector2f(0.0f, 0.0f);
 
+	sf::Vector2f real_origin = sf::Vector2f(0.0f, 0.0f);
+
 
 	sf::Vector2f scale = sf::Vector2f(1.0f, 1.0f);
 
@@ -54,6 +56,11 @@ public:
 		return origin;
 	}
 
+	sf::Vector2f		 getRealOrigin()
+	{
+		return real_origin;
+	}
+
 
 	virtual void		 setScale(float x, float y) = 0;
 
@@ -65,6 +72,12 @@ public:
 	sf::Vector2f		 getRealScale()
 	{
 		return real_scale;
+	}
+
+
+	bool				 isMouseCollision()
+	{
+		return sf::FloatRect(getRealPosition().x - real_origin.x, getRealPosition().y - real_origin.y, getSize().x, getSize().y).contains(sf::Mouse::getPosition(*Window::getWindow()).x, sf::Mouse::getPosition(*Window::getWindow()).y);
 	}
 
 

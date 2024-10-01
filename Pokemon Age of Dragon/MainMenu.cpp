@@ -21,13 +21,13 @@ void MainMenu::texture()
 
 void MainMenu::sprite()
 {
-	sprite1.setPosition(0.5f, 0.5f);
+	sprite1.setPosition(0.8f, 0.5f);
 	sprite1.setSmartScale(6.0f, 6.0f);
 	sprite1.setOrigin(0.5f, 0.5f);
 	sprite1.setBorderScale(0.5f, 0.5f);
 
 	text1.setString(L"Центр");
-	text1.setPosition(&sprite1, 0.0f, 0.0f);
+	text1.setPosition(&sprite1, 0.5f, 0.5f);
 	text1.getText()->setFillColor(sf::Color::Black);
 	text1.setOrigin(0.5f, 0.5f);
 }
@@ -44,7 +44,13 @@ void MainMenu::update()
 
 void MainMenu::events()
 {
-	
+	if (text1.isMouseCollision())
+	{
+		if (Input::isMouseReleased(sf::Mouse::Left))
+		{
+			printf("true\n");
+		}
+	}
 }
 
 void MainMenu::render()

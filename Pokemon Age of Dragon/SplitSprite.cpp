@@ -49,6 +49,8 @@ void SplitSprite::setPosition(float x, float y)
         std::max(left.getGlobalBounds().height, std::max(center.getGlobalBounds().height, right.getGlobalBounds().height)) +
         std::max(bottom_left.getGlobalBounds().height, std::max(bottom.getGlobalBounds().height, bottom_right.getGlobalBounds().height));
 
+    real_origin = sf::Vector2f(width * getOrigin().x, height * getOrigin().y);
+
     if (x > 0.0000f)
     {
         position_x = (Window::getWindow()->getSize().x * x) - (getSize().x * getOrigin().x);
@@ -100,6 +102,8 @@ void SplitSprite::setPosition(sf::Sprite* start_position, float x, float y)
         std::max(left.getGlobalBounds().height, std::max(center.getGlobalBounds().height, right.getGlobalBounds().height)) +
         std::max(bottom_left.getGlobalBounds().height, std::max(bottom.getGlobalBounds().height, bottom_right.getGlobalBounds().height));
 
+    real_origin = sf::Vector2f(width * getOrigin().x, height * getOrigin().y);
+
     if (x > 0.0000f)
     {
         position_x = (start_position->getPosition().x + (start_position->getGlobalBounds().width * x)) - (getSize().x * getOrigin().x);
@@ -142,6 +146,16 @@ void SplitSprite::setPosition(Drawable* start_drawable, float x, float y)
     this->start_drawable = start_drawable;
 
     this->start_position->setPosition(position);
+
+    width = std::max(top_left.getGlobalBounds().width, std::max(left.getGlobalBounds().width, bottom_left.getGlobalBounds().width)) +
+        std::max(top.getGlobalBounds().width, std::max(center.getGlobalBounds().width, bottom.getGlobalBounds().width)) +
+        std::max(top_right.getGlobalBounds().width, std::max(right.getGlobalBounds().width, bottom_right.getGlobalBounds().width));
+
+    height = std::max(top_left.getGlobalBounds().height, std::max(top.getGlobalBounds().height, top_right.getGlobalBounds().height)) +
+        std::max(left.getGlobalBounds().height, std::max(center.getGlobalBounds().height, right.getGlobalBounds().height)) +
+        std::max(bottom_left.getGlobalBounds().height, std::max(bottom.getGlobalBounds().height, bottom_right.getGlobalBounds().height));
+
+    real_origin = sf::Vector2f(width * getOrigin().x, height * getOrigin().y);
 
     float position_x; float position_y;
 

@@ -124,6 +124,8 @@ void SimpleSprite::setOrigin(float x, float y)
 {
 	origin = sf::Vector2f(x, y);
 
+    real_origin = sf::Vector2f(getSize().x * x, getSize().y * y);
+
     if (start_position != nullptr)
     {
         setPosition(start_position, position.x, position.y);
