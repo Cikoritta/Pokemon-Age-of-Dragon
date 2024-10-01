@@ -22,7 +22,7 @@ public:
 
 	void		    setPosition(sf::Sprite* start_position, float x, float y) override;
 
-	void			setPosition(sf::Vector2f position, sf::Vector2f size, float x, float y) override;
+	void			setPosition(Drawable* start_drawable, float x, float y) override;
 
 	void			setOrigin(float x, float y) override;
 

@@ -53,7 +53,7 @@ void SimpleText::setPosition(float x, float y)
         real_position.y = Window::getWindow()->getSize().y;
     }
 
-    text.setPosition((int)position_x, (int)position_y);
+    text.setPosition(round(position_x), round(position_y));
 }
 
 void SimpleText::setPosition(sf::Sprite* start_position, float x, float y)
@@ -86,42 +86,40 @@ void SimpleText::setPosition(sf::Sprite* start_position, float x, float y)
         real_position.y = start_position->getPosition().y - text.getLocalBounds().top;
     }
 
-    text.setPosition((int)position_x, (int)position_y);
+    text.setPosition(round(position_x), round(position_y));
 }
 
-void SimpleText::setPosition(sf::Vector2f position, sf::Vector2f size, float x, float y)
+void SimpleText::setPosition(Drawable* start_drawable, float x, float y)
 {
     position = sf::Vector2f(x, y);
 
-    this->start_position = new sf::Sprite();
-
-	this->start_position->setPosition(position);
+    this->start_drawable = start_drawable;
 
     float position_x; float position_y;
 
     if (x > 0.0000f)
     {
-        position_x = (start_position->getPosition().x + (size.x * x)) - (getSize().x * getOrigin().x);
-        real_position.x = start_position->getPosition().x + (size.x * x);
+        position_x = ((start_drawable->getRealPosition().x + (start_drawable->getSize().x * x)) - (text.getGlobalBounds().width * getOrigin().x) - text.getLocalBounds().left);
+        real_position.x = start_drawable->getRealPosition().x + (start_drawable->getSize().x * x);
     }
     else
     {
-        position_x = position.x - (getSize().x * getOrigin().x);
-        real_position.x = position.x;
+        position_x = start_drawable->getRealPosition().x - (text.getGlobalBounds().width * getOrigin().x) - text.getLocalBounds().left;
+        real_position.x = start_drawable->getRealPosition().x - text.getLocalBounds().left;
     }
 
     if (y > 0.0000f)
     {
-        position_y = (start_position->getPosition().y + (size.y * y)) - (getSize().y * getOrigin().y);
-        real_position.y = start_position->getPosition().y + (size.y * y);
+        position_y = ((start_drawable->getRealPosition().y + (start_drawable->getSize().y * y)) - (text.getGlobalBounds().height * getOrigin().y) - text.getLocalBounds().top);
+        real_position.y = start_drawable->getRealPosition().y + (start_drawable->getSize().y * y);
     }
     else
     {
-        position_y = start_position->getPosition().y - (getSize().y * getOrigin().y);
-        real_position.y = start_position->getPosition().y;
+        position_y = start_drawable->getRealPosition().y - (text.getGlobalBounds().height * getOrigin().y) - text.getLocalBounds().top;
+        real_position.y = start_drawable->getRealPosition().y - text.getLocalBounds().top;
     }
 
-    text.setPosition((int)position_x, (int)position_y);
+    text.setPosition(round(position_x), round(position_y));
 }
 
 void SimpleText::setOrigin(float x, float y)
@@ -131,6 +129,10 @@ void SimpleText::setOrigin(float x, float y)
     if (start_position != nullptr)
     {
         setPosition(start_position, position.x, position.y);
+    }
+    else if (start_drawable != nullptr)
+    {
+        setPosition(start_drawable, position.x, position.y);
     }
     else
     {

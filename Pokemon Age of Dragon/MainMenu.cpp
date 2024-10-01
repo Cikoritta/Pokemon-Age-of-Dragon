@@ -27,8 +27,9 @@ void MainMenu::sprite()
 	sprite1.setBorderScale(0.5f, 0.5f);
 
 	text1.setString(L"Центр");
-	text1.setPosition(sprite1.getRealPosition(), sprite1.getSize(), 0.0f, 0.0f);
+	text1.setPosition(&sprite1, 0.0f, 0.0f);
 	text1.getText()->setFillColor(sf::Color::Black);
+	text1.setOrigin(0.5f, 0.5f);
 }
 
 void MainMenu::start()

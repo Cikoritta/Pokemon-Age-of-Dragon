@@ -71,7 +71,7 @@ void SplitSprite::setPosition(float x, float y)
         real_position.y = 0.0f;
     }
 
-    top_left.setPosition(position_x, position_y);
+    top_left.setPosition(round(position_x), round(position_y));
     top.setPosition(top_left.getPosition().x + top_left.getGlobalBounds().width, top_left.getPosition().y);
     top_right.setPosition(top.getPosition().x + top.getGlobalBounds().width, top.getPosition().y);
 
@@ -122,7 +122,7 @@ void SplitSprite::setPosition(sf::Sprite* start_position, float x, float y)
         real_position.y = start_position->getPosition().y;
     }
 
-    top_left.setPosition((int)position_x, (int)position_y);
+    top_left.setPosition(round(position_x), round(position_y));
     top.setPosition(top_left.getPosition().x + top_left.getGlobalBounds().width, top_left.getPosition().y);
     top_right.setPosition(top.getPosition().x + top.getGlobalBounds().width, top.getPosition().y);
 
@@ -135,11 +135,11 @@ void SplitSprite::setPosition(sf::Sprite* start_position, float x, float y)
     bottom_right.setPosition(bottom.getPosition().x + bottom.getGlobalBounds().width, bottom.getPosition().y);
 }
 
-void SplitSprite::setPosition(sf::Vector2f position, sf::Vector2f size, float x, float y)
+void SplitSprite::setPosition(Drawable* start_drawable, float x, float y)
 {
     position = sf::Vector2f(x, y);
 
-    this->start_position = new sf::Sprite();
+    this->start_drawable = start_drawable;
 
     this->start_position->setPosition(position);
 
@@ -147,27 +147,27 @@ void SplitSprite::setPosition(sf::Vector2f position, sf::Vector2f size, float x,
 
     if (x > 0.0000f)
     {
-        position_x = (start_position->getPosition().x + (size.x * x)) - (getSize().x * getOrigin().x);
-        real_position.x = start_position->getPosition().x + (size.x * x);
+        position_x = (start_drawable->getRealPosition().x + (start_drawable->getSize().x * x)) - (getSize().x * getOrigin().x);
+        real_position.x = start_drawable->getRealPosition().x + (start_drawable->getSize().x * x);
     }
     else
     {
-        position_x = start_position->getPosition().x - (getSize().x * getOrigin().x);
-        real_position.x = start_position->getPosition().x;
+        position_x = start_drawable->getRealPosition().x - (getSize().x * getOrigin().x);
+        real_position.x = start_drawable->getRealPosition().x;
     }
 
     if (y > 0.0000f)
     {
-        position_y = (start_position->getPosition().y + (size.y * y)) - (getSize().y * getOrigin().y);
-        real_position.y = start_position->getPosition().y + (size.y * y);
+        position_y = (start_drawable->getRealPosition().y + (start_drawable->getSize().y * y)) - (getSize().y * getOrigin().y);
+        real_position.y = start_drawable->getRealPosition().y + (start_drawable->getSize().y * y);
     }
     else
     {
-        position_y = start_position->getPosition().y - (getSize().y * getOrigin().y);
-        real_position.y = start_position->getPosition().y;
+        position_y = start_drawable->getPosition().y - (getSize().y * getOrigin().y);
+        real_position.y = start_drawable->getPosition().y;
     }
 
-    top_left.setPosition((int)position_x, (int)position_y);
+    top_left.setPosition(round(position_x), round(position_y));
 }
 
 void SplitSprite::setOrigin(float x, float y)
@@ -177,6 +177,10 @@ void SplitSprite::setOrigin(float x, float y)
     if (start_position != nullptr)
     {
         setPosition(start_position, position.x, position.y);
+    }
+    else if (start_drawable != nullptr)
+    {
+        setPosition(start_drawable, position.x, position.y);
     }
     else
     {
