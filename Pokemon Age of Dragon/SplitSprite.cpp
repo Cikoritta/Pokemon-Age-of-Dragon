@@ -297,7 +297,130 @@ sf::Vector2f SplitSprite::getSize()
 
 void SplitSprite::move(Move move)
 {
+    if (!move_end)
+    {
+        if (!clock_restart)
+        {
+            if (top_left.getPosition().x + (getSize().x * getOrigin().x) < current_move.position.x)
+            {
+                move_direction.x = true;
 
+                distance.x = abs(top_left.getPosition().x - current_move.position.x) - (getSize().x * getOrigin().x);
+            }
+            else
+            {
+                distance.x = abs(top_left.getPosition().x - current_move.position.x) + (getSize().x * getOrigin().x);
+            }
+            if (top_left.getPosition().y + (getSize().y * getOrigin().y) < current_move.position.y)
+            {
+                move_direction.y = true;
+
+                distance.y = abs(top_left.getPosition().y - current_move.position.y) - (getSize().y * getOrigin().y);
+            }
+            else
+            {
+                distance.y = abs(top_left.getPosition().y - current_move.position.y) + (getSize().y * getOrigin().y);
+            }
+
+            scale_factor = fmax(distance.x, distance.y) / fmin(distance.x, distance.y);
+
+            end_position = sf::Vector2f(current_move.position.x - (getSize().x * getOrigin().x), current_move.position.y - (getSize().y * getOrigin().y));
+
+            if (distance.x > distance.y)
+            {
+                x_larger_y = true;
+            }
+
+            clock.restart();
+
+            clock_restart = true;
+        }
+
+        if (clock.getElapsedTime().asSeconds() >= current_move.time_interval)
+        {
+            if ((move_direction.x && top_left.getPosition().x < end_position.x) || (!move_direction.x && top_left.getPosition().x > end_position.x))
+            {
+                if (x_larger_y)
+                {
+                    if (move_direction.x)
+                    {
+                        top_left.setPosition(top_left.getPosition().x + (current_move.pixel_interval * scale_factor), top_left.getPosition().y);
+                    }
+                    else
+                    {
+                        top_left.setPosition(top_left.getPosition().x - (current_move.pixel_interval * scale_factor), top_left.getPosition().y);
+                    }
+                }
+                else
+                {
+                    if (move_direction.x)
+                    {
+                        top_left.setPosition(top_left.getPosition().x + current_move.pixel_interval, top_left.getPosition().y);
+                    }
+                    else
+                    {
+                        top_left.setPosition(top_left.getPosition().x - current_move.pixel_interval, top_left.getPosition().y);
+                    }
+                }
+            }
+
+            if ((move_direction.y && top_left.getPosition().y < end_position.y) || (!move_direction.y && top_left.getPosition().y > end_position.y))
+            {
+                if (x_larger_y)
+                {
+                    if (move_direction.y)
+                    {
+                        top_left.setPosition(top_left.getPosition().x, top_left.getPosition().y + current_move.pixel_interval);
+                    }
+                    else
+                    {
+                        top_left.setPosition(top_left.getPosition().x, top_left.getPosition().y - current_move.pixel_interval);
+                    }
+                }
+                else
+                {
+                    if (move_direction.y)
+                    {
+                        top_left.setPosition(top_left.getPosition().x, top_left.getPosition().y + (current_move.pixel_interval * scale_factor));
+                    }
+                    else
+                    {
+                        top_left.setPosition(top_left.getPosition().x, top_left.getPosition().y - (current_move.pixel_interval * scale_factor));
+                    }
+                }
+            }
+            else
+            {
+                move_end = true;
+            }
+
+            clock.restart();
+        }
+
+        if (move_end)
+        {
+            top_left.setPosition(end_position);
+
+            previous_move = move.getID();
+
+            move_end = true;
+        }
+    }
+    else
+    {
+        if (current_move.getID() != move.getID() && previous_move != move.getID())
+        {
+            current_move = move;
+
+            x_larger_y = false;
+
+            clock_restart = false;
+
+            move_direction = sf::Vector2<bool>(false, false);
+
+            move_end = false;
+        }
+    }
 }
 
 void SplitSprite::draw()

@@ -1,14 +1,12 @@
 #pragma once
-#include "Scenes.h"
+#include "Scene.h"
 #include "Sprite.h"
 #include "Text.h"
 #include "Input.h"
 
 class MainMenu : public Scene
 {
-	SplitSprite sprite1;
-
-	SimpleText text1;
+	AnimatedSprite background;
 
 	void texture() override;
 

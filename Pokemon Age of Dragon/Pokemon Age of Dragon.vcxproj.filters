@@ -52,15 +52,6 @@
     <Filter Include="Engine\Private\Drawable\Moving">
       <UniqueIdentifier>{cf67ddbd-2c72-4612-b3f5-3cadd382f420}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Private\Scene">
-      <UniqueIdentifier>{ff900a72-378b-47ff-8a53-bf3dff6339d1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Private\Scene\Scene">
-      <UniqueIdentifier>{cf47c654-6e1d-4408-b328-25ad9770b474}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Private\Scene\SceneManager">
-      <UniqueIdentifier>{c8f4b05b-ef7d-45f0-8ea3-d68d3c880952}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Private\Window">
       <UniqueIdentifier>{37d18c9c-b993-457f-bf67-2e10475a65e0}</UniqueIdentifier>
     </Filter>
@@ -73,13 +64,16 @@
     <Filter Include="Engine\Private\Input">
       <UniqueIdentifier>{8f4eb355-b146-4eb5-bcc6-5b21e98ea7db}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Private\SceneManager">
+      <UniqueIdentifier>{c8f4b05b-ef7d-45f0-8ea3-d68d3c880952}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="File.cpp">
       <Filter>Engine\Private\File</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
-      <Filter>Engine\Private\Scene\SceneManager</Filter>
+      <Filter>Engine\Private\SceneManager</Filter>
     </ClCompile>
     <ClCompile Include="Icon.cpp">
       <Filter>Engine\Private\Window\Icon</Filter>
@@ -110,20 +104,11 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Scene.h">
-      <Filter>Engine\Private\Scene\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="File.h">
-      <Filter>Engine\Private\File</Filter>
-    </ClInclude>
     <ClInclude Include="SceneManager.h">
-      <Filter>Engine\Private\Scene\SceneManager</Filter>
+      <Filter>Engine\Private\SceneManager</Filter>
     </ClInclude>
     <ClInclude Include="Icon.h">
       <Filter>Engine\Private\Window\Icon</Filter>
-    </ClInclude>
-    <ClInclude Include="Window.h">
-      <Filter>Engine\Private\Window\Window</Filter>
     </ClInclude>
     <ClInclude Include="MainMenu.h">
       <Filter>Game\Scene\MainMenu</Filter>
@@ -152,13 +137,16 @@
     <ClInclude Include="Text.h">
       <Filter>Engine\Public</Filter>
     </ClInclude>
-    <ClInclude Include="Base.h">
-      <Filter>Engine\Public</Filter>
-    </ClInclude>
-    <ClInclude Include="Scenes.h">
-      <Filter>Engine\Public</Filter>
-    </ClInclude>
     <ClInclude Include="Input.h">
+      <Filter>Engine\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="File.h">
+      <Filter>Engine\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Engine\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
       <Filter>Engine\Public</Filter>
     </ClInclude>
   </ItemGroup>

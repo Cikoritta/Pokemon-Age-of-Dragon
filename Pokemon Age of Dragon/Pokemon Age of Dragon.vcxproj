@@ -147,7 +147,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedSprite.h" />
-    <ClInclude Include="Base.h" />
     <ClInclude Include="Drawable.h" />
     <ClInclude Include="File.h" />
     <ClInclude Include="Icon.h" />
@@ -156,7 +155,6 @@
     <ClInclude Include="Moving.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="Scenes.h" />
     <ClInclude Include="SimpleSprite.h" />
     <ClInclude Include="SimpleText.h" />
     <ClInclude Include="SplitSprite.h" />

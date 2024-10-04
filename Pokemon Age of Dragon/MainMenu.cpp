@@ -3,33 +3,12 @@
 
 void MainMenu::texture()
 {
-	sf::IntRect rect[9] = {
-		sf::IntRect(0,0,6,6),
-		sf::IntRect(6,0,32,6),
-		sf::IntRect(38,0,6,6),
-		sf::IntRect(0,6,6,32),
-		sf::IntRect(6,6,32,32),
-		sf::IntRect(38,6,6,32),
-		sf::IntRect(0,38,6,6),
-		sf::IntRect(6,38,32,6),
-		sf::IntRect(38,38,6,6)
-	};
-	sprite1.setTexture("Data/Textures/MainMenu/exit_background.png", rect);
-
-	text1.setFont("Data/Textures/Font/UpheavalPro.ttf");
+	background.setTexture("Data/Textures/MainMenu/background.png", sf::IntRect(0, 0, 1920, 1080));
 }
 
 void MainMenu::sprite()
 {
-	sprite1.setPosition(0.8f, 0.5f);
-	sprite1.setSmartScale(6.0f, 6.0f);
-	sprite1.setOrigin(0.5f, 0.5f);
-	sprite1.setBorderScale(0.5f, 0.5f);
-
-	text1.setString(L"Центр");
-	text1.setPosition(&sprite1, 0.5f, 0.5f);
-	text1.getText()->setFillColor(sf::Color::Black);
-	text1.setOrigin(0.5f, 0.5f);
+	
 }
 
 void MainMenu::start()
@@ -44,18 +23,10 @@ void MainMenu::update()
 
 void MainMenu::events()
 {
-	if (text1.isMouseCollision())
-	{
-		if (Input::isMouseReleased(sf::Mouse::Left))
-		{
-			printf("true\n");
-		}
-	}
+	
 }
 
 void MainMenu::render()
 {
-	sprite1.draw();
-
-	text1.draw();
+	background.draw();
 }
