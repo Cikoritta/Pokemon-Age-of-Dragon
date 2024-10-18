@@ -19,6 +19,8 @@ void SimpleSprite::setTexture(std::string locate_texture, sf::IntRect rect)
 	sprite.setTexture(texture);
 
     sprite.setTextureRect(rect);
+
+    sprite.setScale(scale.x * Window::getScale().x, scale.y * Window::getScale().y);
 }
 
 void SimpleSprite::setPosition(float x, float y)
@@ -146,7 +148,7 @@ void SimpleSprite::setScale(float x, float y)
 
     real_scale = sf::Vector2f(x, y);
 
-    sprite.setScale(scale.x, scale.y);
+    sprite.setScale(scale.x * Window::getScale().x, scale.y * Window::getScale().y);
 
     if (start_position != nullptr)
     {

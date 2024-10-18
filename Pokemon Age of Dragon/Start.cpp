@@ -7,5 +7,7 @@ int main()
 
 	Window::setStartScene(new MainMenu());
 
+	Window::setScale(1920U, 1080U);
+
 	Window::create(File::Read::int_read("Data/Configs/window.peconf", "create_size.x"), File::Read::int_read("Data/Configs/window.peconf", "create_size.y"), File::Read::wstring_read(Window::getLanguage(), L"window_title"), File::Read::int_read("Data/Configs/window.peconf", "style"));
 }

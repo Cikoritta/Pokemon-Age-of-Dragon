@@ -8,6 +8,8 @@ class MainMenu : public Scene
 {
 	AnimatedSprite background;
 
+	AnimatedSprite logo;
+
 	void texture() override;
 
 	void sprite() override;

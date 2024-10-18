@@ -6,6 +6,7 @@ SceneManager		Window::scene_manager;
 Icon*				Window::window_icon = nullptr;
 std::wstring		Window::window_language = L"Data/Languages/RU.pelang";
 sf::Vector2f        Window::window_scale = sf::Vector2f(1.0f, 1.0f);
+sf::Vector2u 		Window::window_original_size = sf::Vector2u(1U, 1U);
 
 
 void Window::create(sf::Uint16 size_x, sf::Uint16 size_y, std::wstring title, sf::Uint8 style)
@@ -15,6 +16,11 @@ void Window::create(sf::Uint16 size_x, sf::Uint16 size_y, std::wstring title, sf
 	if (window_icon != nullptr)
 	{
 		window.setIcon(window_icon->getSize().x, window_icon->getSize().y, window_icon->getPixels());
+	}
+
+	if (window_original_size.x != 1U || window_original_size.y != 1U)
+	{
+		window_scale = sf::Vector2f((float)size_x / (float)window_original_size.x, (float)size_y / (float)window_original_size.y);
 	}
 
 	if (File::Read::int_read("Data/Configs/window.peconf","framerate_limit") != 0)
@@ -60,9 +66,7 @@ std::wstring Window::getLanguage()
 
 void Window::setScale(sf::Uint16 original_size_x, sf::Uint16 original_size_y)
 {
-	window_scale.x = (float)original_size_x / window.getSize().x;
-
-	window_scale.y = (float)original_size_y / window.getSize().y;
+	window_original_size = sf::Vector2u(original_size_x, original_size_y);
 }
 
 sf::Vector2f Window::getScale()

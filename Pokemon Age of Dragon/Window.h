@@ -19,6 +19,8 @@ class Window
 
 	static sf::Vector2f				window_scale;
 
+	static sf::Vector2u 			window_original_size;
+
 public:
 
 	static void								create(sf::Uint16 size_x, sf::Uint16 size_y, std::wstring title = L"Window", sf::Uint8 style = sf::Style::Default);

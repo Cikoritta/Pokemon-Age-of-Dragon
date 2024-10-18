@@ -121,6 +121,73 @@ void AnimatedSprite::longAnimate(LongAnimation long_animation)
 	}
 }
 
+void AnimatedSprite::scaleAnimate(ScaleAnimation scale_animation)
+{
+	if (state)
+	{
+		if (!animate_end)
+		{
+			if (!clock_restart)
+			{
+				clock.restart();
+
+				clock_restart = true;
+			}
+
+			if (clock.getElapsedTime().asSeconds() >= current_scale_animation.time_interval)
+			{
+				if (current_scale_animation.vector)
+				{
+					if (current_scale_animation.repeat)
+					{
+						if (current_scale_animation.scale.x < current_scale_animation.max_scale)
+						{
+							sprite.setScale(sprite.getScale().x + current_scale_animation.pixel_interval_x, sprite.getScale().y + current_scale_animation.pixel_interval_y);
+						}
+						else
+						{
+							current_scale_animation.vector = false;
+						}
+					}
+					else
+					{
+						animate_end = true;
+
+						previous_animation = scale_animation.getID();
+					}
+				}
+				else
+				{
+					if (current_animation.repeat)
+					{
+						if (sprite.getScale().x > current_scale_animation.max_scale)
+						{
+							sprite.setScale(sprite.getScale().x - current_scale_animation.pixel_interval_x, sprite.getScale().y - current_scale_animation.pixel_interval_y);
+						}
+					}
+					else
+					{
+						animate_end = true;
+
+						previous_animation = scale_animation.getID();
+					}
+				}
+
+				clock.restart();
+			}
+		}
+		else
+		{
+			if (current_animation.getID() != scale_animation.getID() && previous_animation != scale_animation.getID())
+			{
+				current_scale_animation = scale_animation;
+
+				animate_end = false;
+			}
+		}
+	}
+}
+
 bool AnimatedSprite::isAnimateEnd()
 {
 	return animate_end;
