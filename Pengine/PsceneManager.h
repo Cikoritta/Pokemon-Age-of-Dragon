@@ -8,6 +8,11 @@ class PsceneManager
 	sf::Event*				event = nullptr;
 
 
+	sf::Clock				fpsClock;
+
+	sf::String				windowTitle = "none";
+
+
 	Pscene*					currentScene = nullptr;
 
 public:

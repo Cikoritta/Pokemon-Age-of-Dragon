@@ -32,6 +32,8 @@ public:
 		{
 			ApplyConfig();
 		}
+
+		Config::Write(L"Config.ini", L"windowTitle", title.toWideString());
 	}
 
 

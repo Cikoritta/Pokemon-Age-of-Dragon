@@ -16,7 +16,10 @@ public:
     void Start() override
     {
 		colader.SetOrigin(sf::Vector2f(0.5f, 0.5f));
+
 		colader2.SetOrigin(sf::Vector2f(0.5f, 0.5f));
+
+		colader2.SetSolid(true);
     }
 
     void Update() override
@@ -32,6 +35,26 @@ public:
             {
                 colader.SetPixelPosition(sf::Vector2f(sf::Mouse::getPosition(*window).x, sf::Mouse::getPosition(*window).y));
             }
+        }
+
+        if (event->KeyPressed && event->key.code == sf::Keyboard::W)
+        {
+            colader.SetPixelPosition(sf::Vector2f(colader.GetPixelPosition().x, colader.GetPixelPosition().y - 1.0f));
+        }
+
+        if (event->KeyPressed && event->key.code == sf::Keyboard::S)
+        {
+            colader.SetPixelPosition(sf::Vector2f(colader.GetPixelPosition().x, colader.GetPixelPosition().y + 1.0f));
+        }
+
+		if (event->KeyPressed && event->key.code == sf::Keyboard::A)
+		{
+			colader.SetPixelPosition(sf::Vector2f(colader.GetPixelPosition().x - 1.0f, colader.GetPixelPosition().y));
+		}
+
+        if (event->KeyPressed && event->key.code == sf::Keyboard::D)
+        {
+            colader.SetPixelPosition(sf::Vector2f(colader.GetPixelPosition().x + 1.0f, colader.GetPixelPosition().y));
         }
     }
 

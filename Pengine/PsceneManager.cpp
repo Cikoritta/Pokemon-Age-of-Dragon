@@ -58,6 +58,11 @@ void PsceneManager::RenderScene()
 	currentScene->SetEvent(event);
 
 
+	fpsClock.restart();
+
+	windowTitle = Config::Read(L"Config.ini", L"windowTitle");
+
+
 	currentScene->Start();
 
 	while (window->isOpen())
@@ -85,5 +90,9 @@ void PsceneManager::RenderScene()
 		currentScene->Draw();
 
 		window->display();
+
+		float fps = 1.0f / (fpsClock.restart().asSeconds());
+
+		window->setTitle(windowTitle + " | FPS: " + std::to_string(static_cast<int>(fps)));
 	}
 }

@@ -46,13 +46,23 @@ class Pcolader
 	sf::String				coladerName = "none";
 
 
-	sf::Vector2f			position = { 0, 0 };
+	sf::Vector2f			position = { 0.0f, 0.0f };
 
-	sf::Vector2f			origin = { 0, 0 };
+	sf::Vector2f			origin = { 0.0f, 0.0f };
+
+
+	Pcolader*				colisionColader = nullptr;
+
+	sf::Uint8				colision = 0U;
+
+	bool					solid = false;
+
+
+	sf::Uint8               Colision();
 
 public:
 
-	Pcolader() = default;
+	Pcolader();
 
 	Pcolader(sf::RenderWindow* window, sf::Event* event, sf::Vector2f position, sf::Vector2f size, const sf::String coladerName);
 
@@ -69,7 +79,13 @@ public:
 
 	void					Draw() const;
 
+
 	bool					IsColision(Pcolader* colader);
+
+
+	void					SetSolid(bool solid);
+
+	bool					IsSolid() const;
 
 
 	void					SetPosition(sf::Vector2f position);
