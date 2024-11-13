@@ -38,30 +38,30 @@ public:
 
     sf::Vector2f            GetPosition() const;
 
-    virtual sf::Vector2u    GetPixelPosition() const;
+    virtual sf::Vector2f    GetPixelPosition() const;
 
-    virtual sf::Vector2u    GetRealPosition() const;
+    virtual sf::Vector2f    GetRealPosition() const;
 
-    virtual void            SetPosition(float x, float y, Psprite* RelativeSprite = nullptr);
+    virtual void            SetPosition(sf::Vector2f position, Psprite* RelativeSprite = nullptr);
 
-    virtual void            SetPixelPosition(sf::Uint16 x, sf::Uint16 y);
+    virtual void            SetPixelPosition(sf::Vector2f position);
 
 
     sf::Vector2f            GetScale() const;
 
-    virtual void            SetScale(float x, float y);
+    virtual void            SetScale(sf::Vector2f scale);
 
 
     sf::Vector2f            GetOrigin() const;
 
-    virtual  sf::Vector2u   GetPixelOrigin() const;
+    virtual  sf::Vector2f   GetPixelOrigin() const;
 
-    virtual void            SetOrigin(float x, float y, bool local = false);
+    virtual void            SetOrigin(sf::Vector2f origin, bool local = false);
 
 
-    virtual sf::Vector2u    GetSize(bool local = false) const;
+    virtual sf::Vector2f    GetSize(bool local = false) const;
 
-    virtual sf::IntRect     GetBounds(bool local = false) const;
+    virtual sf::FloatRect   GetBounds(bool local = false) const;
 
 
     virtual void            Draw() const;

@@ -34,7 +34,7 @@ Psprite::Psprite(sf::RenderWindow* window, sf::Event* event, sf::String textureP
 
     windowScale.y = std::stof(Config::Read(L"windowScaleHeight"));
 
-    SetScale(scale.x, scale.y);
+    SetScale({1.0f, 1.0f});
 }
 
 
@@ -64,35 +64,35 @@ sf::Vector2f Psprite::GetPosition() const
     return position;
 }
 
-sf::Vector2u Psprite::GetPixelPosition() const
+sf::Vector2f Psprite::GetPixelPosition() const
 {
-    return (sf::Vector2u)sprite.getPosition();
+    return sprite.getPosition();
 }
 
-sf::Vector2u Psprite::GetRealPosition() const
+sf::Vector2f Psprite::GetRealPosition() const
 {
-    return sf::Vector2u((sf::Uint16)(sprite.getPosition().x - sprite.getOrigin().x), (sf::Uint16)(sprite.getPosition().y - sprite.getOrigin().y));
+    return { sprite.getPosition().x - sprite.getOrigin().x, sprite.getPosition().y - sprite.getOrigin().y };
 }
 
-void Psprite::SetPosition(float x, float y, Psprite* RelativeSprite)
+void Psprite::SetPosition(sf::Vector2f position, Psprite* RelativeSprite)
 {
-    position.x = x;
-
-    position.y = y;
+    this->position = position;
 
     if (RelativeSprite != nullptr)
     {
-        sprite.setPosition((RelativeSprite->GetPixelPosition().x + (RelativeSprite->GetSize().x * x)) - RelativeSprite->GetPixelOrigin().x, (RelativeSprite->GetPixelPosition().y + (RelativeSprite->GetSize().y * y)) - RelativeSprite->GetPixelOrigin().y);
+        sprite.setPosition((RelativeSprite->GetPixelPosition().x + (RelativeSprite->GetSize().x * position.x)) - RelativeSprite->GetPixelOrigin().x, (RelativeSprite->GetPixelPosition().y + (RelativeSprite->GetSize().y * position.y)) - RelativeSprite->GetPixelOrigin().y);
     }
     else
     {
-        sprite.setPosition(window->getSize().x * x, window->getSize().y * y);
+        sprite.setPosition(window->getSize().x * position.x, window->getSize().y * position.y);
     }
 }
 
-void Psprite::SetPixelPosition(sf::Uint16 x, sf::Uint16 y)
+void Psprite::SetPixelPosition(sf::Vector2f position)
 {
-    sprite.setPosition(x, y);
+    sprite.setPosition(position);
+
+    this->position = { position.x / window->getSize().x, position.y / window->getSize().y };
 }
 
 
@@ -101,13 +101,11 @@ sf::Vector2f Psprite::GetScale() const
     return scale;
 }
 
-void Psprite::SetScale(float x, float y)
+void Psprite::SetScale(sf::Vector2f scale)
 {
-    scale.x = x;
+    this->scale = scale;
 
-    scale.y = y;
-
-    sprite.setScale(windowScale.x * x, windowScale.y * y);
+    sprite.setScale(windowScale.x * scale.x, windowScale.y * scale.y);
 }
 
 
@@ -116,39 +114,37 @@ sf::Vector2f Psprite::GetOrigin() const
     return origin;
 }
 
-sf::Vector2u Psprite::GetPixelOrigin() const
+sf::Vector2f Psprite::GetPixelOrigin() const
 {
-    return (sf::Vector2u)sprite.getOrigin();
+    return sprite.getOrigin();
 }
 
-void Psprite::SetOrigin(float x, float y, bool local)
+void Psprite::SetOrigin(sf::Vector2f origin, bool local)
 {
-    origin.x = x;
+    this->origin = origin;
 
-    origin.y = y;
-
-    sprite.setOrigin(GetSize(local).x * x, GetSize(local).y * y);
+    sprite.setOrigin(GetSize(local).x * origin.x, GetSize(local).y * origin.y);
 }
 
 
-sf::Vector2u Psprite::GetSize(bool local) const
+sf::Vector2f Psprite::GetSize(bool local) const
 {
     if (local)
     {
-        return (sf::Vector2u)sprite.getLocalBounds().getSize();
+        return sprite.getLocalBounds().getSize();
     }
 
-    return (sf::Vector2u)sprite.getGlobalBounds().getSize();
+    return sprite.getGlobalBounds().getSize();
 }
 
-sf::IntRect Psprite::GetBounds(bool local) const
+sf::FloatRect Psprite::GetBounds(bool local) const
 {
     if (local)
     {
-        return (sf::IntRect)sprite.getLocalBounds();
+        return sprite.getLocalBounds();
     }
 
-    return (sf::IntRect)sprite.getGlobalBounds();
+    return sprite.getGlobalBounds();
 }
 
 

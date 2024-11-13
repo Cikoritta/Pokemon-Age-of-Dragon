@@ -143,7 +143,7 @@ void Pcolader::SetSprite(Psprite* sprite)
 {
     this->sprite = sprite;
 
-    sprite->SetPixelPosition(bounds.getPosition().x, bounds.getPosition().y);
+    sprite->SetPixelPosition(bounds.getPosition());
 }
 
 
@@ -198,7 +198,7 @@ void Pcolader::SetPosition(sf::Vector2f position)
 
     if (sprite != nullptr)
     {
-        sprite->SetPixelPosition(bounds.getPosition().x, bounds.getPosition().y);
+        sprite->SetPixelPosition(bounds.getPosition());
     }
 }
 
@@ -210,7 +210,7 @@ void Pcolader::SetPixelPosition(sf::Vector2f position)
 
     if (sprite != nullptr)
     {
-        sprite->SetPixelPosition(bounds.getPosition().x, bounds.getPosition().y);
+        sprite->SetPixelPosition(bounds.getPosition());
     }
 
 	this->position = { bounds.getSize().x / window->getSize().x, bounds.getSize().y / window->getSize().y };

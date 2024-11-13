@@ -19,14 +19,14 @@ public:
 
     void Start() override
     {
-		colader.SetOrigin(sf::Vector2f(0.5f, 0.5f));
+		colader.SetOrigin({ 0.5f, 0.5f });
 
-		colader2.SetOrigin(sf::Vector2f(0.5f, 0.5f));
+		colader2.SetOrigin({ 0.5f, 0.5f });
 
 		colader2.SetSolid(true);
 
-        sprite.SetOrigin(0.5f, 0.5f);
-        sprite2.SetOrigin(0.5f, 0.5f);
+        sprite.SetOrigin({0.5f, 0.5f});
+        sprite2.SetOrigin({ 0.5f, 0.5f });
 
         sprite2.SetFrameTime(0.1f);
 
@@ -51,7 +51,7 @@ public:
         {
             if (Pinput::IsMouseUpdatePressed(sf::Mouse::Left))
             {
-                colader.SetPixelPosition(sf::Vector2f(sf::Mouse::getPosition(*window).x, sf::Mouse::getPosition(*window).y));
+                colader.SetPixelPosition(sf::Vector2f(static_cast<float>(sf::Mouse::getPosition(*window).x), static_cast<float>(sf::Mouse::getPosition(*window).y)));
             }
         }
 
@@ -59,7 +59,7 @@ public:
         {
             if (Pinput::IsMouseUpdatePressed(sf::Mouse::Left))
             {
-                colader2.SetPixelPosition(sf::Vector2f(sf::Mouse::getPosition(*window).x, sf::Mouse::getPosition(*window).y));
+                colader2.SetPixelPosition(sf::Vector2f(static_cast<float>(sf::Mouse::getPosition(*window).x), static_cast<float>(sf::Mouse::getPosition(*window).y)));
             }
         }
 

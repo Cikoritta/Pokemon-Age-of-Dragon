@@ -20,6 +20,8 @@ public:
 
     static bool                     IsMouseCollision(Pcolader* colader);
 
+    static bool                     IsMouseCollision(Psprite* sprite);
+
 
     static bool                     IsKeyPressed(sf::Keyboard::Key key);
 

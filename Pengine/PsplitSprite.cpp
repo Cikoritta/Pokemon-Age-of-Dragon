@@ -30,16 +30,14 @@ void PsplitSprite::SetTexture(const sf::String texturePath, sf::IntRect* texture
 }
 
 
-sf::Vector2u PsplitSprite::GetPixelPosition() const
+sf::Vector2f PsplitSprite::GetPixelPosition() const
 {
-    return (sf::Vector2u)topLeft.getPosition();
+    return topLeft.getPosition();
 }
 
-void PsplitSprite::SetPosition(float x, float y, Psprite* RelativeSprite)
+void PsplitSprite::SetPosition(sf::Vector2f position, Psprite* RelativeSprite)
 {
-    position.x = x;
-
-    position.y = y;
+    this->position = position;
 
 
     this->relativeSprite = RelativeSprite;
@@ -47,11 +45,11 @@ void PsplitSprite::SetPosition(float x, float y, Psprite* RelativeSprite)
 
     if (RelativeSprite != nullptr)
     {
-        topLeft.setPosition(((RelativeSprite->GetPixelPosition().x + (RelativeSprite->GetSize().x * x)) - RelativeSprite->GetPixelOrigin().x) - pixelOrigin.x, ((RelativeSprite->GetPixelPosition().y + (RelativeSprite->GetSize().y * y)) - RelativeSprite->GetPixelOrigin().y) - pixelOrigin.y);
+        topLeft.setPosition(((RelativeSprite->GetPixelPosition().x + (RelativeSprite->GetSize().x * position.x)) - RelativeSprite->GetPixelOrigin().x) - pixelOrigin.x, ((RelativeSprite->GetPixelPosition().y + (RelativeSprite->GetSize().y * position.y)) - RelativeSprite->GetPixelOrigin().y) - pixelOrigin.y);
     }
     else
     {
-        topLeft.setPosition((window->getSize().x * x) - pixelOrigin.x, (window->getSize().y * y) - pixelOrigin.y);
+        topLeft.setPosition((window->getSize().x * position.x) - pixelOrigin.x, (window->getSize().y * position.y) - pixelOrigin.y);
     }
 
 
@@ -67,9 +65,9 @@ void PsplitSprite::SetPosition(float x, float y, Psprite* RelativeSprite)
     bottomRight.setPosition(right.getPosition().x, right.getPosition().y + right.getGlobalBounds().height);
 }
 
-void PsplitSprite::SetPixelPosition(sf::Uint16 x, sf::Uint16 y)
+void PsplitSprite::SetPixelPosition(sf::Vector2f position)
 {
-    topLeft.setPosition((float)(window->getSize().x * x) - pixelOrigin.x, (float)(window->getSize().y * y) - pixelOrigin.y);
+    topLeft.setPosition((float)(window->getSize().x * position.x) - pixelOrigin.x, (float)(window->getSize().y * position.y) - pixelOrigin.y);
 
     top.setPosition(topLeft.getPosition().x + topLeft.getGlobalBounds().width, topLeft.getPosition().y);
     topRight.setPosition(top.getPosition().x + top.getGlobalBounds().width, top.getPosition().y);
@@ -81,145 +79,141 @@ void PsplitSprite::SetPixelPosition(sf::Uint16 x, sf::Uint16 y)
     bottomLeft.setPosition(left.getPosition().x, left.getPosition().y + left.getGlobalBounds().height);
     bottom.setPosition(sprite.getPosition().x, sprite.getPosition().y + sprite.getGlobalBounds().height);
     bottomRight.setPosition(right.getPosition().x, right.getPosition().y + right.getGlobalBounds().height);
+
+    this->position = { position.x / window->getSize().x, position.y / window->getSize().y };
 }
 
 
-void PsplitSprite::SetScale(float x, float y)
+void PsplitSprite::SetScale(sf::Vector2f scale)
 {
-    scale.x = x;
-
-    scale.y = y;
+    this->scale = scale;
 
 
-    topLeft.setScale(windowScale.x * x, windowScale.y * y);
-    top.setScale(windowScale.x * x, windowScale.y * y);
-    topRight.setScale(windowScale.x * x, windowScale.y * y);
+    topLeft.setScale(windowScale.x * scale.x, windowScale.y * scale.y);
+    top.setScale(windowScale.x * scale.x, windowScale.y * scale.y);
+    topRight.setScale(windowScale.x * scale.x, windowScale.y * scale.y);
 
-    left.setScale(windowScale.x * x, windowScale.y * y);
-    sprite.setScale(windowScale.x * x, windowScale.y * y);
-    right.setScale(windowScale.x * x, windowScale.y * y);
+    left.setScale(windowScale.x * scale.x, windowScale.y * scale.y);
+    sprite.setScale(windowScale.x * scale.x, windowScale.y * scale.y);
+    right.setScale(windowScale.x * scale.x, windowScale.y * scale.y);
 
-    bottomLeft.setScale(windowScale.x * x, windowScale.y * y);
-    bottom.setScale(windowScale.x * x, windowScale.y * y);
-    bottomRight.setScale(windowScale.x * x, windowScale.y * y);
+    bottomLeft.setScale(windowScale.x * scale.x, windowScale.y * scale.y);
+    bottom.setScale(windowScale.x * scale.x, windowScale.y * scale.y);
+    bottomRight.setScale(windowScale.x * scale.x, windowScale.y * scale.y);
 
 
-    SetPosition(position.x, position.y, relativeSprite);
+    SetPosition(position, relativeSprite);
 }
 
-void PsplitSprite::SetSmartScale(float x, float y)
+void PsplitSprite::SetSmartScale(sf::Vector2f scale)
 {
-    scale.x = x;
-
-    scale.y = y;
+    this->scale = scale;
 
 
     float scaleFactor = 1.0f;
 
     
-    if (x >= y)
+    if (scale.x >= scale.y)
     {
-        scaleFactor = y / x;
+        scaleFactor = scale.y / scale.x;
 
-        topLeft.setScale((windowScale.x * x) * scaleFactor, windowScale.y * y);
-        top.setScale(windowScale.x * x, windowScale.y * y);
-        topRight.setScale((windowScale.x * x) * scaleFactor, windowScale.y * y);
+        topLeft.setScale((windowScale.x * scale.x) * scaleFactor, windowScale.y * scale.y);
+        top.setScale(windowScale.x * scale.x, windowScale.y * scale.y);
+        topRight.setScale((windowScale.x * scale.x) * scaleFactor, windowScale.y * scale.y);
 
-        left.setScale((windowScale.x * x) * scaleFactor, windowScale.y * y);
-        sprite.setScale(windowScale.x * x, windowScale.y * y);
-        right.setScale((windowScale.x * x) * scaleFactor, windowScale.y * y);
+        left.setScale((windowScale.x * scale.x) * scaleFactor, windowScale.y * scale.y);
+        sprite.setScale(windowScale.x * scale.x, windowScale.y * scale.y);
+        right.setScale((windowScale.x * scale.x) * scaleFactor, windowScale.y * scale.y);
 
-        bottomLeft.setScale((windowScale.x * x) * scaleFactor, windowScale.y * y);
-        bottom.setScale(windowScale.x * x, windowScale.y * y);
-        bottomRight.setScale((windowScale.x * x) * scaleFactor, windowScale.y * y);
+        bottomLeft.setScale((windowScale.x * scale.x) * scaleFactor, windowScale.y * scale.y);
+        bottom.setScale(windowScale.x * scale.x, windowScale.y * scale.y);
+        bottomRight.setScale((windowScale.x * scale.x) * scaleFactor, windowScale.y * scale.y);
     }
     else
     {
-        scaleFactor = x / y;
+        scaleFactor = scale.x / scale.y;
 
-        topLeft.setScale(windowScale.x * x, (windowScale.y * y) * scaleFactor);
-        top.setScale(windowScale.x * x, (windowScale.y * y) * scaleFactor);
-        topRight.setScale(windowScale.x * x, (windowScale.y * y) * scaleFactor);
+        topLeft.setScale(windowScale.x * scale.x, (windowScale.y * scale.y) * scaleFactor);
+        top.setScale(windowScale.x * scale.x, (windowScale.y * scale.y) * scaleFactor);
+        topRight.setScale(windowScale.x * scale.x, (windowScale.y * scale.y) * scaleFactor);
 
-        left.setScale(windowScale.x * x, windowScale.y * y);
-        sprite.setScale(windowScale.x * x, windowScale.y * y);
-        right.setScale(windowScale.x * x, windowScale.y * y);
+        left.setScale(windowScale.x * scale.x, windowScale.y * scale.y);
+        sprite.setScale(windowScale.x * scale.x, windowScale.y * scale.y);
+        right.setScale(windowScale.x * scale.x, windowScale.y * scale.y);
 
-        bottomLeft.setScale(windowScale.x * x, (windowScale.y * y) * scaleFactor);
-        bottom.setScale(windowScale.x * x, (windowScale.y * y) * scaleFactor);
-        bottomRight.setScale(windowScale.x * x, (windowScale.y * y) * scaleFactor);
+        bottomLeft.setScale(windowScale.x * scale.x, (windowScale.y * scale.y) * scaleFactor);
+        bottom.setScale(windowScale.x * scale.x, (windowScale.y * scale.y) * scaleFactor);
+        bottomRight.setScale(windowScale.x * scale.x, (windowScale.y * scale.y) * scaleFactor);
     }
 
 
-    SetPosition(position.x, position.y, relativeSprite);
+    SetPosition(position, relativeSprite);
 }
 
-void PsplitSprite::SetBorderScale(float x, float y)
+void PsplitSprite::SetBorderScale(sf::Vector2f scale)
 {
-    topLeft.setScale(x, y);
-    top.setScale(scale.x, y);
-    topRight.setScale(x, y);
+    topLeft.setScale(scale.x, scale.y);
+    top.setScale(this->scale.x, scale.y);
+    topRight.setScale(scale.x, scale.y);
 
-    left.setScale(x, scale.y);
-    right.setScale(x, scale.y);
+    left.setScale(scale.x, this->scale.y);
+    right.setScale(scale.x, this->scale.y);
 
-    bottomLeft.setScale(x, y);
-    bottom.setScale(scale.x, y);
-    bottomRight.setScale(x, y);
+    bottomLeft.setScale(scale.x, scale.y);
+    bottom.setScale(this->scale.x, scale.y);
+    bottomRight.setScale(scale.x, scale.y);
 
-    SetPosition(position.x, position.y, relativeSprite);
+    SetPosition(position, relativeSprite);
 }
 
 
-sf::Vector2u PsplitSprite::GetPixelOrigin() const
+sf::Vector2f PsplitSprite::GetPixelOrigin() const
 {
     return pixelOrigin;
 }
 
-void PsplitSprite::SetOrigin(float x, float y, bool local)
+void PsplitSprite::SetOrigin(sf::Vector2f origin, bool local)
 {
-    origin.x = x;
-
-    origin.y = y;
+    this->origin = origin;
 
 
-    pixelOrigin.x = (sf::Uint32)(GetSize(local).x * x);
+    pixelOrigin.x = GetSize(local).x * origin.x;
 
-    pixelOrigin.y = (sf::Uint32)(GetSize(local).y * y);
+    pixelOrigin.y = GetSize(local).y * origin.y;
 
 
-    SetPosition(position.x, position.y, relativeSprite);
+    SetPosition(position, relativeSprite);
 }
 
 
-sf::Vector2u PsplitSprite::GetSize(bool local) const
+sf::Vector2f PsplitSprite::GetSize(bool local) const
 {
-    sf::Uint16 width;
+    float width;
 
-    sf::Uint16 height;
+    float height;
 
 
     if (local)
     {
-        width = (sf::Uint16)(left.getLocalBounds().width + sprite.getLocalBounds().width - right.getLocalBounds().width);
+        width = left.getLocalBounds().width + sprite.getLocalBounds().width - right.getLocalBounds().width;
 
-        height = (sf::Uint16)(top.getLocalBounds().height + sprite.getLocalBounds().height - bottom.getLocalBounds().height);
+        height = top.getLocalBounds().height + sprite.getLocalBounds().height - bottom.getLocalBounds().height;
 
-        return sf::Vector2u(width, height);
+        return { width, height };
     }
 
 
-    width = (sf::Uint16)(left.getGlobalBounds().width + sprite.getGlobalBounds().width + right.getGlobalBounds().width);
+    width = left.getGlobalBounds().width + sprite.getGlobalBounds().width + right.getGlobalBounds().width;
 
-    height = (sf::Uint16)(top.getGlobalBounds().height + sprite.getGlobalBounds().height + bottom.getGlobalBounds().height);
+    height = top.getGlobalBounds().height + sprite.getGlobalBounds().height + bottom.getGlobalBounds().height;
 
 
-    return sf::Vector2u(width, height);
+    return { width, height };
 }
 
-sf::IntRect PsplitSprite::GetBounds(bool local) const
+sf::FloatRect PsplitSprite::GetBounds(bool local) const
 {
-    return sf::IntRect(GetPixelPosition().x - GetPixelOrigin().x, GetPixelPosition().y - GetPixelOrigin().y, GetSize().x, GetSize().y);
+    return sf::FloatRect(GetPixelPosition().x - GetPixelOrigin().x, GetPixelPosition().y - GetPixelOrigin().y, GetSize().x, GetSize().y);
 }
 
 

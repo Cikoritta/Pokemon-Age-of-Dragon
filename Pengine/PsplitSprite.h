@@ -14,7 +14,7 @@ class PsplitSprite : public Psprite
     sf::Sprite bottom;
     sf::Sprite bottomRight;
 
-    sf::Vector2u pixelOrigin = sf::Vector2u(0U, 0U);
+    sf::Vector2f pixelOrigin = { 0U, 0U };
 
     Psprite* relativeSprite = nullptr;
 
@@ -57,28 +57,28 @@ public:
     void SetTexture(const sf::String texturePath, sf::IntRect* textureRect[9]);
 
 
-    sf::Vector2u GetPixelPosition() const override;
+    sf::Vector2f GetPixelPosition() const override;
 
-    void SetPosition(float x, float y, Psprite* RelativeSprite = nullptr) override;
+    void SetPosition(sf::Vector2f position, Psprite* RelativeSprite = nullptr) override;
 
-    void SetPixelPosition(sf::Uint16 x, sf::Uint16 y) override;
-
-
-    void SetScale(float x, float y) override;
-
-    void SetSmartScale(float x, float y);
-
-    void SetBorderScale(float x, float y);
+    void SetPixelPosition(sf::Vector2f position) override;
 
 
-    virtual  sf::Vector2u GetPixelOrigin() const override;
+    void SetScale(sf::Vector2f scale) override;
 
-    virtual void SetOrigin(float x, float y, bool local = false) override;
+    void SetSmartScale(sf::Vector2f scale);
+
+    void SetBorderScale(sf::Vector2f scale);
 
 
-    virtual sf::Vector2u GetSize(bool local = false) const override;
+    virtual sf::Vector2f GetPixelOrigin() const override;
 
-    virtual sf::IntRect GetBounds(bool local = false) const override;
+    virtual void SetOrigin(sf::Vector2f origin, bool local = false) override;
+
+
+    virtual sf::Vector2f GetSize(bool local = false) const override;
+
+    virtual sf::FloatRect GetBounds(bool local = false) const override;
 
 
     virtual void Draw() const override;
