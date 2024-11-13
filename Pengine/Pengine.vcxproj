@@ -156,16 +156,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
+    <ClInclude Include="PanimatedSprite.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Pcolader.h" />
     <ClInclude Include="Pengine.h" />
     <ClInclude Include="Pinput.h" />
     <ClInclude Include="PsceneManager.h" />
+    <ClInclude Include="PsplitSprite.h" />
+    <ClInclude Include="Psprite.h" />
     <ClInclude Include="Pwindow.h" />
     <ClInclude Include="Pscene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="PanimatedSprite.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -174,6 +178,8 @@
     </ClCompile>
     <ClCompile Include="Pcolader.cpp" />
     <ClCompile Include="Pinput.cpp" />
+    <ClCompile Include="PsplitSprite.cpp" />
+    <ClCompile Include="Psprite.cpp" />
     <ClCompile Include="Pwindow.cpp" />
     <ClCompile Include="PsceneManager.cpp" />
     <ClCompile Include="Pscene.cpp" />

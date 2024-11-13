@@ -23,7 +23,7 @@ void Pinput::SetWindow(sf::RenderWindow* window_, sf::Event* event_)
 
 bool Pinput::IsMouseCollision(Pcolader* colader)
 {
-    if (colader->GetBounds().contains(sf::Vector2f(sf::Mouse::getPosition(*window).x, sf::Mouse::getPosition(*window).y)))
+    if (colader->GetBounds().contains(sf::Vector2f(static_cast<float>(sf::Mouse::getPosition(*window).x), static_cast<float>(sf::Mouse::getPosition(*window).y))))
     {
         return true;
     }

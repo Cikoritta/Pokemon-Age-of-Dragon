@@ -139,6 +139,14 @@ void Pcolader::Draw() const
 }
 
 
+void Pcolader::SetSprite(Psprite* sprite)
+{
+    this->sprite = sprite;
+
+    sprite->SetPixelPosition(bounds.getPosition().x, bounds.getPosition().y);
+}
+
+
 bool Pcolader::IsColision(Pcolader* colader)
 {
 	colisionColader = colader;
@@ -187,6 +195,11 @@ void Pcolader::SetPosition(sf::Vector2f position)
 	bounds.setPosition(window->getSize().x * position.x, window->getSize().y * position.y);
 
     textName.setPosition(bounds.getPosition().x + 3.0f, bounds.getPosition().y);
+
+    if (sprite != nullptr)
+    {
+        sprite->SetPixelPosition(bounds.getPosition().x, bounds.getPosition().y);
+    }
 }
 
 void Pcolader::SetPixelPosition(sf::Vector2f position)
@@ -194,6 +207,11 @@ void Pcolader::SetPixelPosition(sf::Vector2f position)
 	bounds.setPosition(position);
 
     textName.setPosition(bounds.getPosition().x + 3.0f, bounds.getPosition().y);
+
+    if (sprite != nullptr)
+    {
+        sprite->SetPixelPosition(bounds.getPosition().x, bounds.getPosition().y);
+    }
 
 	this->position = { bounds.getSize().x / window->getSize().x, bounds.getSize().y / window->getSize().y };
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "Psprite.h"
 
 class RectangleBounds
 {
@@ -58,6 +59,9 @@ class Pcolader
 	bool					solid = false;
 
 
+    Psprite*                sprite = nullptr;
+
+
 	sf::Uint8               Colision();
 
 public:
@@ -78,6 +82,9 @@ public:
 
 
 	void					Draw() const;
+
+
+    void                    SetSprite(Psprite* sprite);
 
 
 	bool					IsColision(Pcolader* colader);

@@ -7,17 +7,29 @@
     <Filter Include="Window">
       <UniqueIdentifier>{47a33aee-f1bc-4cdf-946d-333672298add}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Window\Scene">
-      <UniqueIdentifier>{2f73e5a6-7f1e-4ba6-af47-a4d6b01837b2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Window\Scene\SceneManager">
-      <UniqueIdentifier>{b444873a-7a0b-45de-b7db-57e0960d5d3d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Colader">
       <UniqueIdentifier>{cfb441e0-0448-4cf5-b0d0-68f283e38c93}</UniqueIdentifier>
     </Filter>
     <Filter Include="Input">
       <UniqueIdentifier>{3ee00043-4f94-49d2-85de-2cc7e671e515}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sprites">
+      <UniqueIdentifier>{b1cc1145-aae9-44a4-800c-3e7912bc5da0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{2f73e5a6-7f1e-4ba6-af47-a4d6b01837b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SceneManager">
+      <UniqueIdentifier>{b444873a-7a0b-45de-b7db-57e0960d5d3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sprites\Default">
+      <UniqueIdentifier>{597e57ff-6c18-4a87-bacf-1a8cc52ea614}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sprites\Animated">
+      <UniqueIdentifier>{8d12bd22-abc3-4056-b012-87df7b35903e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sprites\Split">
+      <UniqueIdentifier>{351e23b4-7437-4326-ba96-5659cc39f942}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -31,10 +43,10 @@
       <Filter>Window</Filter>
     </ClInclude>
     <ClInclude Include="Pscene.h">
-      <Filter>Window\Scene</Filter>
+      <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="PsceneManager.h">
-      <Filter>Window\Scene\SceneManager</Filter>
+      <Filter>SceneManager</Filter>
     </ClInclude>
     <ClInclude Include="Pengine.h" />
     <ClInclude Include="Pcolader.h">
@@ -42,6 +54,15 @@
     </ClInclude>
     <ClInclude Include="Pinput.h">
       <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Psprite.h">
+      <Filter>Sprites\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="PanimatedSprite.h">
+      <Filter>Sprites\Animated</Filter>
+    </ClInclude>
+    <ClInclude Include="PsplitSprite.h">
+      <Filter>Sprites\Split</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -55,16 +76,25 @@
       <Filter>Window</Filter>
     </ClCompile>
     <ClCompile Include="PsceneManager.cpp">
-      <Filter>Window\Scene\SceneManager</Filter>
+      <Filter>SceneManager</Filter>
     </ClCompile>
     <ClCompile Include="Pscene.cpp">
-      <Filter>Window\Scene</Filter>
+      <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="Pcolader.cpp">
       <Filter>Colader</Filter>
     </ClCompile>
     <ClCompile Include="Pinput.cpp">
       <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Psprite.cpp">
+      <Filter>Sprites\Default</Filter>
+    </ClCompile>
+    <ClCompile Include="PanimatedSprite.cpp">
+      <Filter>Sprites\Animated</Filter>
+    </ClCompile>
+    <ClCompile Include="PsplitSprite.cpp">
+      <Filter>Sprites\Split</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
