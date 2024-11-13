@@ -16,6 +16,9 @@
     <Filter Include="Colader">
       <UniqueIdentifier>{cfb441e0-0448-4cf5-b0d0-68f283e38c93}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{3ee00043-4f94-49d2-85de-2cc7e671e515}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -37,6 +40,9 @@
     <ClInclude Include="Pcolader.h">
       <Filter>Colader</Filter>
     </ClInclude>
+    <ClInclude Include="Pinput.h">
+      <Filter>Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -56,6 +62,9 @@
     </ClCompile>
     <ClCompile Include="Pcolader.cpp">
       <Filter>Colader</Filter>
+    </ClCompile>
+    <ClCompile Include="Pinput.cpp">
+      <Filter>Input</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

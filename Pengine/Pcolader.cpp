@@ -71,7 +71,7 @@ Pcolader::Pcolader()
 	bounds.setOutlineColor(sf::Color::Green);
 	bounds.setOutlineThickness(1.0f);
 
-	font.loadFromFile("Data/Fonts/System.ttf");
+	font.loadFromFile("Data/Fonts/Classic Console Neue/clacon2.ttf");
 	font.setSmooth(false);
 
 	textName.setFont(font);
@@ -97,7 +97,7 @@ Pcolader::Pcolader(sf::RenderWindow* window, sf::Event* event, sf::Vector2f posi
 	bounds.setOutlineColor(sf::Color::Green);
 	bounds.setOutlineThickness(1.0f);
 
-	font.loadFromFile("Data/Fonts/System.ttf");
+	font.loadFromFile("Data/Fonts/Classic Console Neue/clacon2.ttf");
 	font.setSmooth(false);
 
 	textName.setFont(font);
@@ -106,7 +106,7 @@ Pcolader::Pcolader(sf::RenderWindow* window, sf::Event* event, sf::Vector2f posi
 	textName.setFillColor(sf::Color::White);
 	textName.setOutlineThickness(1.0f);
 	textName.setOutlineColor(sf::Color::Black);
-	textName.setPosition(bounds.getPosition());
+	textName.setPosition(bounds.getPosition().x + 3.0f, bounds.getPosition().y);
 }
 
 
@@ -186,14 +186,14 @@ void Pcolader::SetPosition(sf::Vector2f position)
 
 	bounds.setPosition(window->getSize().x * position.x, window->getSize().y * position.y);
 
-	textName.setPosition(bounds.getPosition());
+    textName.setPosition(bounds.getPosition().x + 3.0f, bounds.getPosition().y);
 }
 
 void Pcolader::SetPixelPosition(sf::Vector2f position)
 {
 	bounds.setPosition(position);
 
-	textName.setPosition(bounds.getPosition());
+    textName.setPosition(bounds.getPosition().x + 3.0f, bounds.getPosition().y);
 
 	this->position = { bounds.getSize().x / window->getSize().x, bounds.getSize().y / window->getSize().y };
 }

@@ -159,6 +159,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="Pcolader.h" />
     <ClInclude Include="Pengine.h" />
+    <ClInclude Include="Pinput.h" />
     <ClInclude Include="PsceneManager.h" />
     <ClInclude Include="Pwindow.h" />
     <ClInclude Include="Pscene.h" />
@@ -172,6 +173,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Pcolader.cpp" />
+    <ClCompile Include="Pinput.cpp" />
     <ClCompile Include="Pwindow.cpp" />
     <ClCompile Include="PsceneManager.cpp" />
     <ClCompile Include="Pscene.cpp" />

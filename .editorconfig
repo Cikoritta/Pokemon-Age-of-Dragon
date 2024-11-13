@@ -1,0 +1,31 @@
+root = true
+
+# Общие настройки
+[*]
+indent_style = space
+indent_size = 4
+end_of_line = lf
+charset = utf-8
+
+# Названия переменных и функций
+[*.{c,cpp,h}]
+camelCase = true
+upper_case_constants = true
+lowercase_before_number = true
+constant_case = UPPER_CASE
+underscore_prefix = false
+
+# Классы и интерфейсы
+[*.h]
+class_style = pascal_case
+interface_prefix = I
+
+# Члены классов
+[*.{c,cpp}]
+member_naming_style = snake_case
+member_access = private
+
+# Другие правила
+[*.{c,cpp,h}]
+max_line_length = 120
+trailing_commas = true

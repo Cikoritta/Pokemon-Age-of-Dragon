@@ -3,3 +3,4 @@
 #include "Pwindow.h"
 #include "PsceneManager.h"
 #include "Pcolader.h"
+#include "Pinput.h"

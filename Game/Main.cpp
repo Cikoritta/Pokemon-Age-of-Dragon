@@ -1,4 +1,4 @@
-﻿#include <Pengine.h>
+#include <Pengine.h>
 
 class MyScene : public Pscene
 {
@@ -20,6 +20,8 @@ public:
 		colader2.SetOrigin(sf::Vector2f(0.5f, 0.5f));
 
 		colader2.SetSolid(true);
+
+        Pinput::SetWindow(window, event);
     }
 
     void Update() override
@@ -29,30 +31,30 @@ public:
 
     void Events() override
     {
-        if (colader.GetBounds().contains(sf::Mouse::getPosition(*window).x, sf::Mouse::getPosition(*window).y))
+        if (Pinput::IsMouseCollision(&colader))
         {
-            if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+            if (Pinput::IsMouseUpdatePressed(sf::Mouse::Left))
             {
                 colader.SetPixelPosition(sf::Vector2f(sf::Mouse::getPosition(*window).x, sf::Mouse::getPosition(*window).y));
             }
         }
 
-        if (event->KeyPressed && event->key.code == sf::Keyboard::W)
+        if (Pinput::IsKeyPressed(sf::Keyboard::W))
         {
             colader.SetPixelPosition(sf::Vector2f(colader.GetPixelPosition().x, colader.GetPixelPosition().y - 1.0f));
         }
 
-        if (event->KeyPressed && event->key.code == sf::Keyboard::S)
+        if (Pinput::IsKeyPressed(sf::Keyboard::S))
         {
             colader.SetPixelPosition(sf::Vector2f(colader.GetPixelPosition().x, colader.GetPixelPosition().y + 1.0f));
         }
 
-		if (event->KeyPressed && event->key.code == sf::Keyboard::A)
+		if (Pinput::IsKeyPressed(sf::Keyboard::A))
 		{
 			colader.SetPixelPosition(sf::Vector2f(colader.GetPixelPosition().x - 1.0f, colader.GetPixelPosition().y));
 		}
 
-        if (event->KeyPressed && event->key.code == sf::Keyboard::D)
+        if (Pinput::IsKeyPressed(sf::Keyboard::D))
         {
             colader.SetPixelPosition(sf::Vector2f(colader.GetPixelPosition().x + 1.0f, colader.GetPixelPosition().y));
         }
