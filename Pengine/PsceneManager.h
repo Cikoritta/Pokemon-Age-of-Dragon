@@ -1,5 +1,6 @@
 #pragma once
 #include "Pscene.h"
+#include "Windows.h"
 
 class PsceneManager
 {
@@ -12,6 +13,30 @@ class PsceneManager
 
 
     bool                    debugMode = false;
+
+
+    FILETIME                idle{}, prev_idle{},
+                            kernel{}, prev_kernel{},
+                            user{}, prev_user{};
+
+    MEMORYSTATUSEX          statex{};
+
+
+    sf::Clock               cpuClock;
+    bool                    cpuClockStarted = false;
+    sf::Uint16              cpuUsage = 0U;
+
+
+    sf::Clock               fpsClock;
+    bool                    fpsClockStarted = false;
+
+
+    sf::Clock               timeClock;
+    bool                    timeClockStarted = false;
+
+
+    sf::Font                debugFont;
+    sf::Text                debugText;
 
 public:
 
@@ -36,6 +61,18 @@ public:
 	void					SetCurrentScene(Pscene* scene);
 
 	Pscene*					GetCurrentScene() const;
+
+
+    sf::Uint16              GetCpuUsage();
+
+    sf::Uint16              GetMemoryUsage();  
+
+    sf::Uint16              GetFrameRate();
+
+    sf::Uint32              GetTimeElapsed();
+
+
+    void                    DebugText(sf::String string, sf::Uint16 position = 0U);
 
 
 	void					RenderScene();
