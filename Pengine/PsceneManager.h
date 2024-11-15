@@ -13,6 +13,7 @@ class PsceneManager
 
 
     bool                    debugMode = false;
+    bool                    debugModeVisible = true;
 
 
     FILETIME                idle{}, prev_idle{},
@@ -37,6 +38,8 @@ class PsceneManager
 
     sf::Font                debugFont;
     sf::Text                debugText;
+
+    sf::Vector2f            windowScale = { 1.0f, 1.0f };
 
 public:
 

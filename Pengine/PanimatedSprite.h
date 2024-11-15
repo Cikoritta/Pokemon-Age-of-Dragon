@@ -14,6 +14,8 @@ class PanimatedSprite : public Psprite
 
     float           frameTime = 0.0f;
 
+    float           maxLeft = 0.0f;
+
 
     bool            pause = false;
 
@@ -24,6 +26,11 @@ class PanimatedSprite : public Psprite
 
     bool            clockStart = false;
 
+
+    float           animationScale = 1.0f;
+    bool            animationScaleVector = true;
+    sf::Vector2f    baseScale = { 1.0f, 1.0f };
+
 public:
 
     PanimatedSprite() = default;
@@ -31,12 +38,17 @@ public:
     PanimatedSprite(sf::RenderWindow* window, sf::Event* event, sf::String texturePath = "none", sf::IntRect* textureRect = nullptr) : Psprite(window, event, texturePath, textureRect) {}
 
 
-    void            Animate(sf::Uint16 sizeFrame, sf::Uint16 startFrame = 0U);
+    void            Animate(sf::Uint16 sizeFrame, sf::Uint16 interval, sf::Uint16 startFrame = 0U);
+
+    void            ScaleAnimate(float minScale, float maxScale, float interval = 0.01f);
 
 
     void            SetPause(bool pause);
 
     bool            GetPause() const;
+
+
+    void            ScaleAnimateReset();
 
 
     void            SetLoop(bool loop);

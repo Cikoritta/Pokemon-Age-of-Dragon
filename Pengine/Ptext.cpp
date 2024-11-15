@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Ptext.h"
+#include <EazyConfig.h>
 
 Ptext::Ptext(sf::RenderWindow* window, sf::Event* event, sf::String fontPath, sf::String text, sf::Color color)
 {
@@ -9,6 +10,10 @@ Ptext::Ptext(sf::RenderWindow* window, sf::Event* event, sf::String fontPath, sf
     this->SetFont(fontPath);
     this->SetText(text);
     this->SetColor(color);
+
+    windowScale = { stof(Config::Read(L"Config.ini", L"windowScaleWidth")), stof(Config::Read(L"Config.ini", L"windowScaleHeight")) };
+
+    SetScale({ 1.0f, 1.0f });
 }
 
 
@@ -17,6 +22,10 @@ void Ptext::SetFont(std::string fontPath)
     font.loadFromFile(fontPath);
 
     text.setFont(font);
+
+    windowScale = { stof(Config::Read(L"Config.ini", L"windowScaleWidth")), stof(Config::Read(L"Config.ini", L"windowScaleHeight")) };
+
+    SetScale({ 1.0f, 1.0f });
 }
 
 void Ptext::SetText(std::string text)
@@ -37,7 +46,7 @@ void Ptext::SetPosition(sf::Vector2f position, Psprite* sprite)
 
     if (sprite != nullptr)
     {
-        text.setPosition({ sprite->GetPixelPosition().x + (sprite->GetSize().x * position.x) - sprite->GetPixelOrigin().x, sprite->GetPixelPosition().y + (sprite->GetSize().y * position.y) - sprite->GetPixelOrigin().y - text.getLocalBounds().top });
+        text.setPosition({ sprite->GetPixelPosition().x + (sprite->GetSize(true).x * position.x) - sprite->GetPixelOrigin().x, sprite->GetPixelPosition().y + (sprite->GetSize(true).y * position.y) - sprite->GetPixelOrigin().y - text.getLocalBounds().top });
     
         return;
     }
@@ -67,7 +76,7 @@ void Ptext::SetScale(sf::Vector2f scale)
 {
     this->scale = scale;
 
-    text.setScale(scale);
+    text.setScale({ scale.x * windowScale.x, scale.y * windowScale.y });
 }
 
 sf::Vector2f Ptext::GetScale() const

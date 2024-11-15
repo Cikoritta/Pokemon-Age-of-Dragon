@@ -47,6 +47,9 @@ class Pcolader
 	sf::String				coladerName = "none";
 
 
+    sf::Vector2f			windowScale = { 0.0f, 0.0f };
+
+
 	sf::Vector2f			position = { 0.0f, 0.0f };
 
 	sf::Vector2f			origin = { 0.0f, 0.0f };
@@ -116,7 +119,7 @@ public:
 	RectangleBounds			GetRectangleBounds() const;
 
 
-	void					SetOrigin(sf::Vector2f origin);
+	void					SetOrigin(sf::Vector2f origin, bool local = false);
 
 	sf::Vector2f			GetOrigin() const;
 

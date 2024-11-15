@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "PanimatedSprite.h"
 
-void PanimatedSprite::Animate(sf::Uint16 sizeFrame, sf::Uint16 startFrame)
+void PanimatedSprite::Animate(sf::Uint16 sizeFrame, sf::Uint16 interval, sf::Uint16 startFrame)
 {
     if (!clockStart)
     {
@@ -17,6 +17,8 @@ void PanimatedSprite::Animate(sf::Uint16 sizeFrame, sf::Uint16 startFrame)
 
         textureRect.left = currentFrame * sizeFrame;
 
+        maxLeft = sprite.getTexture()->getSize().x - sizeFrame;
+
         sprite.setTextureRect(textureRect);
 
         clockStart = true;
@@ -26,11 +28,11 @@ void PanimatedSprite::Animate(sf::Uint16 sizeFrame, sf::Uint16 startFrame)
     {
         if (clock.getElapsedTime().asSeconds() >= frameTime)
         {
-            if (currentFrame != maxFrame)
+            if (textureRect.left != maxLeft)
             {
                 currentFrame++;
 
-                textureRect.left += sizeFrame;
+                textureRect.left += interval;
             }
             else if (loop)
             {
@@ -50,6 +52,64 @@ void PanimatedSprite::Animate(sf::Uint16 sizeFrame, sf::Uint16 startFrame)
     }
 }
 
+void PanimatedSprite::ScaleAnimate(float minScale, float maxScale, float interval)
+{
+    if (!clockStart)
+    {
+        clock.restart();
+
+        baseScale = sprite.getScale();
+
+        clockStart = true;
+    }
+
+    if (!pause && !animationEnd)
+    {
+        if (clock.getElapsedTime().asSeconds() >= frameTime)
+        {
+            if (animationScaleVector)
+            {
+                if (animationScale < maxScale)
+                {
+                    sprite.setScale({ baseScale.x * animationScale, baseScale.y * animationScale });
+
+                    animationScale += interval;
+                }
+                else
+                {
+                    animationScale = maxScale;
+
+                    animationScaleVector = false;
+                }
+            }
+            else
+            {
+                if (animationScale > minScale)
+                {
+                    sprite.setScale({ baseScale.x * animationScale, baseScale.y * animationScale });
+
+                    animationScale -= interval;
+                }
+                else
+                {
+                    if (!loop)
+                    {
+                        animationEnd = true;
+                    }
+                    else
+                    {
+                        animationScale = minScale;
+
+                        animationScaleVector = true;
+                    }
+                }
+            }
+
+            clock.restart();
+        }
+    }
+}
+
 
 void PanimatedSprite::SetPause(bool pause)
 {
@@ -59,6 +119,11 @@ void PanimatedSprite::SetPause(bool pause)
 bool PanimatedSprite::GetPause() const
 {
     return pause;
+}
+
+void PanimatedSprite::ScaleAnimateReset()
+{
+    animationScale = 1.0f;
 }
 
 

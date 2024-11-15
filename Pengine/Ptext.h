@@ -20,6 +20,9 @@ class Ptext
 
     sf::Vector2f            origin = { 0.0f, 0.0f };
 
+
+    sf::Vector2f            windowScale = { 1.0f, 1.0f };
+
 public:
 
     Ptext() = default;

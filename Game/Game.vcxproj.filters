@@ -1,6 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Main.cpp" />
+    <Filter Include="Game">
+      <UniqueIdentifier>{30942d89-0ec9-48fe-981b-966ee76ab728}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Main">
+      <UniqueIdentifier>{04e0f921-d85c-446f-9fd5-7789a2061853}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scenes">
+      <UniqueIdentifier>{8ec255ef-ebca-4b01-8c14-a2e45fd7388f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scenes\MainMenu">
+      <UniqueIdentifier>{1f65ae76-5a10-4bf3-87b3-ab266f222b5d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Game\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>Game\Scenes\MainMenu</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MainMenu.h">
+      <Filter>Game\Scenes\MainMenu</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

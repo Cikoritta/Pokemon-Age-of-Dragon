@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Pcolader.h"
+#include <EazyConfig.h>
 
 sf::Uint8 Pcolader::Colision()
 {
@@ -91,7 +92,9 @@ Pcolader::Pcolader(sf::RenderWindow* window, sf::Event* event, sf::Vector2f posi
 
 	this->coladerName = coladerName;
 
-	bounds.setSize(size);
+    windowScale = { stof(Config::Read(L"Config.ini", L"windowScaleWidth")), stof(Config::Read(L"Config.ini", L"windowScaleHeight")) };
+
+	bounds.setSize({ size.x * windowScale.x, size.y * windowScale.y });
 	bounds.setPosition(window->getSize().x * position.x, window->getSize().y * position.y);
 	bounds.setFillColor(sf::Color::Transparent);
 	bounds.setOutlineColor(sf::Color::Green);
@@ -102,7 +105,7 @@ Pcolader::Pcolader(sf::RenderWindow* window, sf::Event* event, sf::Vector2f posi
 
 	textName.setFont(font);
 	textName.setString(coladerName);
-	textName.setCharacterSize(12);
+	textName.setCharacterSize(12 * ((windowScale.x + windowScale.y) / 2.0f));
 	textName.setFillColor(sf::Color::White);
 	textName.setOutlineThickness(1.0f);
 	textName.setOutlineColor(sf::Color::Black);
@@ -113,6 +116,8 @@ Pcolader::Pcolader(sf::RenderWindow* window, sf::Event* event, sf::Vector2f posi
 void Pcolader::SetWindow(sf::RenderWindow* window)
 {
 	this->window = window;
+
+    windowScale = { stof(Config::Read(L"Config.ini", L"windowScaleWidth")), stof(Config::Read(L"Config.ini", L"windowScaleHeight")) };
 }
 
 void Pcolader::SetEvent(sf::Event* event)
@@ -210,7 +215,7 @@ void Pcolader::SetPixelPosition(sf::Vector2f position)
 
     if (sprite != nullptr)
     {
-        sprite->SetPixelPosition(bounds.getPosition());
+        sprite->SetPixelPosition({ bounds.getPosition().x, bounds.getPosition().y });
     }
 
 	this->position = { bounds.getSize().x / window->getSize().x, bounds.getSize().y / window->getSize().y };
@@ -234,7 +239,7 @@ sf::Vector2f Pcolader::GetRealPosition() const
 
 void Pcolader::SetSize(sf::Vector2f size)
 {
-	bounds.setSize(size);
+    bounds.setSize({ size.x * windowScale.x, size.y * windowScale.y });
 }
 
 sf::Vector2f Pcolader::GetSize() const
@@ -259,13 +264,14 @@ RectangleBounds Pcolader::GetRectangleBounds() const
 }
 
 
-void Pcolader::SetOrigin(sf::Vector2f origin)
+void Pcolader::SetOrigin(sf::Vector2f origin, bool local)
 {
 	this->origin = origin;
 
-	bounds.setOrigin(GetSize().x * origin.x, GetSize().y * origin.y);
-	textName.setOrigin(GetSize().x * origin.x, GetSize().y * origin.y);
+	bounds.setOrigin(GetBounds(local).width * origin.x, GetBounds(local).height * origin.y);
+	textName.setOrigin(GetBounds(local).width * origin.x, GetBounds(local).height * origin.y);
 }
+
 
 sf::Vector2f Pcolader::GetOrigin() const
 {

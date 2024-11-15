@@ -127,13 +127,16 @@ void PsceneManager::DebugText(sf::String string, sf::Uint16 position)
     {
         debugFont.loadFromFile("Data/Fonts/Classic Console Neue/clacon2.ttf");
 
+        windowScale = { stof(Config::Read(L"Config.ini", L"windowScaleWidth")), stof(Config::Read(L"Config.ini", L"windowScaleHeight")) };
+
         debugText.setCharacterSize(20U);
         debugText.setFont(debugFont);
         debugText.setOutlineThickness(1.0f);
         debugText.setOutlineColor(sf::Color::Black);
+        debugText.setScale(windowScale);
     }
 
-    debugText.setPosition(0.0f, 20.0f * position);
+    debugText.setPosition(0.0f, (20.0f * position) * windowScale.y);
     debugText.setString(string);
 
     window->draw(debugText);
@@ -163,6 +166,14 @@ void PsceneManager::RenderScene()
 				window->setView(sf::View(sf::FloatRect(0.0f, 0.0f, static_cast<float>(event->size.width), static_cast<float>(event->size.height))));
 			}
 
+            if (debugMode)
+            {
+                if (event->type == event->KeyPressed && event->key.code == sf::Keyboard::F2)
+                {
+                    debugModeVisible = !debugModeVisible;
+                }
+            }
+
 			currentScene->Events();
 		}
 
@@ -174,7 +185,7 @@ void PsceneManager::RenderScene()
 
 		currentScene->Draw();
 
-        if (debugMode)
+        if (debugMode && debugModeVisible)
         {
             DebugText("Fps: " + std::to_string(GetFrameRate()));
             DebugText("Time: " + std::to_string(GetTimeElapsed()) + "s", 1U);

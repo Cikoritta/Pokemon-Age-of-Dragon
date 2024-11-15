@@ -11,13 +11,18 @@ class Pwindow : public sf::RenderWindow
 	sf::String			 configPath = "none";
 
 
+    sf::String           title = "none";
+
+
 public:
 
 	Pwindow() = default;
 
-	Pwindow(const sf::VideoMode& mode, const sf::String& title, const sf::Uint32 style = sf::Style::Default, const sf::String configPath = "none", Pscene* startScene = nullptr) : sf::RenderWindow(mode, title, style)
+	Pwindow(sf::String title , const sf::String configPath = "none", Pscene* startScene = nullptr)
 	{
 		this->configPath = configPath;
+
+        this->title = title;
 
 
 		sceneManager.SetWindow(this);
