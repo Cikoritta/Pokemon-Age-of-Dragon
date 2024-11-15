@@ -7,3 +7,4 @@
 #include "Psprite.h"
 #include "PanimatedSprite.h"
 #include "PsplitSprite.h"
+#include "Ptext.h"

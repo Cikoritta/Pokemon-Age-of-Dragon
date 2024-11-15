@@ -31,6 +31,9 @@
     <Filter Include="Sprites\Split">
       <UniqueIdentifier>{351e23b4-7437-4326-ba96-5659cc39f942}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Text">
+      <UniqueIdentifier>{e09e6e2e-6039-4933-9e0e-7040ef1ec520}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -64,6 +67,9 @@
     <ClInclude Include="PsplitSprite.h">
       <Filter>Sprites\Split</Filter>
     </ClInclude>
+    <ClInclude Include="Ptext.h">
+      <Filter>Text</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -95,6 +101,9 @@
     </ClCompile>
     <ClCompile Include="PsplitSprite.cpp">
       <Filter>Sprites\Split</Filter>
+    </ClCompile>
+    <ClCompile Include="Ptext.cpp">
+      <Filter>Text</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

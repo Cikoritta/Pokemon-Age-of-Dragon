@@ -10,6 +10,9 @@ class MyScene : public Pscene
 
     PanimatedSprite sprite2 = PanimatedSprite(window, event, "image.png", new sf::IntRect(0, 0, 200, 200));
 
+    Ptext text = Ptext(window, event, "Data/Fonts/Classic Console Neue/clacon2.ttf", "Hello World", sf::Color::Red);
+
+
 public:
 
     MyScene() = default;
@@ -25,7 +28,7 @@ public:
 
 		colader2.SetSolid(true);
 
-        sprite.SetOrigin({0.5f, 0.5f});
+        sprite.SetOrigin({ 0.5f, 0.5f });
         sprite2.SetOrigin({ 0.5f, 0.5f });
 
         sprite2.SetFrameTime(0.1f);
@@ -35,12 +38,17 @@ public:
         colader.SetSprite(&sprite);
         colader2.SetSprite(&sprite2);
 
+        text.SetPosition({ 0.5f, 0.5f }, &sprite);
+
+
         Pinput::SetWindow(window, event);
     }
 
     void Update() override
     {
         sprite2.Animate(200U);
+
+        text.SetPosition({ 0.5f, 0.5f }, &sprite);
 
         colader.IsColision(&colader2);
     }
@@ -92,6 +100,8 @@ public:
         colader2.Draw();
 
         colader.Draw();
+
+        text.Draw();
     }
 
 };

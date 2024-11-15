@@ -115,7 +115,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\Pokemon Age of Dragon\Pengine\Lib\EazyConfig\include;C:\Pokemon Age of Dragon\Pengine\Lib\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Pokemon Age of Dragon\Pengine\Lib\EazyConfig\include;D:\Pokemon Age of Dragon\Pengine\Lib\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
@@ -140,7 +140,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\Pokemon Age of Dragon\Pengine\Lib\EazyConfig\include;C:\Pokemon Age of Dragon\Pengine\Lib\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Pokemon Age of Dragon\Pengine\Lib\EazyConfig\include;D:\Pokemon Age of Dragon\Pengine\Lib\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
@@ -164,6 +164,7 @@
     <ClInclude Include="PsceneManager.h" />
     <ClInclude Include="PsplitSprite.h" />
     <ClInclude Include="Psprite.h" />
+    <ClInclude Include="Ptext.h" />
     <ClInclude Include="Pwindow.h" />
     <ClInclude Include="Pscene.h" />
   </ItemGroup>
@@ -180,6 +181,7 @@
     <ClCompile Include="Pinput.cpp" />
     <ClCompile Include="PsplitSprite.cpp" />
     <ClCompile Include="Psprite.cpp" />
+    <ClCompile Include="Ptext.cpp" />
     <ClCompile Include="Pwindow.cpp" />
     <ClCompile Include="PsceneManager.cpp" />
     <ClCompile Include="Pscene.cpp" />
