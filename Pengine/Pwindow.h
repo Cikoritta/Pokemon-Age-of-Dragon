@@ -10,6 +10,7 @@ class Pwindow : public sf::RenderWindow
 
 	sf::String			 configPath = "none";
 
+
 public:
 
 	Pwindow() = default;
@@ -23,17 +24,17 @@ public:
 
 		sceneManager.SetEvent(&event);
 
+
 		if (startScene != nullptr)
 		{
 			sceneManager.SetCurrentScene(startScene);
 		}
 
+
 		if (configPath != "none")
 		{
 			ApplyConfig();
 		}
-
-		Config::Write(L"Config.ini", L"windowTitle", title.toWideString());
 	}
 
 

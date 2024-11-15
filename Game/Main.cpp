@@ -17,26 +17,28 @@ public:
 
     MyScene() = default;
 
-    MyScene(sf::RenderWindow* window, sf::Event* event) : Pscene(window, event) {}
+    MyScene(sf::RenderWindow* window, sf::Event* event, sf::String string) : Pscene(window, event, string) {}
 
 
     void Start() override
     {
 		colader.SetOrigin({ 0.5f, 0.5f });
-
 		colader2.SetOrigin({ 0.5f, 0.5f });
-
 		colader2.SetSolid(true);
 
+
         sprite.SetOrigin({ 0.5f, 0.5f });
+
+
         sprite2.SetOrigin({ 0.5f, 0.5f });
-
         sprite2.SetFrameTime(0.1f);
-
         sprite2.SetLoop(true);
 
+
         colader.SetSprite(&sprite);
+
         colader2.SetSprite(&sprite2);
+
 
         text.SetPosition({ 0.5f, 0.5f }, &sprite);
 
@@ -112,7 +114,7 @@ int main()
 
     Pwindow window(sf::VideoMode(200U, 200U), "Pengine", 7U, "Config.ini");
 
-	window.GetSceneManager()->SetCurrentScene(new MyScene(&window, window.GetEvent()));
+	window.GetSceneManager()->SetCurrentScene(new MyScene(&window, window.GetEvent(), "MyTestScene"));
 
     window.GetSceneManager()->RenderScene();
 }

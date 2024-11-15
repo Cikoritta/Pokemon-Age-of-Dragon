@@ -8,12 +8,10 @@ class PsceneManager
 	sf::Event*				event = nullptr;
 
 
-	sf::Clock				fpsClock;
-
-	sf::String				windowTitle = "none";
-
-
 	Pscene*					currentScene = nullptr;
+
+
+    bool                    debugMode = false;
 
 public:
 
@@ -30,6 +28,9 @@ public:
 	void					SetEvent(sf::Event* event);
 
 	sf::Event*				GetEvent() const;
+
+
+    void                    SetDebugMode(bool debugMode);
 
 
 	void					SetCurrentScene(Pscene* scene);
