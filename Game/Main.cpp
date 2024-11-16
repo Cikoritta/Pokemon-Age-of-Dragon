@@ -3,9 +3,9 @@
 
 int main()
 { 
-    Pwindow window("Pengine", "Config.ini");
+    Pwindow window("Pokemon Age of Dragon", "Config.ini");
 
-	window.GetSceneManager()->SetCurrentScene(new MainMenu(&window, window.GetEvent(), "MainMenu"));
+	window.GetSceneManager()->SetCurrentScene(new MainMenu(&window, window.GetEvent(), L"MainMenu"));
 
     window.GetSceneManager()->RenderScene();
 }

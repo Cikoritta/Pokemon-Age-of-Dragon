@@ -34,6 +34,9 @@
     <Filter Include="Text">
       <UniqueIdentifier>{e09e6e2e-6039-4933-9e0e-7040ef1ec520}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lang">
+      <UniqueIdentifier>{56346a45-f7b2-48f1-9979-9a8691206230}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -70,6 +73,9 @@
     <ClInclude Include="Ptext.h">
       <Filter>Text</Filter>
     </ClInclude>
+    <ClInclude Include="Plang.h">
+      <Filter>Lang</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -104,6 +110,9 @@
     </ClCompile>
     <ClCompile Include="Ptext.cpp">
       <Filter>Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Plang.cpp">
+      <Filter>Lang</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

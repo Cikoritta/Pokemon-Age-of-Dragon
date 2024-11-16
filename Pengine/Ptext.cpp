@@ -16,6 +16,21 @@ Ptext::Ptext(sf::RenderWindow* window, sf::Event* event, sf::String fontPath, sf
     SetScale({ 1.0f, 1.0f });
 }
 
+Ptext::Ptext(Ptext* Ptext, sf::String text)
+{
+    this->window = Ptext->window;
+    this->event = Ptext->event;
+
+    this->font = *Ptext->GetTamplate()->getFont();
+    this->text.setFont(font);
+
+    windowScale = { stof(Config::Read(L"Config.ini", L"windowScaleWidth")), stof(Config::Read(L"Config.ini", L"windowScaleHeight")) };
+
+    SetScale({ 1.0f, 1.0f });
+
+    SetText(text);
+}
+
 
 void Ptext::SetFont(std::string fontPath)
 {
@@ -28,7 +43,7 @@ void Ptext::SetFont(std::string fontPath)
     SetScale({ 1.0f, 1.0f });
 }
 
-void Ptext::SetText(std::string text)
+void Ptext::SetText(sf::String text)
 {
     this->text.setString(text);
 }
@@ -46,12 +61,12 @@ void Ptext::SetPosition(sf::Vector2f position, Psprite* sprite)
 
     if (sprite != nullptr)
     {
-        text.setPosition({ sprite->GetPixelPosition().x + (sprite->GetSize(true).x * position.x) - sprite->GetPixelOrigin().x, sprite->GetPixelPosition().y + (sprite->GetSize(true).y * position.y) - sprite->GetPixelOrigin().y - text.getLocalBounds().top });
+        text.setPosition({ floor(sprite->GetPixelPosition().x + (sprite->GetSize(true).x * position.x) - sprite->GetPixelOrigin().x), floor(sprite->GetPixelPosition().y + (sprite->GetSize(true).y * position.y) - sprite->GetPixelOrigin().y - text.getLocalBounds().top) });
     
         return;
     }
 
-    text.setPosition({ window->getSize().x * position.x, (window->getSize().y * position.y) - text.getLocalBounds().top });
+    text.setPosition({ floor(window->getSize().x * position.x), floor((window->getSize().y * position.y) - text.getLocalBounds().top) });
 }
 
 void Ptext::SetPixelPosition(sf::Vector2f position)
@@ -85,11 +100,11 @@ sf::Vector2f Ptext::GetScale() const
 }
 
 
-void Ptext::SetOrigin(sf::Vector2f origin)
+void Ptext::SetOrigin(sf::Vector2f origin, bool local)
 {
     this->origin = origin;
 
-    text.setOrigin({ GetSize().x * origin.x, GetSize().y * origin.y });
+    text.setOrigin({ GetSize(local).x * origin.x, GetSize(local).y * origin.y });
 }
 
 void Ptext::SetPixelOrigin(sf::Vector2f origin)

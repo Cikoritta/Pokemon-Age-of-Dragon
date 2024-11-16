@@ -1,0 +1,4 @@
+new_game = "Новая игра";
+load_game = "Загрузить";
+setting_game = "Настройки";
+exit_game = "Выход";

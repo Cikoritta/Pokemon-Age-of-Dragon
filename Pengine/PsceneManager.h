@@ -1,6 +1,7 @@
 #pragma once
 #include "Pscene.h"
 #include "Windows.h"
+#include "Plang.h"
 
 class PsceneManager
 {
@@ -10,6 +11,8 @@ class PsceneManager
 
 
 	Pscene*					currentScene = nullptr;
+
+    Plang                   lang = Plang(Config::Read(L"Config.ini", L"lang"));
 
 
     bool                    debugMode = false;

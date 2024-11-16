@@ -1,0 +1,4 @@
+new_game = "New game";
+load_game = "Load";
+setting_game = "Settings";
+exit_game = "Exit";

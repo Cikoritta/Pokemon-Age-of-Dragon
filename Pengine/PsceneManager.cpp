@@ -190,7 +190,7 @@ void PsceneManager::RenderScene()
             DebugText("Fps: " + std::to_string(GetFrameRate()));
             DebugText("Time: " + std::to_string(GetTimeElapsed()) + "s", 1U);
 
-            DebugText("Current scene: " + currentScene->GetSceneName(), 2U);
+            DebugText("Current scene: " + *currentScene->GetSceneName(), 2U);
 
             DebugText("CPU: " + std::to_string(GetCpuUsage()) + " %", 3U);
             DebugText("MEM: " + std::to_string(GetMemoryUsage()) + " %", 4U);

@@ -38,7 +38,7 @@ void Pscene::SetSceneName(const sf::String sceneName)
 	this->sceneName = sceneName;
 }
 
-sf::String Pscene::GetSceneName() const
+sf::String* Pscene::GetSceneName()
 {
-	return sceneName;
+	return &sceneName;
 }

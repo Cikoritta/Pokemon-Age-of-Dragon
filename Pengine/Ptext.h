@@ -29,10 +29,12 @@ public:
 
     Ptext(sf::RenderWindow* window, sf::Event* event, sf::String fontPath, sf::String text, sf::Color color);
 
+    Ptext(Ptext* Ptext, sf::String text);
+
 
     void                    SetFont(std::string fontPath);
 
-    void                    SetText(std::string text);
+    void                    SetText(sf::String text);
 
 
     void                    SetColor(sf::Color color);
@@ -52,7 +54,7 @@ public:
     sf::Vector2f            GetScale() const;
 
 
-    void                    SetOrigin(sf::Vector2f origin);
+    void                    SetOrigin(sf::Vector2f origin, bool local = false);
 
     void                    SetPixelOrigin(sf::Vector2f origin);
 

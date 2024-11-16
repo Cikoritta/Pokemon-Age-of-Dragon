@@ -1,5 +1,6 @@
 #pragma once
 #include <Pengine.h>
+#include "Plang.h"
 
 class MainMenu : public Pscene
 {
@@ -8,7 +9,10 @@ class MainMenu : public Pscene
     PanimatedSprite         logo = PanimatedSprite(window, event, "Data/Textures/MainMenu/logo.png", new sf::IntRect(0, 0, 828, 366));
 
 
-    Ptext                   newGame = Ptext(window, event, "Data/Fonts/Upheaval Pro/UpheavalPro.ttf", L"Новая игра", sf::Color::White);
+    Ptext                   newGame = Ptext(window, event, "Data/Fonts/Upheaval Pro/UpheavalPro.ttf", Plang::GetString(L"new_game", L"MainMenu"), sf::Color::White);
+    Ptext                   loadGame = Ptext(&newGame, Plang::GetString(L"load_game", L"MainMenu"));
+    Ptext                   settingGame = Ptext(&newGame, Plang::GetString(L"setting_game", L"MainMenu"));
+    Ptext                   exitGame = Ptext(&newGame, Plang::GetString(L"exit_game", L"MainMenu"));
 
 public:
 

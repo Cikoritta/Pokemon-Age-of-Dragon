@@ -32,7 +32,7 @@ public:
 
 	void 					SetSceneName(const sf::String sceneName);
 
-	sf::String				GetSceneName() const;
+	sf::String*				GetSceneName();
 
 
 	virtual void			Start() = 0;
