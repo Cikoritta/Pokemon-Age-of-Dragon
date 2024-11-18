@@ -152,16 +152,16 @@ void PsplitSprite::SetSmartScale(sf::Vector2f scale)
 
 void PsplitSprite::SetBorderScale(sf::Vector2f scale)
 {
-    topLeft.setScale(scale.x, scale.y);
-    top.setScale(this->scale.x, scale.y);
-    topRight.setScale(scale.x, scale.y);
+    topLeft.setScale(scale.x * windowScale.x, scale.y * windowScale.y);
+    top.setScale(this->scale.x * windowScale.x, scale.y * windowScale.y);
+    topRight.setScale(scale.x * windowScale.x, scale.y * windowScale.y);
 
-    left.setScale(scale.x, this->scale.y);
-    right.setScale(scale.x, this->scale.y);
+    left.setScale(scale.x * windowScale.x, this->scale.y * windowScale.y);
+    right.setScale(scale.x * windowScale.x, this->scale.y * windowScale.y);
 
-    bottomLeft.setScale(scale.x, scale.y);
-    bottom.setScale(this->scale.x, scale.y);
-    bottomRight.setScale(scale.x, scale.y);
+    bottomLeft.setScale(scale.x * windowScale.x, scale.y * windowScale.y);
+    bottom.setScale(this->scale.x * windowScale.x, scale.y * windowScale.y);
+    bottomRight.setScale(scale.x * windowScale.x, scale.y * windowScale.y);
 
     SetPosition(position, relativeSprite);
 }
@@ -224,6 +224,7 @@ void PsplitSprite::Draw() const
     window->draw(topRight);
 
     window->draw(left);
+    window->draw(sprite);
     window->draw(right);
 
     window->draw(bottomLeft);

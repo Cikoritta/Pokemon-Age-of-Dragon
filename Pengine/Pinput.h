@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Pcolader.h"
+#include "Ptext.h"
 
 class Pinput
 {
@@ -21,6 +22,8 @@ public:
     static bool                     IsMouseCollision(Pcolader* colader);
 
     static bool                     IsMouseCollision(Psprite* sprite);
+
+    static bool                     IsMouseCollision(Ptext* text);
 
 
     static bool                     IsKeyPressed(sf::Keyboard::Key key);

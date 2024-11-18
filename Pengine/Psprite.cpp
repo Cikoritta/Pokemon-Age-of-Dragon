@@ -20,8 +20,6 @@ Psprite::Psprite(sf::RenderWindow* window, sf::Event* event, sf::String textureP
             sprite.setTextureRect(*textureRect);
 
             this->textureRect = *textureRect;
-
-            delete textureRect;
         }
         else
         {
@@ -56,6 +54,11 @@ void Psprite::setTexture(sf::String texturePath, sf::IntRect* textureRect)
     {
         this->textureRect = sf::IntRect(0, 0, sprite.getTexture()->getSize().x, sprite.getTexture()->getSize().y);
     }
+}
+
+sf::Sprite* Psprite::GetSprite()
+{
+    return &sprite;
 }
 
 

@@ -2,3 +2,7 @@ new_game = "Новая игра";
 load_game = "Загрузить";
 setting_game = "Настройки";
 exit_game = "Выход";
+
+exit_title = "Ты уходишь?";
+exit_stay = "Остаться";
+exit_exit = "Уйти";

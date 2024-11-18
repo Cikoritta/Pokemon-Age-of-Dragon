@@ -10,9 +10,36 @@ class MainMenu : public Pscene
 
 
     Ptext                   newGame = Ptext(window, event, "Data/Fonts/Upheaval Pro/UpheavalPro.ttf", Plang::GetString(L"new_game", L"MainMenu"), sf::Color::White);
+
     Ptext                   loadGame = Ptext(&newGame, Plang::GetString(L"load_game", L"MainMenu"));
+
     Ptext                   settingGame = Ptext(&newGame, Plang::GetString(L"setting_game", L"MainMenu"));
+
     Ptext                   exitGame = Ptext(&newGame, Plang::GetString(L"exit_game", L"MainMenu"));
+
+
+    bool                    exitEvent = false;
+
+    sf::IntRect             exitBackgroundRect[9] = { sf::IntRect(0, 0, 6, 6),
+                                                      sf::IntRect(6, 0, 32, 6),
+                                                      sf::IntRect(38, 0, 6, 6),
+                                                      sf::IntRect(0, 6, 6, 32), 
+                                                      sf::IntRect(6, 6, 32, 32), 
+                                                      sf::IntRect(38, 6, 6, 32), 
+                                                      sf::IntRect(0, 38, 6, 6), 
+                                                      sf::IntRect(6, 38, 32, 6), 
+                                                      sf::IntRect(38, 38, 6, 6) };
+
+    PsplitSprite            exitBackground = PsplitSprite(window, event, "Data/Textures/MainMenu/exit_background.png", exitBackgroundRect);
+
+    Ptext                   exitTitle = Ptext(&newGame, Plang::GetString(L"exit_title", L"MainMenu"));
+
+    Ptext                   exitStay = Ptext(&newGame, Plang::GetString(L"exit_stay", L"MainMenu"));
+
+    Ptext                   exitExit = Ptext(&newGame, Plang::GetString(L"exit_exit", L"MainMenu"));
+
+    Psprite                 magikarp = Psprite(window, event, "Data/Textures/MainMenu/magikarp.png", new sf::IntRect(640, 0, 640, 640));
+
 
 public:
 

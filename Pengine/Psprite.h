@@ -35,6 +35,8 @@ public:
 
     virtual void            setTexture(sf::String texturePath, sf::IntRect* textureRect = nullptr);
 
+    sf::Sprite*             GetSprite();
+
 
     sf::Vector2f            GetPosition() const;
 

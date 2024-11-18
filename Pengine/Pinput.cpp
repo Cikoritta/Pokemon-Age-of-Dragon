@@ -41,6 +41,16 @@ bool Pinput::IsMouseCollision(Psprite* sprite)
     return false;
 }
 
+bool Pinput::IsMouseCollision(Ptext* text)
+{
+    if (text->GetBounds().contains(sf::Vector2f(static_cast<float>(sf::Mouse::getPosition(*window).x), static_cast<float>(sf::Mouse::getPosition(*window).y))))
+    {
+        return true;
+    }
+
+    return false;
+}
+
 
 bool Pinput::IsKeyPressed(sf::Keyboard::Key key)
 {

@@ -22,7 +22,7 @@ public:
 
     PsplitSprite() = default;
 
-    PsplitSprite(sf::RenderWindow* window, sf::Event* event, sf::String texturePath, sf::IntRect* textureRect[9]) : Psprite(window, event, texturePath, textureRect[4])
+    PsplitSprite(sf::RenderWindow* window, sf::Event* event, sf::String texturePath, sf::IntRect textureRect[9]) : Psprite(window, event, texturePath, &textureRect[4])
     {
         if (texturePath != "none")
         {
@@ -33,6 +33,7 @@ public:
             topRight.setTexture(texture);
 
             left.setTexture(texture);
+            sprite.setTexture(texture);
             right.setTexture(texture);
 
             bottomLeft.setTexture(texture);
@@ -40,17 +41,21 @@ public:
             bottomRight.setTexture(texture);
 
 
-            topLeft.setTextureRect(*textureRect[0]);
-            top.setTextureRect(*textureRect[1]);
-            topRight.setTextureRect(*textureRect[2]);
+            topLeft.setTextureRect(textureRect[0]);
+            top.setTextureRect(textureRect[1]);
+            topRight.setTextureRect(textureRect[2]);
 
-            left.setTextureRect(*textureRect[3]);
-            right.setTextureRect(*textureRect[5]);
+            left.setTextureRect(textureRect[3]);
+            sprite.setTextureRect(textureRect[4]);
+            right.setTextureRect(textureRect[5]);
 
-            bottomLeft.setTextureRect(*textureRect[6]);
-            bottom.setTextureRect(*textureRect[7]);
-            bottomRight.setTextureRect(*textureRect[8]);
+            bottomLeft.setTextureRect(textureRect[6]);
+            bottom.setTextureRect(textureRect[7]);
+            bottomRight.setTextureRect(textureRect[8]);
         }
+
+        SetScale({ 1.0f, 1.0f });
+        SetPosition({ 0.1f, 0.1f });
     }
 
 
