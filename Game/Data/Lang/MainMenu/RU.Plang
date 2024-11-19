@@ -6,3 +6,7 @@ exit_game = "Выход";
 exit_title = "Ты уходишь?";
 exit_stay = "Остаться";
 exit_exit = "Уйти";
+
+setting_title = "Настройки";
+setting_exit = "Назад";
+setting_apply = "Применить";

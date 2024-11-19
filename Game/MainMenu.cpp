@@ -1,9 +1,7 @@
 #include "MainMenu.h"
 
-void MainMenu::Start()
+void MainMenu::BaseStart()
 {
-    Pinput::SetWindow(window, event);
-
     background.SetFrameTime(0.01f);
     background.SetLoop(true);
 
@@ -29,8 +27,10 @@ void MainMenu::Start()
     exitGame.SetTamplate(newGame.GetTamplate());
     exitGame.SetOrigin({ 0.5f, 0.5f }, true);
     exitGame.SetPosition({ 0.5f, 0.695f });
+}
 
-
+void MainMenu::ExitStart()
+{
     exitBackground.SetOrigin({ 0.5f, 0.5f });
     exitBackground.SetPosition({ 0.5f, 0.5f });
     exitBackground.SetSmartScale({ 18.0f, 10.0f });
@@ -51,6 +51,33 @@ void MainMenu::Start()
     magikarp.SetPosition({ 0.5f, 0.5f });
     magikarp.SetOrigin({ 0.5f, 0.5f }, true);
     magikarp.SetScale({ 0.5f, 0.5f });
+}
+
+void MainMenu::SettingStart()
+{
+    settingTitle.SetTamplate(newGame.GetTamplate());
+    settingTitle.SetOrigin({ 0.5f, 0.5f }, true);
+    settingTitle.SetPosition({ 0.5f, 0.15f });
+
+    settingExit.SetTamplate(newGame.GetTamplate());
+    settingExit.SetOrigin({ 0.5f, 0.5f }, true);
+    settingExit.SetPosition({ 0.58f, 0.8f });
+
+    settingApply.SetTamplate(newGame.GetTamplate());
+    settingApply.SetOrigin({ 0.5f, 0.5f }, true);
+    settingApply.SetPosition({ 0.42f, 0.7993f });
+}
+
+
+void MainMenu::Start()
+{
+    Pinput::SetWindow(window, event);
+
+    BaseStart();
+
+    ExitStart();
+
+    SettingStart();
 }
 
 void MainMenu::Update()
@@ -107,6 +134,11 @@ void MainMenu::Events()
             if (Pinput::IsMouseButtonPressed(sf::Mouse::Left))
             {
                 settingGame.SetScale({ 1.0f, 1.0f });
+            }
+
+            if (Pinput::IsMouseButtonReleased(sf::Mouse::Left))
+            {
+                settingEvent = true;
             }
         }
         else if (settingGame.GetScale().x == 1.1f)
@@ -178,21 +210,79 @@ void MainMenu::Events()
         }
     }
 
+    if (settingEvent)
+    {
+        if (Pinput::IsMouseCollision(&settingExit))
+        {
+            settingExit.SetScale({ 1.1f, 1.1f });
+
+            if (Pinput::IsMouseButtonPressed(sf::Mouse::Left))
+            {
+                settingExit.SetScale({ 1.0f, 1.0f });
+            }
+
+            if (Pinput::IsMouseButtonReleased(sf::Mouse::Left))
+            {
+                settingEvent = false;
+            }
+        }
+        else if (settingExit.GetScale().x == 1.1f)
+        {
+            settingExit.SetScale({ 1.0f, 1.0f });
+        }
+
+        if (Pinput::IsMouseCollision(&settingApply))
+        {
+            settingApply.SetScale({ 1.1f, 1.1f });
+
+            if (Pinput::IsMouseButtonPressed(sf::Mouse::Left))
+            {
+                settingApply.SetScale({ 1.0f, 1.0f });
+            }
+
+            if (Pinput::IsMouseButtonReleased(sf::Mouse::Left))
+            {
+                settingEvent = false;
+            }
+        }
+        else if (settingApply.GetScale().x == 1.1f)
+        {
+            settingApply.SetScale({ 1.0f, 1.0f });
+        }
+    }
+
     if (Pinput::IsKeyPressed(sf::Keyboard::Escape))
     {
-        exitEvent = !exitEvent;
+        if (settingEvent == true)
+        {
+            settingEvent = false;
+        }
+        else
+        {
+            exitEvent = !exitEvent;
+        }
     }
 }
 
 void MainMenu::Draw() const
 {
     background.Draw();
-    logo.Draw();
 
-    newGame.Draw();
-    loadGame.Draw();
-    settingGame.Draw();
-    exitGame.Draw();
+    if (!settingEvent)
+    {
+        logo.Draw();
+
+        newGame.Draw();
+        loadGame.Draw();
+        settingGame.Draw();
+        exitGame.Draw();
+    }
+    else
+    {
+        settingTitle.Draw();
+        settingExit.Draw();
+        settingApply.Draw();
+    }
 
     if (exitEvent)
     {

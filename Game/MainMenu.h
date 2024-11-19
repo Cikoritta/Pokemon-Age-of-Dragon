@@ -41,11 +41,26 @@ class MainMenu : public Pscene
     Psprite                 magikarp = Psprite(window, event, "Data/Textures/MainMenu/magikarp.png", new sf::IntRect(640, 0, 640, 640));
 
 
+    bool                    settingEvent = false;
+
+    Ptext                   settingTitle = Ptext(&newGame, Plang::GetString(L"setting_title", L"MainMenu"));
+
+    Ptext                   settingExit = Ptext(&newGame, Plang::GetString(L"setting_exit", L"MainMenu"));
+
+    Ptext                   settingApply = Ptext(&newGame, Plang::GetString(L"setting_apply", L"MainMenu"));
+
 public:
 
     MainMenu() = default;
 
     MainMenu(Pwindow* window, sf::Event* event, const sf::String name) : Pscene(window, event, name) {}
+
+
+    void                    BaseStart();
+
+    void                    ExitStart();
+
+    void                    SettingStart();
 
 
     void                    Start() override;
