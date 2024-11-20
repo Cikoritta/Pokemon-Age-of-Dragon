@@ -10,3 +10,4 @@ exit_exit = "Уйти";
 setting_title = "Настройки";
 setting_exit = "Назад";
 setting_apply = "Применить";
+setting_resolution = "Разрешение экрана:";

@@ -40,4 +40,30 @@ void Pwindow::ApplyConfig()
 
 
     sceneManager.SetDebugMode(stoi(Config::Read(L"debugMode")));
+
+    if ((std::stoi(Config::Read(L"ResolutionList.ini", Config::Read(L"ResolutionList.ini", L"current_resolution")).substr(0, 4)) != stoi(Config::Read(L"createWidth"))) || 
+        (std::stoi(Config::Read(L"ResolutionList.ini", Config::Read(L"ResolutionList.ini", L"current_resolution")).substr(6)) != stoi(Config::Read(L"createHeight"))))
+    {
+        bool searchResolution = false;
+
+        sf::Uint16 numberResolution = 1U;
+
+        while (!searchResolution)
+        {
+            sf::Vector2f tempResolution;
+
+            tempResolution.x = std::stoi(Config::Read(L"ResolutionList.ini", std::to_wstring(numberResolution)).substr(0, 4));
+
+            tempResolution.y = std::stoi(Config::Read(L"ResolutionList.ini", std::to_wstring(numberResolution)).substr(6));
+
+            if ((tempResolution.x == stoi(Config::Read(L"createWidth"))) && (tempResolution.y == stoi(Config::Read(L"createHeight"))))
+            {
+                Config::Write(L"ResolutionList.ini", L"current_resolution", std::to_wstring(numberResolution));
+
+                searchResolution = true;
+            }
+
+            numberResolution++;
+        }
+    }
 }

@@ -49,6 +49,10 @@ class MainMenu : public Pscene
 
     Ptext                   settingApply = Ptext(&newGame, Plang::GetString(L"setting_apply", L"MainMenu"));
 
+    Ptext                   settingTitleResolution = Ptext(&newGame, Plang::GetString(L"setting_resolution", L"MainMenu"));
+
+    Ptext                   settingResolution = Ptext(&newGame, std::to_wstring(window->getSize().x) + L"x"  + std::to_wstring(window->getSize().y));
+
 public:
 
     MainMenu() = default;
@@ -61,6 +65,9 @@ public:
     void                    ExitStart();
 
     void                    SettingStart();
+
+
+    void                    SetResolution(bool vector = false);
 
 
     void                    Start() override;
