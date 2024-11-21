@@ -80,57 +80,29 @@ void MainMenu::SettingStart()
 }
 
 
-void MainMenu::SetResolution(bool vector)
+void MainMenu::SetResolution()
 {
 	sf::Vector2u newResolution;
 
 	sf::Uint16 currentResolution = std::stoi(Config::Read(L"ResolutionList.ini", L"current_resolution"));
 
-	sf::Uint16 maxResolution = std::stoi(Config::Read(L"ResolutionList.ini", L"max_resolution"));
 
-	if (currentResolution != 0U)
-	{
-		currentResolution;
-	}
+    newResolution.x = std::stoi(Config::Read(L"ResolutionList.ini", std::to_wstring(currentResolution)).substr(0, 4));
 
-	if (vector)
-	{
-		if ((currentResolution + 1U) == maxResolution + 1U)
-		{
-            currentResolution = 1U;
-		}
-        else
-        {
-            currentResolution++;
-        }
+    newResolution.y = std::stoi(Config::Read(L"ResolutionList.ini", std::to_wstring(currentResolution)).substr(6));
 
-		newResolution.x = std::stoi(Config::Read(L"ResolutionList.ini", std::to_wstring(currentResolution)).substr(0, 4));
 
-		newResolution.y = std::stoi(Config::Read(L"ResolutionList.ini", std::to_wstring(currentResolution)).substr(6));
-	}
-	else
-	{
-        if ((currentResolution - 1U) == 0U)
-        {
-            currentResolution = maxResolution;
-        }
-        else
-        {
-            currentResolution--;
-        }
+    window->create(sf::VideoMode(newResolution.x, newResolution.y), "Pokemon Age of Dragon", stoi(Config::Read(L"Config.ini", L"createMode")));
 
-		newResolution.x = std::stoi(Config::Read(L"ResolutionList.ini", std::to_wstring(currentResolution)).substr(0, 4));
+    window->setFramerateLimit(stoi(Config::Read(L"frameRate")));
 
-		newResolution.y = std::stoi(Config::Read(L"ResolutionList.ini", std::to_wstring(currentResolution)).substr(6));
-	}
+    window->setVerticalSyncEnabled(stoi(Config::Read(L"vsync")));
 
-    Config::Write(L"ResolutionList.ini", L"current_resolution", std::to_wstring(currentResolution));
-
-    window->setSize(newResolution);
 
     Config::Write(L"Config.ini", L"windowScaleWidth", std::to_wstring(newResolution.x / std::stof(Config::Read(L"orientedWidth"))));
 
     Config::Write(L"Config.ini", L"windowScaleHeight", std::to_wstring(newResolution.y / std::stof(Config::Read(L"orientedHeight"))));
+
 
     Start();
 }
@@ -206,6 +178,10 @@ void MainMenu::Events()
 			if (Pinput::IsMouseButtonReleased(sf::Mouse::Left))
 			{
 				settingEvent = true;
+
+                Config::CreateConfig(L"$SettingTemp", false);
+
+                Config::CopyConfig(L"$SettingTemp", L"Config.ini");
 			}
 		}
 		else if (settingGame.GetScale().x == 1.1f)
@@ -268,6 +244,8 @@ void MainMenu::Events()
 
 			if (Pinput::IsMouseButtonReleased(sf::Mouse::Left))
 			{
+                Config::DeleteConfig("$SettingTemp");
+
 				window->close();
 			}
 		}
@@ -291,6 +269,8 @@ void MainMenu::Events()
 			if (Pinput::IsMouseButtonReleased(sf::Mouse::Left))
 			{
 				settingEvent = false;
+
+                Config::DeleteConfig("$SettingTemp");
 			}
 		}
 		else if (settingExit.GetScale().x == 1.1f)
@@ -309,6 +289,11 @@ void MainMenu::Events()
 
 			if (Pinput::IsMouseButtonReleased(sf::Mouse::Left))
 			{
+                SetResolution();
+
+
+                Config::DeleteConfig("$SettingTemp");
+
 				settingEvent = false;
 			}
 		}
@@ -325,14 +310,32 @@ void MainMenu::Events()
 			{
 				settingResolution.SetScale({ 1.0f, 1.0f });
 
-                SetResolution(true);
+                if (std::stoi(Config::Read(L"ResolutionList.ini", L"current_resolution")) + 1U != std::stoi(Config::Read(L"ResolutionList.ini", L"max_resolution")) + 1U)
+                {
+                    Config::Write(L"ResolutionList.ini", L"current_resolution", std::to_wstring((stoi(Config::Read(L"ResolutionList.ini", L"current_resolution")) + 1)));
+                }
+                else
+                {
+                    Config::Write(L"ResolutionList.ini", L"current_resolution", std::to_wstring(1));
+                }
+                 
+                settingResolution.SetText(Config::Read(L"ResolutionList.ini", Config::Read(L"ResolutionList.ini", L"current_resolution")).substr(0, 4) + L"x" + Config::Read(L"ResolutionList.ini", Config::Read(L"ResolutionList.ini", L"current_resolution")).substr(6));
 			}
 
             if (Pinput::IsMouseButtonPressed(sf::Mouse::Right))
             {
                 settingResolution.SetScale({ 1.0f, 1.0f });
 
-                SetResolution(false);
+                if (std::stoi(Config::Read(L"ResolutionList.ini", L"current_resolution")) - 1U != 0U)
+                {
+                    Config::Write(L"ResolutionList.ini", L"current_resolution", std::to_wstring((stoi(Config::Read(L"ResolutionList.ini", L"current_resolution")) - 1)));
+                }
+                else
+                {
+                    Config::Write(L"ResolutionList.ini", L"current_resolution", Config::Read(L"ResolutionList.ini", L"max_resolution"));
+                }
+
+                settingResolution.SetText(Config::Read(L"ResolutionList.ini", Config::Read(L"ResolutionList.ini", L"current_resolution")).substr(0, 4) + L"x" + Config::Read(L"ResolutionList.ini", Config::Read(L"ResolutionList.ini", L"current_resolution")).substr(6));
             }
 		}
 		else if (settingResolution.GetScale().x == 1.1f)

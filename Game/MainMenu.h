@@ -67,7 +67,7 @@ public:
     void                    SettingStart();
 
 
-    void                    SetResolution(bool vector = false);
+    void                    SetResolution();
 
 
     void                    Start() override;

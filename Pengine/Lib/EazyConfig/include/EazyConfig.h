@@ -31,6 +31,13 @@ public:
 	static void					Write(std::wstring locateFile, std::wstring settingName, std::wstring value);
 
 
+	static void					CreateConfig(std::wstring locateFile, bool visible = true);
+
+	static void					CopyConfig(std::wstring locateFile, std::wstring copyingFile);
+
+	static void					DeleteConfig(std::string locateFile);
+
+
 	static void					Create(std::wstring settingName, std::wstring value);
 	static void					Create(std::wstring locateFile, std::wstring settingName, std::wstring value);
 
