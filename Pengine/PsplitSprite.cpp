@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "PsplitSprite.h"
+#include <EazyConfig.h>
 
 void PsplitSprite::SetTexture(const sf::String texturePath, sf::IntRect* textureRect[9])
 {
@@ -81,6 +82,8 @@ void PsplitSprite::SetPixelPosition(sf::Vector2f position)
     bottomRight.setPosition(right.getPosition().x, right.getPosition().y + right.getGlobalBounds().height);
 
     this->position = { position.x / window->getSize().x, position.y / window->getSize().y };
+
+    SetScale(scale);
 }
 
 
@@ -88,6 +91,9 @@ void PsplitSprite::SetScale(sf::Vector2f scale)
 {
     this->scale = scale;
 
+    windowScale.x = std::stof(Config::Read(L"windowScaleWidth"));
+
+    windowScale.y = std::stof(Config::Read(L"windowScaleHeight"));
 
     topLeft.setScale(windowScale.x * scale.x, windowScale.y * scale.y);
     top.setScale(windowScale.x * scale.x, windowScale.y * scale.y);
@@ -101,6 +107,7 @@ void PsplitSprite::SetScale(sf::Vector2f scale)
     bottom.setScale(windowScale.x * scale.x, windowScale.y * scale.y);
     bottomRight.setScale(windowScale.x * scale.x, windowScale.y * scale.y);
 
+    SetOrigin(origin);
 
     SetPosition(position, relativeSprite);
 }
@@ -111,6 +118,10 @@ void PsplitSprite::SetSmartScale(sf::Vector2f scale)
 
 
     float scaleFactor = 1.0f;
+
+    windowScale.x = std::stof(Config::Read(L"windowScaleWidth"));
+
+    windowScale.y = std::stof(Config::Read(L"windowScaleHeight"));
 
     
     if (scale.x >= scale.y)
@@ -146,12 +157,17 @@ void PsplitSprite::SetSmartScale(sf::Vector2f scale)
         bottomRight.setScale(windowScale.x * scale.x, (windowScale.y * scale.y) * scaleFactor);
     }
 
+    SetOrigin(origin);
 
     SetPosition(position, relativeSprite);
 }
 
 void PsplitSprite::SetBorderScale(sf::Vector2f scale)
 {
+    windowScale.x = std::stof(Config::Read(L"windowScaleWidth"));
+
+    windowScale.y = std::stof(Config::Read(L"windowScaleHeight"));
+
     topLeft.setScale(scale.x * windowScale.x, scale.y * windowScale.y);
     top.setScale(this->scale.x * windowScale.x, scale.y * windowScale.y);
     topRight.setScale(scale.x * windowScale.x, scale.y * windowScale.y);
@@ -162,6 +178,8 @@ void PsplitSprite::SetBorderScale(sf::Vector2f scale)
     bottomLeft.setScale(scale.x * windowScale.x, scale.y * windowScale.y);
     bottom.setScale(this->scale.x * windowScale.x, scale.y * windowScale.y);
     bottomRight.setScale(scale.x * windowScale.x, scale.y * windowScale.y);
+
+    SetOrigin(origin);
 
     SetPosition(position, relativeSprite);
 }

@@ -89,6 +89,8 @@ void Psprite::SetPosition(sf::Vector2f position, Psprite* RelativeSprite)
     {
         sprite.setPosition(window->getSize().x * position.x, window->getSize().y * position.y);
     }
+
+    SetScale(scale);
 }
 
 void Psprite::SetPixelPosition(sf::Vector2f position)
@@ -96,6 +98,8 @@ void Psprite::SetPixelPosition(sf::Vector2f position)
     sprite.setPosition(position);
 
     this->position = { position.x / window->getSize().x, position.y / window->getSize().y };
+
+    SetScale(scale);
 }
 
 
@@ -107,6 +111,10 @@ sf::Vector2f Psprite::GetScale() const
 void Psprite::SetScale(sf::Vector2f scale)
 {
     this->scale = scale;
+
+    windowScale.x = std::stof(Config::Read(L"windowScaleWidth"));
+
+    windowScale.y = std::stof(Config::Read(L"windowScaleHeight"));
 
     sprite.setScale(windowScale.x * scale.x, windowScale.y * scale.y);
 }

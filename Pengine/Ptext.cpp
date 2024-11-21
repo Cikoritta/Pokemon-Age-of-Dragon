@@ -67,6 +67,8 @@ void Ptext::SetPosition(sf::Vector2f position, Psprite* sprite)
     }
 
     text.setPosition({ floor(window->getSize().x * position.x), floor((window->getSize().y * position.y) - text.getLocalBounds().top) });
+
+    SetScale(scale);
 }
 
 void Ptext::SetPixelPosition(sf::Vector2f position)
@@ -74,6 +76,8 @@ void Ptext::SetPixelPosition(sf::Vector2f position)
     text.setPosition(position.x, position.y - text.getLocalBounds().top);
 
     this->position = { position.x / window->getSize().x, position.y / window->getSize().y };
+
+    SetScale(scale);
 }
 
 sf::Vector2f Ptext::GetPosition() const
@@ -90,6 +94,10 @@ sf::Vector2f Ptext::GetPixelPosition() const
 void Ptext::SetScale(sf::Vector2f scale)
 {
     this->scale = scale;
+
+    windowScale.x = std::stof(Config::Read(L"windowScaleWidth"));
+
+    windowScale.y = std::stof(Config::Read(L"windowScaleHeight"));
 
     text.setScale({ scale.x * windowScale.x, scale.y * windowScale.y });
 }

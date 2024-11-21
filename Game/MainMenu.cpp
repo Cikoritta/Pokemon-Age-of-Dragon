@@ -3,12 +3,14 @@
 void MainMenu::BaseStart()
 {
 	background.SetFrameTime(0.01f);
+	background.SetScale({ 1.0f, 1.0f });
 	background.SetLoop(true);
 
 	logo.SetFrameTime(0.01f);
 	logo.SetOrigin({ 0.5f, 0.5f }, true);
 	logo.SetPosition({ 0.495f, 0.25f });
 	logo.SetLoop(true);
+    logo.ScaleAnimateReset();
 
 	newGame.SetPosition({ 0.5f, 0.5f });
 	newGame.SetOrigin({ 0.5f, 0.5f }, true);

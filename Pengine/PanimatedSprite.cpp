@@ -124,6 +124,7 @@ bool PanimatedSprite::GetPause() const
 void PanimatedSprite::ScaleAnimateReset()
 {
     animationScale = 1.0f;
+    clockStart = false;
 }
 
 
