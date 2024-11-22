@@ -97,3 +97,26 @@ bool Pinput::IsMouseButtonReleased(sf::Mouse::Button button)
 
     return false;
 }
+
+bool Pinput::IsMouseScrolled(bool down)
+{
+    if (event->type == event->MouseWheelScrolled)
+    {
+        if (!down)
+        {
+            if (event->mouseWheelScroll.delta > 0)
+            {
+                return true;
+            }
+        }
+        else
+        {
+            if (event->mouseWheelScroll.delta < 0)
+            {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}

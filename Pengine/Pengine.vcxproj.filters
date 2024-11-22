@@ -37,6 +37,9 @@
     <Filter Include="Lang">
       <UniqueIdentifier>{56346a45-f7b2-48f1-9979-9a8691206230}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{814029da-0e16-4f0c-b544-4556dea6a857}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -76,6 +79,12 @@
     <ClInclude Include="Plang.h">
       <Filter>Lang</Filter>
     </ClInclude>
+    <ClInclude Include="Psound.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Pmusic.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -113,6 +122,12 @@
     </ClCompile>
     <ClCompile Include="Plang.cpp">
       <Filter>Lang</Filter>
+    </ClCompile>
+    <ClCompile Include="Psound.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Pmusic.cpp">
+      <Filter>Sound</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

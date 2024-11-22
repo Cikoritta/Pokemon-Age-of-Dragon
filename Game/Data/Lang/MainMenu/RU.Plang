@@ -14,3 +14,5 @@ setting_resolution = "Разрешение экрана:";
 setting_style_title = "Режим окна:";
 setting_style_fullscreen = "Полноэкранный";
 setting_style_window = "Оконный";
+setting_music_title = "Музыка:";
+setting_effect_title = "Эффекты:";

@@ -8,3 +8,5 @@
 #include "PanimatedSprite.h"
 #include "PsplitSprite.h"
 #include "Ptext.h"
+#include "Pmusic.h"
+#include "Psound.h"

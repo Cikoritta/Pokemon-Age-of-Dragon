@@ -88,6 +88,22 @@ void MainMenu::SettingStart()
     {
         settingStyle.SetText(Plang::GetString(L"setting_style_window", L"MainMenu"));
     }
+
+    settingTitleMusic.SetTamplate(newGame.GetTamplate());
+    settingTitleMusic.SetOrigin({ 0.0f, 0.5f }, true);
+    settingTitleMusic.SetPosition({ 0.2f, 0.4f });
+
+    settingTitleEffect.SetTamplate(newGame.GetTamplate());
+    settingTitleEffect.SetOrigin({ 0.0f, 0.5f }, true);
+    settingTitleEffect.SetPosition({ 0.2f, 0.45f });
+
+    settingMusic.SetTamplate(newGame.GetTamplate());
+    settingMusic.SetOrigin({ 0.0f, 0.5f }, true);
+    settingMusic.SetPosition({ 0.5f, 0.4f });
+
+    settingEffect.SetTamplate(newGame.GetTamplate());
+    settingEffect.SetOrigin({ 0.0f, 0.5f }, true);
+    settingEffect.SetPosition({ 0.5f, 0.45f });
 }
 
 
@@ -135,6 +151,8 @@ void MainMenu::Start()
 	ExitStart();
 
 	SettingStart();
+
+    music.PlayMusic(true);
 }
 
 void MainMenu::Update()
@@ -164,6 +182,12 @@ void MainMenu::Events()
 			{
 				newGame.SetScale({ 1.0f, 1.0f });
 			}
+
+
+            if (Pinput::IsMouseButtonReleased(sf::Mouse::Left))
+            {
+                buttonSound.PlayEffect();
+            }
 		}
 		else if (newGame.GetScale().x == 1.1f)
 		{
@@ -178,6 +202,11 @@ void MainMenu::Events()
 			{
 				loadGame.SetScale({ 1.0f, 1.0f });
 			}
+
+            if (Pinput::IsMouseButtonReleased(sf::Mouse::Left))
+            {
+                buttonSound.PlayEffect();
+            }
 		}
 		else if (loadGame.GetScale().x == 1.1f)
 		{
@@ -195,6 +224,8 @@ void MainMenu::Events()
 
 			if (Pinput::IsMouseButtonReleased(sf::Mouse::Left))
 			{
+                buttonSound.PlayEffect();
+
 				settingEvent = true;
 
                 Config::CreateConfig(L"$SettingTemp", false);
@@ -227,6 +258,8 @@ void MainMenu::Events()
 
 			if (Pinput::IsMouseButtonReleased(sf::Mouse::Left))
 			{
+                buttonSound.PlayEffect();
+
 				exitEvent = true;
 			}
 		}
@@ -250,6 +283,8 @@ void MainMenu::Events()
 
 			if (Pinput::IsMouseButtonReleased(sf::Mouse::Left))
 			{
+                buttonSound.PlayEffect();
+
 				exitEvent = false;
 			}
 		}
@@ -271,9 +306,16 @@ void MainMenu::Events()
 
 			if (Pinput::IsMouseButtonReleased(sf::Mouse::Left))
 			{
+                buttonSound.PlayEffect();
+
+                while (buttonSound.GetSound()->getStatus() != 0)
+                {
+
+                }
+
                 Config::DeleteConfig("$SettingTemp");
 
-				window->close();
+                window->close();
 			}
 		}
 		else if (exitExit.GetScale().x == 1.1f)
@@ -295,6 +337,8 @@ void MainMenu::Events()
 
 			if (Pinput::IsMouseButtonReleased(sf::Mouse::Left))
 			{
+                buttonSound.PlayEffect();
+
 				settingEvent = false;
 
                 Config::DeleteConfig("$SettingTemp");
@@ -316,6 +360,8 @@ void MainMenu::Events()
 
 			if (Pinput::IsMouseButtonReleased(sf::Mouse::Left))
 			{
+                buttonSound.PlayEffect();
+
                 SetTempSetting();
 
                 Config::DeleteConfig("$SettingTemp");
@@ -327,6 +373,7 @@ void MainMenu::Events()
 		{
 			settingApply.SetScale({ 1.0f, 1.0f });
 		}
+
 
 		if (Pinput::IsMouseCollision(&settingResolution))
 		{
@@ -375,7 +422,6 @@ void MainMenu::Events()
 			settingResolution.SetScale({ 1.0f, 1.0f });
 		}
 
-
         if (Pinput::IsMouseCollision(&settingStyle))
         {
             settingStyle.SetScale({ 1.1f, 1.1f });
@@ -420,6 +466,64 @@ void MainMenu::Events()
         {
             settingStyle.SetScale({ 1.0f, 1.0f });
         }
+
+        if (Pinput::IsMouseCollision(&settingMusic))
+        {
+            settingMusic.SetScale({ 1.1f, 1.1f });
+
+            if (Pinput::IsMouseScrolled())
+            {
+                if (std::stoi(Config::Read(L"Sound.ini", L"Music")) < 100)
+                {
+                    Config::Write(L"Sound.ini", L"Music", std::to_wstring(std::stoi(Config::Read(L"Sound.ini", L"Music")) + 1U));
+                }
+
+                settingMusic.SetText(Config::Read(L"Sound.ini", L"Music"));
+            }
+
+            if (Pinput::IsMouseScrolled(true))
+            {
+                if (std::stoi(Config::Read(L"Sound.ini", L"Music")) > 0)
+                {
+                    Config::Write(L"Sound.ini", L"Music", std::to_wstring(std::stoi(Config::Read(L"Sound.ini", L"Music")) - 1U));
+                }
+
+                settingMusic.SetText(Config::Read(L"Sound.ini", L"Music"));
+            }
+        }
+        else if (settingMusic.GetScale().x == 1.1f)
+        {
+            settingMusic.SetScale({ 1.0f, 1.0f });
+        }
+
+        if (Pinput::IsMouseCollision(&settingEffect))
+        {
+            settingEffect.SetScale({ 1.1f, 1.1f });
+
+            if (Pinput::IsMouseScrolled())
+            {
+                if (std::stoi(Config::Read(L"Sound.ini", L"Effect")) < 100)
+                {
+                    Config::Write(L"Sound.ini", L"Effect", std::to_wstring(std::stoi(Config::Read(L"Sound.ini", L"Effect")) + 1U));
+                }
+
+                settingEffect.SetText(Config::Read(L"Sound.ini", L"Effect"));
+            }
+
+            if (Pinput::IsMouseScrolled(true))
+            {
+                if (std::stoi(Config::Read(L"Sound.ini", L"Effect")) > 0)
+                {
+                    Config::Write(L"Sound.ini", L"Effect", std::to_wstring(std::stoi(Config::Read(L"Sound.ini", L"Effect")) - 1U));
+                }
+
+                settingEffect.SetText(Config::Read(L"Sound.ini", L"Effect"));
+            }
+        }
+        else if (settingEffect.GetScale().x == 1.1f)
+        {
+            settingEffect.SetScale({ 1.0f, 1.0f });
+        }
 	}
 
 	if (Pinput::IsKeyPressed(sf::Keyboard::Escape))
@@ -451,20 +555,32 @@ void MainMenu::Draw() const
 	else
 	{
 		settingTitle.Draw();
+
 		settingExit.Draw();
 		settingApply.Draw();
+
 		settingTitleResolution.Draw();
 		settingResolution.Draw();
+
         settingTitleStyle.Draw();
         settingStyle.Draw();
+
+        settingTitleMusic.Draw();
+        settingTitleEffect.Draw();
+
+        settingMusic.Draw();
+        settingEffect.Draw();
 	}
 
 	if (exitEvent)
 	{
 		exitBackground.Draw();
+
 		exitTitle.Draw();
+
 		exitExit.Draw();
 		exitStay.Draw();
+
 		magikarp.Draw();
 	}
 }

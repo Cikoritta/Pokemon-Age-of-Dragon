@@ -35,7 +35,10 @@ public:
 
     PanimatedSprite() = default;
 
-    PanimatedSprite(sf::RenderWindow* window, sf::Event* event, sf::String texturePath = "none", sf::IntRect* textureRect = nullptr) : Psprite(window, event, texturePath, textureRect) {}
+    PanimatedSprite(sf::RenderWindow* window, sf::Event* event, sf::String texturePath = "none", sf::IntRect* textureRect = nullptr) : Psprite(window, event, texturePath, textureRect)
+    {
+        baseScale = sprite.getScale();
+    }
 
 
     void            Animate(sf::Uint16 sizeFrame, sf::Uint16 interval, sf::Uint16 startFrame = 0U);

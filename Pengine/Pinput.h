@@ -36,4 +36,6 @@ public:
     static bool                     IsMouseUpdatePressed(sf::Mouse::Button button);
 
     static bool                     IsMouseButtonReleased(sf::Mouse::Button button);
+
+    static bool                     IsMouseScrolled(bool down = false);
 };

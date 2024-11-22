@@ -57,6 +57,19 @@ class MainMenu : public Pscene
 
     Ptext                   settingStyle = Ptext(&newGame, Plang::GetString(L"setting_style_fullscreen", L"MainMenu"));
 
+    Ptext                   settingTitleMusic = Ptext(&newGame, Plang::GetString(L"setting_music_title", L"MainMenu"));
+
+    Ptext                   settingTitleEffect = Ptext(&newGame, Plang::GetString(L"setting_effect_title", L"MainMenu"));
+
+    Ptext                   settingMusic = Ptext(&newGame, Config::Read(L"Sound.ini", L"Music"));
+
+    Ptext                   settingEffect = Ptext(&newGame, Config::Read(L"Sound.ini", L"Effect"));
+
+
+    Pmusic                  music = Pmusic("Data/Music/Route 101.flac");
+
+    Psound                  buttonSound = Psound("Data/Effect/Select.wav");
+
 public:
 
     MainMenu() = default;
