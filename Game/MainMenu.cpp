@@ -74,13 +74,24 @@ void MainMenu::SettingStart()
 	settingTitleResolution.SetPosition({ 0.2f, 0.3f });
 
 	settingResolution.SetTamplate(newGame.GetTamplate());
-	settingResolution.SetOrigin({ 0.5f, 0.5f }, true);
-	settingResolution.SetPosition({ 0.55f, 0.3f });
-	
+	settingResolution.SetOrigin({ 0.0f, 0.5f }, true);
+	settingResolution.SetPosition({ 0.5f, 0.3f });
+
+    settingTitleStyle.SetTamplate(newGame.GetTamplate());
+    settingTitleStyle.SetOrigin({ 0.0f, 0.5f }, true);
+    settingTitleStyle.SetPosition({ 0.2f, 0.35f });
+
+    settingStyle.SetTamplate(newGame.GetTamplate());
+    settingStyle.SetOrigin({ 0.0f, 0.5f }, true);
+    settingStyle.SetPosition({ 0.5f, 0.341f });
+    if (Config::Read(L"Config.ini", L"createMode") == L"4")
+    {
+        settingStyle.SetText(Plang::GetString(L"setting_style_window", L"MainMenu"));
+    }
 }
 
 
-void MainMenu::SetResolution()
+void MainMenu::SetTempSetting()
 {
 	sf::Vector2u newResolution;
 
@@ -92,11 +103,18 @@ void MainMenu::SetResolution()
     newResolution.y = std::stoi(Config::Read(L"ResolutionList.ini", std::to_wstring(currentResolution)).substr(6));
 
 
-    window->create(sf::VideoMode(newResolution.x, newResolution.y), "Pokemon Age of Dragon", stoi(Config::Read(L"Config.ini", L"createMode")));
+    window->create(sf::VideoMode(newResolution.x, newResolution.y), "Pokemon Age of Dragon", stoi(Config::Read(L"$SettingTemp", L"createMode")));
 
-    window->setFramerateLimit(stoi(Config::Read(L"frameRate")));
+    window->setFramerateLimit(stoi(Config::Read(L"$SettingTemp", L"frameRate")));
 
-    window->setVerticalSyncEnabled(stoi(Config::Read(L"vsync")));
+    window->setVerticalSyncEnabled(stoi(Config::Read(L"$SettingTemp", L"vsync")));
+
+
+    Config::Write(L"Config.ini", L"createWidth", std::to_wstring(newResolution.x));
+    Config::Write(L"Config.ini", L"createHeight", std::to_wstring(newResolution.y));
+    Config::Write(L"Config.ini", L"createMode", Config::Read(L"$SettingTemp", L"createMode"));
+    Config::Write(L"Config.ini", L"frameRate", Config::Read(L"$SettingTemp", L"frameRate"));
+    Config::Write(L"Config.ini", L"vsync", Config::Read(L"$SettingTemp", L"vsync"));
 
 
     Config::Write(L"Config.ini", L"windowScaleWidth", std::to_wstring(newResolution.x / std::stof(Config::Read(L"orientedWidth"))));
@@ -182,6 +200,15 @@ void MainMenu::Events()
                 Config::CreateConfig(L"$SettingTemp", false);
 
                 Config::CopyConfig(L"$SettingTemp", L"Config.ini");
+
+                if (Config::Read(L"Config.ini", L"createMode") == L"4")
+                {
+                    settingStyle.SetText(Plang::GetString(L"setting_style_window", L"MainMenu"));
+                }
+                else
+                {
+                    settingStyle.SetText(Plang::GetString(L"setting_style_fullscreen", L"MainMenu"));
+                }
 			}
 		}
 		else if (settingGame.GetScale().x == 1.1f)
@@ -289,8 +316,7 @@ void MainMenu::Events()
 
 			if (Pinput::IsMouseButtonReleased(sf::Mouse::Left))
 			{
-                SetResolution();
-
+                SetTempSetting();
 
                 Config::DeleteConfig("$SettingTemp");
 
@@ -319,7 +345,10 @@ void MainMenu::Events()
                     Config::Write(L"ResolutionList.ini", L"current_resolution", std::to_wstring(1));
                 }
                  
-                settingResolution.SetText(Config::Read(L"ResolutionList.ini", Config::Read(L"ResolutionList.ini", L"current_resolution")).substr(0, 4) + L"x" + Config::Read(L"ResolutionList.ini", Config::Read(L"ResolutionList.ini", L"current_resolution")).substr(6));
+                std::wstring width = std::to_wstring(std::stoi((Config::Read(L"ResolutionList.ini", Config::Read(L"ResolutionList.ini", L"current_resolution")).substr(0, 4))));
+                std::wstring height =  std::to_wstring(std::stoi((Config::Read(L"ResolutionList.ini", Config::Read(L"ResolutionList.ini", L"current_resolution")).substr(6))));
+
+                settingResolution.SetText(width + L"x" + height);
 			}
 
             if (Pinput::IsMouseButtonPressed(sf::Mouse::Right))
@@ -335,13 +364,62 @@ void MainMenu::Events()
                     Config::Write(L"ResolutionList.ini", L"current_resolution", Config::Read(L"ResolutionList.ini", L"max_resolution"));
                 }
 
-                settingResolution.SetText(Config::Read(L"ResolutionList.ini", Config::Read(L"ResolutionList.ini", L"current_resolution")).substr(0, 4) + L"x" + Config::Read(L"ResolutionList.ini", Config::Read(L"ResolutionList.ini", L"current_resolution")).substr(6));
+                std::wstring width = std::to_wstring(std::stoi((Config::Read(L"ResolutionList.ini", Config::Read(L"ResolutionList.ini", L"current_resolution")).substr(0, 4))));
+                std::wstring height = std::to_wstring(std::stoi((Config::Read(L"ResolutionList.ini", Config::Read(L"ResolutionList.ini", L"current_resolution")).substr(6))));
+
+                settingResolution.SetText(width + L"x" + height);
             }
 		}
 		else if (settingResolution.GetScale().x == 1.1f)
 		{
 			settingResolution.SetScale({ 1.0f, 1.0f });
 		}
+
+
+        if (Pinput::IsMouseCollision(&settingStyle))
+        {
+            settingStyle.SetScale({ 1.1f, 1.1f });
+
+            if (Pinput::IsMouseButtonPressed(sf::Mouse::Left))
+            {
+                settingStyle.SetScale({ 1.0f, 1.0f });
+
+                if (std::stoi(Config::Read(L"$SettingTemp", L"createMode")) == 4U)
+                {
+                    Config::Write(L"$SettingTemp", L"createMode", std::to_wstring(8U));
+
+                    settingStyle.SetText(Plang::GetString(L"setting_style_fullscreen", L"MainMenu"));
+                }
+                else
+                {
+                    Config::Write(L"$SettingTemp", L"createMode", std::to_wstring(4U));
+
+                    settingStyle.SetText(Plang::GetString(L"setting_style_window", L"MainMenu"));
+                }
+            }
+
+            if (Pinput::IsMouseButtonPressed(sf::Mouse::Right))
+            {
+                settingStyle.SetScale({ 1.0f, 1.0f });
+
+                if (std::stoi(Config::Read(L"$SettingTemp", L"createMode")) == 4U)
+                {
+                    Config::Write(L"$SettingTemp", L"createMode", std::to_wstring(8U));
+
+                    settingStyle.SetText(Plang::GetString(L"setting_style_fullscreen", L"MainMenu"));
+                }
+                else
+                {
+                    Config::Write(L"$SettingTemp", L"createMode", std::to_wstring(4U));
+
+                    settingStyle.SetText(Plang::GetString(L"setting_style_window", L"MainMenu"));
+                }
+            }
+        }
+        else if (settingStyle.GetScale().x == 1.1f)
+        {
+            settingStyle.SetScale({ 1.0f, 1.0f });
+        }
 	}
 
 	if (Pinput::IsKeyPressed(sf::Keyboard::Escape))
@@ -377,6 +455,8 @@ void MainMenu::Draw() const
 		settingApply.Draw();
 		settingTitleResolution.Draw();
 		settingResolution.Draw();
+        settingTitleStyle.Draw();
+        settingStyle.Draw();
 	}
 
 	if (exitEvent)

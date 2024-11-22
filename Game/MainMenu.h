@@ -53,6 +53,10 @@ class MainMenu : public Pscene
 
     Ptext                   settingResolution = Ptext(&newGame, std::to_wstring(window->getSize().x) + L"x"  + std::to_wstring(window->getSize().y));
 
+    Ptext                   settingTitleStyle = Ptext(&newGame, Plang::GetString(L"setting_style_title", L"MainMenu"));
+
+    Ptext                   settingStyle = Ptext(&newGame, Plang::GetString(L"setting_style_fullscreen", L"MainMenu"));
+
 public:
 
     MainMenu() = default;
@@ -67,7 +71,7 @@ public:
     void                    SettingStart();
 
 
-    void                    SetResolution();
+    void                    SetTempSetting();
 
 
     void                    Start() override;

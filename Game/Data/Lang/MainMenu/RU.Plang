@@ -11,3 +11,6 @@ setting_title = "Настройки";
 setting_exit = "Назад";
 setting_apply = "Применить";
 setting_resolution = "Разрешение экрана:";
+setting_style_title = "Режим окна:";
+setting_style_fullscreen = "Полноэкранный";
+setting_style_window = "Оконный";
