@@ -340,6 +340,7 @@ void MainMenu::Events()
 
                 language.SetText(Config::Read(L"Config.ini", L"lang"));
 
+
                 Plang::SetLang(Config::Read(L"Config.ini", L"lang"));
 
                 warning.SetText(Plang::GetString(L"warning", L"MainMenu"));

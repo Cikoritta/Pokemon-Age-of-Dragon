@@ -25,3 +25,8 @@ void Plang::SetLang(sf::String lang)
 {
     m_currentLang = lang;
 }
+
+sf::String Plang::GetLang()
+{
+    return m_currentLang;
+}

@@ -6,7 +6,7 @@ class MainMenu : public Pscene
 {
     PanimatedSprite         background = PanimatedSprite(window, event, "Data/Textures/MainMenu/background.png", new sf::IntRect(0, 0, 1920, 1080));
 
-    PanimatedSprite         logo = PanimatedSprite(window, event, "Data/Textures/MainMenu/logo.png", new sf::IntRect(0, 0, 828, 366));
+    PanimatedSprite         logo = PanimatedSprite(window, event, "Data/Textures/MainMenu/logo/" + Plang::GetLang().toAnsiString() + ".png", new sf::IntRect(0, 0, 828, 366));
 
 
     Ptext                   newGame = Ptext(window, event, "Data/Fonts/Upheaval Pro/UpheavalPro.ttf", Plang::GetString(L"new_game", L"MainMenu"), sf::Color::White);
