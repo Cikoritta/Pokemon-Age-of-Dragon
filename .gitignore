@@ -361,4 +361,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Pengine temp file
 /Game/$SettingTemp
+
+# Debug src
+/Pengine/Lib/SFML/src
