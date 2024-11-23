@@ -14,6 +14,13 @@ class Pwindow : public sf::RenderWindow
     sf::String           title = "none";
 
 
+    sf::Image            icon;
+
+    sf::Image            cursorImage;
+
+    sf::Cursor           cursor;
+
+
 public:
 
 	Pwindow() = default;

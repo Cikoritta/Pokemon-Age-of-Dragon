@@ -3,9 +3,9 @@
 
 class Intro : public Pscene
 {
-    PanimatedSprite         background = PanimatedSprite(window, event, "Data/Textures/MainMenu/background.png", new sf::IntRect(0, 0, 1920, 1080));
+    Peffect         screenBrightening = Peffect(window, event, Effect::screenBrightening);
 
-    Peffect                 screenBrightening = Peffect(window, event, Effect::screenBrightening);
+    Psprite         background = Psprite(window, event, "Data/Textures/Intro/background.png", new sf::IntRect(0, 0, 1920, 1080));
 
 public:
 

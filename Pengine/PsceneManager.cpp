@@ -5,6 +5,7 @@ Pscene* PsceneManager::currentScene = nullptr;
 sf::RenderWindow* PsceneManager::window = nullptr;
 sf::Event* PsceneManager::event = nullptr;
 
+
 PsceneManager::PsceneManager(sf::RenderWindow* window, sf::Event* event, Pscene* currentScene)
 {
 	this->window = window;
@@ -45,7 +46,10 @@ void PsceneManager::SetDebugMode(bool debugMode)
 
 void PsceneManager::SetCurrentScene(Pscene* scene)
 {
+    delete currentScene;
+
 	currentScene = scene;
+
 
 	currentScene->SetWindow(window);
 
@@ -131,16 +135,16 @@ void PsceneManager::DebugText(sf::String string, sf::Uint16 position)
     {
         debugFont.loadFromFile("Data/Fonts/Classic Console Neue/clacon2.ttf");
 
-        windowScale = { stof(Config::Read(L"Config.ini", L"windowScaleWidth")), stof(Config::Read(L"Config.ini", L"windowScaleHeight")) };
+        windowScale = { window->getSize().x /  stof(Config::Read(L"Config.ini", L"orientedWidth")), window->getSize().y / stof(Config::Read(L"Config.ini", L"orientedHeight")) };
 
-        debugText.setCharacterSize(20U);
+        debugText.setCharacterSize(40U);
         debugText.setFont(debugFont);
-        debugText.setOutlineThickness(1.0f);
+        debugText.setOutlineThickness(5.0f);
         debugText.setOutlineColor(sf::Color::Black);
         debugText.setScale(windowScale);
     }
 
-    debugText.setPosition(0.0f, (20.0f * position) * windowScale.y);
+    debugText.setPosition(5.0f * windowScale.x, (40.0f * position) * windowScale.y);
     debugText.setString(string);
 
     window->draw(debugText);
@@ -176,6 +180,34 @@ void PsceneManager::RenderScene()
                 {
                     debugModeVisible = !debugModeVisible;
                 }
+
+                if (event->type == event->KeyPressed && event->key.code == sf::Keyboard::F3)
+                {
+                    debugInputText = !debugInputText;
+                }
+
+                if (debugInputText)
+                {
+                    if (event->type == event->KeyPressed && event->key.code == sf::Keyboard::Enter)
+                    {
+                        if (debugInputString == "exit")
+                        {
+                            window->close();
+                        }
+                    }
+
+                    if (event->type == event->TextEntered)
+                    {
+                        if (((event->text.unicode >= 65) && (event->text.unicode <= 90)) || ((event->text.unicode >= 97) && (event->text.unicode <= 122)))
+                        {
+                            debugInputString += static_cast<char>(event->text.unicode);
+                        }
+                        else if (event->text.unicode == 8)
+                        {
+                            debugInputString = debugInputString.substring(0, debugInputString.getSize() - 1);
+                        }
+                    }
+                }
             }
 
 			currentScene->Events();
@@ -198,6 +230,11 @@ void PsceneManager::RenderScene()
 
             DebugText("CPU: " + std::to_string(GetCpuUsage()) + " %", 3U);
             DebugText("MEM: " + std::to_string(GetMemoryUsage()) + " %", 4U);
+
+            if (debugInputText)
+            {
+                DebugText("Input: " + debugInputString, 5U);
+            }
         }
 
 		window->display();

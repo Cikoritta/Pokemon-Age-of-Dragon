@@ -16,6 +16,9 @@
     <Filter Include="Game\Scenes\Intro">
       <UniqueIdentifier>{ca52e223-3caa-4159-bc10-3b7720559e78}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Icon">
+      <UniqueIdentifier>{e496d48c-f5b4-494d-b8d7-1d551e4b4c77}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -35,5 +38,18 @@
     <ClInclude Include="Intro.h">
       <Filter>Game\Scenes\Intro</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Game\Icon</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Game.rc">
+      <Filter>Game\Icon</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Data\Textures\Other\Icon\icon.ico">
+      <Filter>Game\Icon</Filter>
+    </Image>
   </ItemGroup>
 </Project>

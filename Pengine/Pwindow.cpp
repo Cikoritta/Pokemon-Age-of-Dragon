@@ -34,6 +34,17 @@ void Pwindow::ApplyConfig()
 	setVerticalSyncEnabled(stoi(Config::Read(L"vsync")));
 
 
+    icon.loadFromFile("Data/Textures/Other/Icon/icon.png");
+
+    setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+
+    cursorImage.loadFromFile("Data/Textures/Other/Cursor/cursor.png");
+
+    cursor.loadFromPixels(cursorImage.getPixelsPtr(), cursorImage.getSize(), { 0, 0 });
+
+    setMouseCursor(cursor);
+
+
     Config::Write(L"windowScaleWidth", std::to_wstring(getSize().x / std::stof(Config::Read(L"orientedWidth"))));
 
     Config::Write(L"windowScaleHeight", std::to_wstring(getSize().y / std::stof(Config::Read(L"orientedHeight"))));

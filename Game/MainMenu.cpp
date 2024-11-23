@@ -220,6 +220,8 @@ void MainMenu::Update()
         if (newGameEvent)
         {
             PsceneManager::SetCurrentScene(new Intro(window, event, L"Intro"));
+
+            Config::CreateConfig(L"Saves/Save.psave");
         }
         else if (loadGameEvent)
         {

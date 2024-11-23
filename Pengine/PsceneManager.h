@@ -18,6 +18,9 @@ class PsceneManager
     bool                    debugMode = false;
     bool                    debugModeVisible = true;
 
+    bool                    debugInputText = false;
+    sf::String              debugInputString = L"";
+
 
     FILETIME                idle{}, prev_idle{},
                             kernel{}, prev_kernel{},
