@@ -29,6 +29,10 @@ void MainMenu::BaseStart()
 	exitGame.SetTamplate(newGame.GetTamplate());
 	exitGame.SetOrigin({ 0.5f, 0.5f }, true);
 	exitGame.SetPosition({ 0.5f, 0.695f });
+
+    warning.SetTamplate(newGame.GetTamplate());
+    warning.SetOrigin({ 0.5f, 0.5f }, true);
+    warning.SetPosition({ 0.5f, 0.38f });
 }
 
 void MainMenu::ExitStart()
@@ -171,6 +175,8 @@ void MainMenu::Events()
 			if (Pinput::IsMouseButtonPressed(sf::Mouse::Left))
 			{
 				logo.ScaleAnimateReset();
+
+                magikarpSound.PlayEffect();
 			}
 		}
 
@@ -206,6 +212,8 @@ void MainMenu::Events()
             if (Pinput::IsMouseButtonReleased(sf::Mouse::Left))
             {
                 buttonSound.PlayEffect();
+
+                warningReset = true;
             }
 		}
 		else if (loadGame.GetScale().x == 1.1f)
@@ -583,4 +591,10 @@ void MainMenu::Draw() const
 
 		magikarp.Draw();
 	}
+
+    if (warningReset)
+    {
+        exitBackground.Draw();
+        warning.Draw();
+    }
 }

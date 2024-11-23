@@ -16,3 +16,8 @@ setting_style_fullscreen = "Полноэкранный";
 setting_style_window = "Оконный";
 setting_music_title = "Музыка:";
 setting_effect_title = "Эффекты:";
+
+warning = "Внимание";
+warning_ok = "Ок";
+warning_cancel = "Назад";
+

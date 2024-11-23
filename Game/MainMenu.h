@@ -68,7 +68,14 @@ class MainMenu : public Pscene
 
     Pmusic                  music = Pmusic("Data/Music/Route 101.flac");
 
-    Psound                  buttonSound = Psound("Data/Effect/Select.wav");
+    Psound                  buttonSound = Psound("Data/Effect/Select.flac");
+
+    Psound                  magikarpSound = Psound("Data/Effect/Magikarp.flac");
+
+
+    bool                    warningReset = false;
+
+    Ptext                   warning = Ptext(&newGame, Plang::GetString(L"warning", L"MainMenu"));
 
 public:
 
