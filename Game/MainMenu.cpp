@@ -8,11 +8,11 @@ void MainMenu::BaseStart()
 
 	logo.SetFrameTime(0.01f);
 	logo.SetOrigin({ 0.5f, 0.5f }, true);
-	logo.SetPosition({ 0.495f, 0.25f });
+	logo.SetPosition({ 0.495f, 0.25f }, &background);
 	logo.SetLoop(true);
     logo.ScaleAnimateReset();
 
-	newGame.SetPosition({ 0.5f, 0.5f });
+	newGame.SetPosition({ 0.5f, 0.5f }, &background);
 	newGame.SetOrigin({ 0.5f, 0.5f }, true);
 	newGame.GetTamplate()->setCharacterSize(45U);
 	newGame.GetTamplate()->setOutlineThickness(5.0f);
@@ -20,19 +20,19 @@ void MainMenu::BaseStart()
 
 	loadGame.SetTamplate(newGame.GetTamplate());
 	loadGame.SetOrigin({ 0.5f, 0.5f }, true);
-	loadGame.SetPosition({ 0.5f, 0.562f });
+	loadGame.SetPosition({ 0.5f, 0.562f }, &background);
 
 	settingGame.SetTamplate(newGame.GetTamplate());
 	settingGame.SetOrigin({ 0.5f, 0.5f }, true);
-	settingGame.SetPosition({ 0.5f, 0.62f });
+	settingGame.SetPosition({ 0.5f, 0.63f }, &background);
 
 	exitGame.SetTamplate(newGame.GetTamplate());
 	exitGame.SetOrigin({ 0.5f, 0.5f }, true);
-	exitGame.SetPosition({ 0.5f, 0.695f });
+	exitGame.SetPosition({ 0.5f, 0.695f }, &background);
 
-    warning.SetTamplate(newGame.GetTamplate());
-    warning.SetOrigin({ 0.5f, 0.5f }, true);
-    warning.SetPosition({ 0.5f, 0.38f });
+    language.SetTamplate(newGame.GetTamplate());
+    language.SetOrigin({ 0.5f, 0.5f }, true);
+    language.SetPosition({ 0.03f, 0.95f }, &background);
 }
 
 void MainMenu::ExitStart()
@@ -44,17 +44,17 @@ void MainMenu::ExitStart()
 
 	exitTitle.SetTamplate(newGame.GetTamplate());
 	exitTitle.SetOrigin({ 0.5f, 0.5f }, true);
-	exitTitle.SetPosition({ 0.5f, 0.38f });
+	exitTitle.SetPosition({ 0.5f, 0.1f }, &exitBackground);
 
 	exitExit.SetTamplate(newGame.GetTamplate());
 	exitExit.SetOrigin({ 0.5f, 0.5f }, true);
-	exitExit.SetPosition({ 0.58f, 0.61f });
+	exitExit.SetPosition({ 0.75f, 0.8f }, &exitBackground);
 
 	exitStay.SetTamplate(newGame.GetTamplate());
 	exitStay.SetOrigin({ 0.5f, 0.5f }, true);
-	exitStay.SetPosition({ 0.43f, 0.62f });
+	exitStay.SetPosition({ 0.3f, 0.8f }, &exitBackground);
 
-	magikarp.SetPosition({ 0.5f, 0.5f });
+	magikarp.SetPosition({ 0.5f, 0.5f }, &exitBackground);
 	magikarp.SetOrigin({ 0.5f, 0.5f }, true);
 	magikarp.SetScale({ 0.5f, 0.5f });
 }
@@ -87,7 +87,7 @@ void MainMenu::SettingStart()
 
     settingStyle.SetTamplate(newGame.GetTamplate());
     settingStyle.SetOrigin({ 0.0f, 0.5f }, true);
-    settingStyle.SetPosition({ 0.5f, 0.341f });
+    settingStyle.SetPosition({ 0.5f, 0.35f });
     if (Config::Read(L"Config.ini", L"createMode") == L"4")
     {
         settingStyle.SetText(Plang::GetString(L"setting_style_window", L"MainMenu"));
@@ -108,6 +108,29 @@ void MainMenu::SettingStart()
     settingEffect.SetTamplate(newGame.GetTamplate());
     settingEffect.SetOrigin({ 0.0f, 0.5f }, true);
     settingEffect.SetPosition({ 0.5f, 0.45f });
+}
+
+void MainMenu::WarningResetStart()
+{
+    warning.SetTamplate(newGame.GetTamplate());
+    warning.SetOrigin({ 0.5f, 0.5f }, true);
+    warning.SetPosition({ 0.5f, 0.1f }, &exitBackground);
+
+    warningOk.SetTamplate(newGame.GetTamplate());
+    warningOk.SetOrigin({ 0.5f, 0.5f }, true);
+    warningOk.SetPosition({ 0.5f, 0.8f }, &exitBackground);
+
+    warningCancel.SetTamplate(newGame.GetTamplate());
+    warningCancel.SetOrigin({ 0.5f, 0.5f }, true);
+    warningCancel.SetPosition({ 0.58f, 0.62f });
+
+    warningAccept.SetTamplate(newGame.GetTamplate());
+    warningAccept.SetOrigin({ 0.5f, 0.5f }, true);
+    warningAccept.SetPosition({ 0.43f, 0.62f });
+
+    warningReset.SetPosition({ 0.5f, 0.5f }, &exitBackground);
+    warningReset.SetOrigin({ 0.5f, 0.5f }, true);
+    warningReset.GetTamplate()->setCharacterSize(36U);
 }
 
 
@@ -155,6 +178,8 @@ void MainMenu::Start()
 	ExitStart();
 
 	SettingStart();
+
+    WarningResetStart();
 
     music.PlayMusic(true);
 }
@@ -213,7 +238,7 @@ void MainMenu::Events()
             {
                 buttonSound.PlayEffect();
 
-                warningReset = true;
+                warningResetEvent = true;
             }
 		}
 		else if (loadGame.GetScale().x == 1.1f)
@@ -230,7 +255,7 @@ void MainMenu::Events()
 				settingGame.SetScale({ 1.0f, 1.0f });
 			}
 
-			if (Pinput::IsMouseButtonReleased(sf::Mouse::Left))
+			if (!warningResetEvent && Pinput::IsMouseButtonReleased(sf::Mouse::Left))
 			{
                 buttonSound.PlayEffect();
 
@@ -275,6 +300,86 @@ void MainMenu::Events()
 		{
 			exitGame.SetScale({ 1.0f, 1.0f });
 		}
+
+        if (Pinput::IsMouseCollision(&language))
+        {
+            language.SetScale({ 1.1f, 1.1f });
+
+            if (Pinput::IsMouseButtonPressed(sf::Mouse::Left))
+            {
+                language.SetScale({ 1.0f, 1.0f });
+            }
+
+            if (Pinput::IsMouseButtonReleased(sf::Mouse::Left))
+            {
+                buttonSound.PlayEffect();
+
+
+                sf::Uint16 newLang = 0;
+
+                sf::Uint16 maxLang = std::stoi(Config::Read(L"Data/Lang/LangList.ini", L"maxLang"));
+
+
+                for (sf::Uint16 currentLang = 0; currentLang <= maxLang; currentLang++)
+                {
+                    if (Config::Read(L"Data/Lang/LangList.ini", std::to_wstring(currentLang)) == Config::Read(L"Config.ini", L"lang"))
+                    {
+                        if (currentLang == maxLang)
+                        {
+                            newLang = 0;
+                        }
+                        else
+                        {
+                            newLang = currentLang + 1;
+                        }
+                    }
+                }
+
+
+                Config::Write(L"Config.ini", L"lang", Config::Read(L"Data/Lang/LangList.ini", std::to_wstring(newLang)));
+
+                language.SetText(Config::Read(L"Config.ini", L"lang"));
+
+                Plang::SetLang(Config::Read(L"Config.ini", L"lang"));
+
+                warning.SetText(Plang::GetString(L"warning", L"MainMenu"));
+                warningOk.SetText(Plang::GetString(L"warning_ok", L"MainMenu"));
+                warningReset.SetText(Plang::GetString(L"warning_reset", L"MainMenu"));
+
+                WarningResetStart();
+
+
+                warningResetEvent = true;
+            }
+        }
+        else if (language.GetScale().x == 1.1f)
+        {
+            language.SetScale({ 1.0f, 1.0f });
+        }
+
+        if (warningResetEvent)
+        {
+            if (Pinput::IsMouseCollision(&warningOk))
+            {
+                warningOk.SetScale({ 1.1f, 1.1f });
+
+                if (Pinput::IsMouseButtonPressed(sf::Mouse::Left))
+                {
+                    warningOk.SetScale({ 1.0f, 1.0f });
+                }
+
+                if (Pinput::IsMouseButtonReleased(sf::Mouse::Left))
+                {
+                    buttonSound.PlayEffect();
+
+                    warningResetEvent = false;
+                }
+            }
+            else if (warningOk.GetScale().x == 1.1f)
+            {
+                warningOk.SetScale({ 1.0f, 1.0f });
+            }
+        }
 	}
 	else
 	{
@@ -536,14 +641,18 @@ void MainMenu::Events()
 
 	if (Pinput::IsKeyPressed(sf::Keyboard::Escape))
 	{
-		if (settingEvent == true)
+		if (settingEvent)
 		{
 			settingEvent = false;
 		}
-		else
+		else if (!warningResetEvent)
 		{
 			exitEvent = !exitEvent;
 		}
+        else
+        {
+            warningResetEvent = false;
+        }
 	}
 }
 
@@ -559,6 +668,8 @@ void MainMenu::Draw() const
 		loadGame.Draw();
 		settingGame.Draw();
 		exitGame.Draw();
+
+        language.Draw();
 	}
 	else
 	{
@@ -592,9 +703,11 @@ void MainMenu::Draw() const
 		magikarp.Draw();
 	}
 
-    if (warningReset)
+    if (warningResetEvent)
     {
         exitBackground.Draw();
         warning.Draw();
+        warningOk.Draw();
+        warningReset.Draw();
     }
 }

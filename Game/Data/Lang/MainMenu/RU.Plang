@@ -1,3 +1,5 @@
+& = \n = line breaks
+
 new_game = "Новая игра";
 load_game = "Загрузить";
 setting_game = "Настройки";
@@ -20,4 +22,6 @@ setting_effect_title = "Эффекты:";
 warning = "Внимание";
 warning_ok = "Ок";
 warning_cancel = "Назад";
+warning_accept = "Принять";
 
+warning_reset = "Для применения настроек&потребуется перезагрузка!";

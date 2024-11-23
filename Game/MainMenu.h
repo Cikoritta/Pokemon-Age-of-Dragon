@@ -73,9 +73,20 @@ class MainMenu : public Pscene
     Psound                  magikarpSound = Psound("Data/Effect/Magikarp.flac");
 
 
-    bool                    warningReset = false;
+    bool                    warningResetEvent = false;
 
     Ptext                   warning = Ptext(&newGame, Plang::GetString(L"warning", L"MainMenu"));
+
+    Ptext                   warningOk = Ptext(&newGame, Plang::GetString(L"warning_ok", L"MainMenu"));
+
+    Ptext                   warningCancel = Ptext(&newGame, Plang::GetString(L"warning_cancel", L"MainMenu"));
+
+    Ptext                   warningAccept = Ptext(&newGame, Plang::GetString(L"warning_accept", L"MainMenu"));
+
+    Ptext                   warningReset = Ptext(window, event, "Data/Fonts/Retron2000/Retron2000.ttf", Plang::GetString(L"warning_reset", L"MainMenu"), sf::Color(96, 96, 96));
+
+
+    Ptext                   language = Ptext(&newGame, Config::Read(L"Config.ini", L"lang"));
 
 public:
 
@@ -89,6 +100,8 @@ public:
     void                    ExitStart();
 
     void                    SettingStart();
+
+    void                    WarningResetStart();
 
 
     void                    SetTempSetting();

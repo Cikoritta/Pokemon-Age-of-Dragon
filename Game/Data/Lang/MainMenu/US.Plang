@@ -1,18 +1,25 @@
-new_game = "New Game"
-load_game = "Load"
-setting_game = "Settings"
-exit_game = "Exit"
+new_game = "New Game";
+load_game = "Load";
+setting_game = "Settings";
+exit_game = "Exit";
 
-exit_title = "Are you leaving?"
-exit_stay = "Stay"
-exit_exit = "Leave"
+exit_title = "Are you leaving?";
+exit_stay = "Stay";
+exit_exit = "Leave";
 
-setting_title = "Settings"
-setting_exit = "Back"
-setting_apply = "Apply"
-setting_resolution = "Screen Resolution:"
-setting_style_title = "Window Mode:"
-setting_style_fullscreen = "Fullscreen"
-setting_style_window = "Windowed"
-setting_music_title = "Music:"
-setting_effect_title = "Effects:"
+setting_title = "Settings";
+setting_exit = "Back";
+setting_apply = "Apply";
+setting_resolution = "Screen Resolution:";
+setting_style_title = "Window Mode:";
+setting_style_fullscreen = "Fullscreen";
+setting_style_window = "Windowed";
+setting_music_title = "Music:";
+setting_effect_title = "Effects:";
+
+warning = "Warning";
+warning_ok = "Ok";
+warning_cancel = "Back";
+warning_accept = "Accept";
+
+warning_reset = "To apply the settings&you will need to restart!";

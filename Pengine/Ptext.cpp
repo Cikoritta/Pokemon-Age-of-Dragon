@@ -61,14 +61,16 @@ void Ptext::SetPosition(sf::Vector2f position, Psprite* sprite)
 
     if (sprite != nullptr)
     {
-        text.setPosition({ floor(sprite->GetPixelPosition().x + (sprite->GetSize(true).x * position.x) - sprite->GetPixelOrigin().x), floor(sprite->GetPixelPosition().y + (sprite->GetSize(true).y * position.y) - sprite->GetPixelOrigin().y - text.getLocalBounds().top) });
+        text.setPosition({ floor(sprite->GetPixelPosition().x + (sprite->GetSize().x * position.x)), floor(sprite->GetPixelPosition().y + (sprite->GetSize().y * position.y)) });
     
+        SetScale({ 1.0f, 1.0f });
+
         return;
     }
 
-    text.setPosition({ floor(window->getSize().x * position.x), floor((window->getSize().y * position.y) - text.getLocalBounds().top) });
+    text.setPosition({ floor(window->getSize().x * position.x), floor((window->getSize().y * position.y)) });
 
-    SetScale(scale);
+    SetScale({ 1.0f, 1.0f });
 }
 
 void Ptext::SetPixelPosition(sf::Vector2f position)

@@ -83,7 +83,7 @@ void Psprite::SetPosition(sf::Vector2f position, Psprite* RelativeSprite)
 
     if (RelativeSprite != nullptr)
     {
-        sprite.setPosition((RelativeSprite->GetPixelPosition().x + (RelativeSprite->GetSize().x * position.x)) - RelativeSprite->GetPixelOrigin().x, (RelativeSprite->GetPixelPosition().y + (RelativeSprite->GetSize().y * position.y)) - RelativeSprite->GetPixelOrigin().y);
+        sprite.setPosition((RelativeSprite->GetPixelPosition().x + (RelativeSprite->GetSize().x * position.x)), (RelativeSprite->GetPixelPosition().y + (RelativeSprite->GetSize().y * position.y)));
     }
     else
     {

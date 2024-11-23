@@ -14,4 +14,6 @@ public:
 
     
     static sf::String      GetString(sf::String id_string, sf::String scene);
+
+    static void            SetLang(sf::String lang);
 };
