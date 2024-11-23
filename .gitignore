@@ -367,3 +367,4 @@ FodyWeavers.xsd
 
 # Debug src
 /Pengine/Lib/SFML/src
+Pengine/Lib/SFML/src/SFML
