@@ -1,6 +1,10 @@
 #include "pch.h"
 #include "PsceneManager.h"
 
+Pscene* PsceneManager::currentScene = nullptr;
+sf::RenderWindow* PsceneManager::window = nullptr;
+sf::Event* PsceneManager::event = nullptr;
+
 PsceneManager::PsceneManager(sf::RenderWindow* window, sf::Event* event, Pscene* currentScene)
 {
 	this->window = window;
@@ -51,7 +55,7 @@ void PsceneManager::SetCurrentScene(Pscene* scene)
 	currentScene->Start();
 }
 
-Pscene* PsceneManager::GetCurrentScene() const
+Pscene* PsceneManager::GetCurrentScene()
 {
 	return currentScene;
 }

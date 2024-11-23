@@ -5,12 +5,12 @@
 
 class PsceneManager
 {
-	sf::RenderWindow*		window = nullptr;
+    static sf::RenderWindow*		window;
 
-	sf::Event*				event = nullptr;
+    static sf::Event*				event;
 
 
-	Pscene*					currentScene = nullptr;
+    static Pscene*			currentScene;
 
     Plang                   lang = Plang(Config::Read(L"Config.ini", L"lang"));
 
@@ -64,9 +64,9 @@ public:
     void                    SetDebugMode(bool debugMode);
 
 
-	void					SetCurrentScene(Pscene* scene);
+	static void				SetCurrentScene(Pscene* scene);
 
-	Pscene*					GetCurrentScene() const;
+    static Pscene*			GetCurrentScene();
 
 
     sf::Uint16              GetCpuUsage();

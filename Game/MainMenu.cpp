@@ -1,4 +1,5 @@
 #include "MainMenu.h"
+#include "Intro.h"
 
 void MainMenu::BaseStart()
 {
@@ -122,15 +123,23 @@ void MainMenu::WarningResetStart()
 
     warningCancel.SetTamplate(newGame.GetTamplate());
     warningCancel.SetOrigin({ 0.5f, 0.5f }, true);
-    warningCancel.SetPosition({ 0.58f, 0.62f });
+    warningCancel.SetPosition({ 0.75f, 0.8f }, &exitBackground);
 
     warningAccept.SetTamplate(newGame.GetTamplate());
     warningAccept.SetOrigin({ 0.5f, 0.5f }, true);
-    warningAccept.SetPosition({ 0.43f, 0.62f });
+    warningAccept.SetPosition({ 0.25f, 0.8f }, &exitBackground);
 
     warningReset.SetPosition({ 0.5f, 0.5f }, &exitBackground);
     warningReset.SetOrigin({ 0.5f, 0.5f }, true);
     warningReset.GetTamplate()->setCharacterSize(36U);
+
+    warningNoSave.SetTamplate(warningReset.GetTamplate());
+    warningNoSave.SetOrigin({ 0.5f, 0.5f }, true);
+    warningNoSave.SetPosition({ 0.5f, 0.5f }, &exitBackground);
+
+    warningNewGame.SetTamplate(warningReset.GetTamplate());
+    warningNewGame.SetOrigin({ 0.5f, 0.5f }, true);
+    warningNewGame.SetPosition({ 0.5f, 0.5f }, &exitBackground);
 }
 
 
@@ -181,6 +190,10 @@ void MainMenu::Start()
 
     WarningResetStart();
 
+
+    screenDimming.Start();
+
+
     music.PlayMusic(true);
 }
 
@@ -189,6 +202,30 @@ void MainMenu::Update()
 	background.Animate(1920, 1U);
 
 	logo.ScaleAnimate(0.9f, 1.1f, 0.002f);
+
+    if (newGameEvent || loadGameEvent)
+    {
+        music.GetMusic()->stop();
+
+        screenDimming.Update(0.1f, 3U);
+
+        if (screenDimming.IsEffectEnd())
+        {
+            LoadSceneEvent = true;
+        }
+    }
+
+    if (LoadSceneEvent)
+    {
+        if (newGameEvent)
+        {
+            PsceneManager::SetCurrentScene(new Intro(window, event, L"Intro"));
+        }
+        else if (loadGameEvent)
+        {
+            // LOAD GAME
+        }
+    }
 }
 
 void MainMenu::Events()
@@ -218,6 +255,19 @@ void MainMenu::Events()
             if (Pinput::IsMouseButtonReleased(sf::Mouse::Left))
             {
                 buttonSound.PlayEffect();
+
+                std::ifstream save("Saves/Save.psave");
+
+                if (save.is_open())
+                {
+                    save.close();
+
+                    warningNewGameEvent = true;
+                }
+                else
+                {
+                    newGameEvent = true;
+                }
             }
 		}
 		else if (newGame.GetScale().x == 1.1f)
@@ -238,7 +288,18 @@ void MainMenu::Events()
             {
                 buttonSound.PlayEffect();
 
-                warningResetEvent = true;
+                std::ifstream save("Saves/Save.psave");
+
+                if (save.is_open())
+                {
+                    loadGameEvent = true;
+                }
+                else
+                {
+                    warningNoSaveEvent = true;
+
+                    save.close();
+                }
             }
 		}
 		else if (loadGame.GetScale().x == 1.1f)
@@ -255,7 +316,7 @@ void MainMenu::Events()
 				settingGame.SetScale({ 1.0f, 1.0f });
 			}
 
-			if (!warningResetEvent && Pinput::IsMouseButtonReleased(sf::Mouse::Left))
+			if (!warningResetEvent && !warningNoSaveEvent && !warningNewGameEvent && Pinput::IsMouseButtonReleased(sf::Mouse::Left))
 			{
                 buttonSound.PlayEffect();
 
@@ -379,6 +440,77 @@ void MainMenu::Events()
             else if (warningOk.GetScale().x == 1.1f)
             {
                 warningOk.SetScale({ 1.0f, 1.0f });
+            }
+        }
+
+        if (warningNoSaveEvent)
+        {
+            if (Pinput::IsMouseCollision(&warningOk))
+            {
+                warningOk.SetScale({ 1.1f, 1.1f });
+
+                if (Pinput::IsMouseButtonPressed(sf::Mouse::Left))
+                {
+                    warningOk.SetScale({ 1.0f, 1.0f });
+                }
+
+                if (Pinput::IsMouseButtonReleased(sf::Mouse::Left))
+                {
+                    buttonSound.PlayEffect();
+
+                    warningNoSaveEvent = false;
+                }
+            }
+            else if (warningOk.GetScale().x == 1.1f)
+            {
+                warningOk.SetScale({ 1.0f, 1.0f });
+            }
+        }
+
+        if (warningNewGameEvent)
+        {
+            if (Pinput::IsMouseCollision(&warningCancel))
+            {
+                warningCancel.SetScale({ 1.1f, 1.1f });
+
+                if (Pinput::IsMouseButtonPressed(sf::Mouse::Left))
+                {
+                    warningCancel.SetScale({ 1.0f, 1.0f });
+                }
+
+                if (Pinput::IsMouseButtonReleased(sf::Mouse::Left))
+                {
+                    buttonSound.PlayEffect();
+
+                    warningNewGameEvent = false;
+                }
+            }
+            else if (warningCancel.GetScale().x == 1.1f)
+            {
+                warningCancel.SetScale({ 1.0f, 1.0f });
+            }
+
+            if (Pinput::IsMouseCollision(&warningAccept))
+            {
+                warningAccept.SetScale({ 1.1f, 1.1f });
+
+                if (Pinput::IsMouseButtonPressed(sf::Mouse::Left))
+                {
+                    warningAccept.SetScale({ 1.0f, 1.0f });
+                }
+
+                if (Pinput::IsMouseButtonReleased(sf::Mouse::Left))
+                {
+                    buttonSound.PlayEffect();
+
+                    warningNewGameEvent = false;
+
+                    newGameEvent = true;
+                }
+            }
+            else if (warningAccept.GetScale().x == 1.1f)
+            {
+                warningAccept.SetScale({ 1.0f, 1.0f });
             }
         }
 	}
@@ -710,5 +842,27 @@ void MainMenu::Draw() const
         warning.Draw();
         warningOk.Draw();
         warningReset.Draw();
+    }
+
+    if (warningNoSaveEvent)
+    {
+        exitBackground.Draw();
+        warning.Draw();
+        warningOk.Draw();
+        warningNoSave.Draw();
+    }
+
+    if (warningNewGameEvent)
+    {
+        exitBackground.Draw();
+        warning.Draw();
+        warningNewGame.Draw();
+        warningAccept.Draw();
+        warningCancel.Draw();
+    }
+
+    if (newGameEvent || loadGameEvent)
+    {
+        screenDimming.Draw();
     }
 }

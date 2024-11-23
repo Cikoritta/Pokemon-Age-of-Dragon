@@ -75,6 +75,10 @@ class MainMenu : public Pscene
 
     bool                    warningResetEvent = false;
 
+    bool                    warningNoSaveEvent = false;
+
+    bool                    warningNewGameEvent = false;
+
     Ptext                   warning = Ptext(&newGame, Plang::GetString(L"warning", L"MainMenu"));
 
     Ptext                   warningOk = Ptext(&newGame, Plang::GetString(L"warning_ok", L"MainMenu"));
@@ -85,8 +89,22 @@ class MainMenu : public Pscene
 
     Ptext                   warningReset = Ptext(window, event, "Data/Fonts/Retron2000/Retron2000.ttf", Plang::GetString(L"warning_reset", L"MainMenu"), sf::Color(96, 96, 96));
 
+    Ptext                   warningNoSave = Ptext(&warningReset, Plang::GetString(L"warning_nosave", L"MainMenu"));
+
+    Ptext                   warningNewGame = Ptext(&warningReset, Plang::GetString(L"warning_newgame", L"MainMenu"));
+
 
     Ptext                   language = Ptext(&newGame, Config::Read(L"Config.ini", L"lang"));
+
+
+    bool                    LoadSceneEvent = false;
+
+    Peffect                 screenDimming = Peffect(window, event, Effect::screenDimming);  
+
+
+    bool                    newGameEvent = false;
+
+    bool                    loadGameEvent = false;
 
 public:
 

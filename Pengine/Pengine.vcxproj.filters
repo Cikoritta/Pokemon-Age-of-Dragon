@@ -40,6 +40,9 @@
     <Filter Include="Sound">
       <UniqueIdentifier>{814029da-0e16-4f0c-b544-4556dea6a857}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Effect">
+      <UniqueIdentifier>{87ccafb5-84a8-4883-92b5-8c7d2bc58268}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -85,6 +88,9 @@
     <ClInclude Include="Pmusic.h">
       <Filter>Sound</Filter>
     </ClInclude>
+    <ClInclude Include="Peffect.h">
+      <Filter>Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -128,6 +134,9 @@
     </ClCompile>
     <ClCompile Include="Pmusic.cpp">
       <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Peffect.cpp">
+      <Filter>Effect</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

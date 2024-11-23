@@ -10,3 +10,4 @@
 #include "Ptext.h"
 #include "Pmusic.h"
 #include "Psound.h"
+#include "Peffect.h"
