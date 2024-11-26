@@ -43,6 +43,9 @@
     <Filter Include="Effect">
       <UniqueIdentifier>{87ccafb5-84a8-4883-92b5-8c7d2bc58268}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dialog">
+      <UniqueIdentifier>{f86db26e-d48d-4a01-8488-1478fd3bd773}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -91,6 +94,9 @@
     <ClInclude Include="Peffect.h">
       <Filter>Effect</Filter>
     </ClInclude>
+    <ClInclude Include="Pdialog.h">
+      <Filter>Dialog</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -137,6 +143,9 @@
     </ClCompile>
     <ClCompile Include="Peffect.cpp">
       <Filter>Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Pdialog.cpp">
+      <Filter>Dialog</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

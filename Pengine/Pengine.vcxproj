@@ -155,6 +155,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Pdialog.h" />
     <ClInclude Include="Peffect.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="PanimatedSprite.h" />
@@ -174,6 +175,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="Pdialog.cpp" />
     <ClCompile Include="Peffect.cpp" />
     <ClCompile Include="PanimatedSprite.cpp" />
     <ClCompile Include="pch.cpp">
