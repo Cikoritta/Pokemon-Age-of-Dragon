@@ -12,6 +12,8 @@ class Intro : public Pscene
 
     Pdialog         dialog = Pdialog(window, event, "Data/Textures/Other/Dialog/text_box.png", "Data/Fonts/Retron2000/Retron2000.ttf", sf::Color(96U, 96U, 96U), 25U);
 
+    PanimatedSprite birch
+
 public:
 
     Intro() = default;

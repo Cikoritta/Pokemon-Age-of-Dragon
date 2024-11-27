@@ -72,33 +72,33 @@ void Pdialog::Update(float timeInterval)
     {
         if (!endPosition)
         {
-            float width = dialogText.getPosition().x + (dialogText.getGlobalBounds().width * 1.01f);
+            float width = dialogText.getPosition().x + (dialogText.getGlobalBounds().width * 1.01f) - dialogSprite.getOrigin().x;
 
-            float height = dialogText.getPosition().y * 1.1f;
+            float height = dialogText.getPosition().y + (window->getSize().y / 100.f) - dialogSprite.getOrigin().y;
             
             countEnter = std::count(dialogStrings[currentDialog].begin(), dialogStrings[currentDialog].end(), '\n');
 
             if (countEnter == 1)
             {
-                height += dialogText.getPosition().y * 2.1f;
+                height += dialogText.getGlobalBounds().height - dialogEnd.getGlobalBounds().height;
 
 
                 sf::Text text(dialogText);
 
                 text.setString(dialogStrings[currentDialog].substr(dialogStrings[currentDialog].find_last_of(L"\n")));
 
-                width = dialogText.getPosition().x + (text.getGlobalBounds().width * 1.01f);
+                width = dialogText.getPosition().x + (text.getGlobalBounds().width * 1.01f) - dialogSprite.getOrigin().x;
             }
             else if(countEnter == 2)
             {
-                height += dialogText.getPosition().y * 4.2f;
+                height += dialogText.getGlobalBounds().height - dialogEnd.getGlobalBounds().height;
 
 
                 sf::Text text(dialogText);
 
                 text.setString(dialogStrings[currentDialog].substr(dialogStrings[currentDialog].find_last_of(L"\n")));
 
-                width = dialogText.getPosition().x + (text.getGlobalBounds().width * 1.01f);
+                width = dialogText.getPosition().x + (text.getGlobalBounds().width * 1.01f) - dialogSprite.getOrigin().x;
             }
 
             dialogEnd.setPosition(width, height);
@@ -132,6 +132,36 @@ void Pdialog::Events()
         {
             if ((event->key.code == sf::Keyboard::Space) || (event->key.code == sf::Keyboard::Enter))
             {
+                if (currentLetter < dialogStrings[currentDialog].length())
+                {
+                    currentLetter = dialogStrings[currentDialog].length();
+
+                    dialogText.setString(dialogStrings[currentDialog].substr(0, currentLetter));
+                }
+                else
+                {
+                    currentDialog++;
+
+                    currentLetter = 0U;
+
+                    isDialogEnd = false;
+
+                    isClockStarted = false;
+
+                    endPosition = false;
+                }
+            }
+        }
+        else if (event->type == event->MouseButtonPressed && event->mouseButton.button == sf::Mouse::Left)
+        {
+            if (currentLetter < dialogStrings[currentDialog].length())
+            {
+                currentLetter = dialogStrings[currentDialog].length();
+
+                dialogText.setString(dialogStrings[currentDialog].substr(0, currentLetter));
+            }
+            else
+            {
                 currentDialog++;
 
                 currentLetter = 0U;
@@ -143,18 +173,6 @@ void Pdialog::Events()
                 endPosition = false;
             }
         }
-        else if (event->type == event->MouseButtonPressed && event->mouseButton.button == sf::Mouse::Left)
-        {
-            currentDialog++;
-
-            currentLetter = 0U;
-
-            isDialogEnd = false;
-
-            isClockStarted = false;
-
-            endPosition = false;
-        }
     }
     else
     {
@@ -162,14 +180,53 @@ void Pdialog::Events()
         {
             if ((event->key.code == sf::Keyboard::Space) || (event->key.code == sf::Keyboard::Enter))
             {
-                isAllDialogEnd = true;
+                if (currentLetter < dialogStrings[currentDialog].length())
+                {
+                    currentLetter = dialogStrings[currentDialog].length();
+
+                    dialogText.setString(dialogStrings[currentDialog].substr(0, currentLetter));
+                }
+                else
+                {
+                    isAllDialogEnd = true;
+                }
             }
         }
         else if (event->type == event->MouseButtonPressed && event->mouseButton.button == sf::Mouse::Left)
         {
-            isAllDialogEnd = true;
+            if (currentLetter < dialogStrings[currentDialog].length())
+            {
+                currentLetter = dialogStrings[currentDialog].length();
+
+                dialogText.setString(dialogStrings[currentDialog].substr(0, currentLetter));
+            }
+            else
+            {
+                isAllDialogEnd = true;
+            }
         }
     }
+}
+
+
+void Pdialog::SetPosition(sf::Vector2f position)
+{
+    dialogSprite.setPosition(window->getSize().x * position.x, window->getSize().y * position.y);
+
+    dialogText.setPosition(dialogSprite.getPosition().x + (dialogSprite.getGlobalBounds().getSize().x / 20.0f), dialogSprite.getPosition().y + (dialogSprite.getGlobalBounds().getSize().y / 9.0f));
+}
+
+void Pdialog::SetOrigin(sf::Vector2f origin)
+{
+    dialogSprite.setOrigin(dialogSprite.getLocalBounds().width * origin.x, dialogSprite.getLocalBounds().height * origin.y);
+    dialogText.setOrigin(dialogSprite.getOrigin().x, dialogSprite.getOrigin().y);
+}
+
+void Pdialog::SetScale(sf::Vector2f scale)
+{
+    dialogSprite.setScale(scale.x * windowScale.x, scale.y * windowScale.y);
+    dialogText.setScale(scale.x * windowScale.x, scale.y * windowScale.y);
+    dialogEnd.setScale(1.2f * (scale.x * windowScale.x), 1.2f * (scale.y * windowScale.y));
 }
 
 

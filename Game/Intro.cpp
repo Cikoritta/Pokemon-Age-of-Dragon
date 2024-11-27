@@ -4,6 +4,9 @@ void Intro::Start()
 {
     background.SetScale({ 1.0f, 1.0f });
 
+    dialog.SetOrigin({ 0.5f, 1.0f });
+    dialog.SetScale({ 1.5f, 1.5f });
+    dialog.SetPosition({ 0.5f, 1.0f });
     dialog.SetStringFile("Data/Lang/Intro/Birch", 5U);
 
     screenBrightening.Start();

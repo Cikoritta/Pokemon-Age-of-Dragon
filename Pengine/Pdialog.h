@@ -68,6 +68,13 @@ public:
     void Events();
 
 
+    void SetPosition(sf::Vector2f position);
+
+    void SetOrigin(sf::Vector2f origin);
+
+    void SetScale(sf::Vector2f scale);
+
+
     void SetStringFile(const sf::String path, sf::Uint16 countDialog);
 
     void Draw() const;
