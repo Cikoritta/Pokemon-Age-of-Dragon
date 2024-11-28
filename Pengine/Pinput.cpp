@@ -72,6 +72,30 @@ bool Pinput::IsKeyReleased(sf::Keyboard::Key key)
     return false;
 }
 
+void Pinput::IsKeyEntered(std::wstring* string, sf::Uint16 max)
+{
+    if (event->type == event->TextEntered)
+    {
+        if (string->length() < max)
+        {
+            if ((event->text.unicode >= 41 && event->text.unicode <= 90) || (event->text.unicode >= 97 && event->text.unicode <= 122))
+            {
+                *string += static_cast<wchar_t>(event->text.unicode);
+            }
+
+            if ((event->text.unicode >= 1040 && event->text.unicode <= 1103))
+            {
+                *string += static_cast<wchar_t>(event->text.unicode);
+            }
+        }
+
+        if (event->text.unicode == 8 && string->length() > 0)
+        {
+            *string = string->substr(0, string->length() - 1U);
+        }
+    }
+}
+
 
 bool Pinput::IsMouseButtonPressed(sf::Mouse::Button button)
 {

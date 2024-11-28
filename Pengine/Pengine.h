@@ -11,3 +11,4 @@
 #include "Pmusic.h"
 #include "Psound.h"
 #include "Peffect.h"
+#include "Pdialog.h"

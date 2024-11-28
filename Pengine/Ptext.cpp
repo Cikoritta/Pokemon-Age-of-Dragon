@@ -114,7 +114,7 @@ void Ptext::SetOrigin(sf::Vector2f origin, bool local)
 {
     this->origin = origin;
 
-    text.setOrigin({ GetSize(local).x * origin.x, GetSize(local).y * origin.y });
+    text.setOrigin({ floor(GetSize(local).x * origin.x), floor(GetSize(local).y * origin.y) });
 }
 
 void Ptext::SetPixelOrigin(sf::Vector2f origin)

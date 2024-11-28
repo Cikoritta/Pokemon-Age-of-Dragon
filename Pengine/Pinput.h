@@ -31,6 +31,9 @@ public:
     static bool                     IsKeyReleased(sf::Keyboard::Key key);
 
 
+    static void                     IsKeyEntered(std::wstring* string, sf::Uint16 max = 65535U);
+
+
     static bool                     IsMouseButtonPressed(sf::Mouse::Button button);
 
     static bool                     IsMouseUpdatePressed(sf::Mouse::Button button);

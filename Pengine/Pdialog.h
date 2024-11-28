@@ -6,55 +6,55 @@
 
 class Pdialog
 {
-    sf::RenderWindow*        window;
+    sf::RenderWindow*               window;
 
-    sf::Event*               event;
-
-
-    sf::Clock                clock;
-
-    bool                     isClockStarted = false;
+    sf::Event*                      event;
 
 
-    bool                     isDialogEnd = false;
+    sf::Clock                       clock;
 
-    bool                     isAllDialogEnd = false;
-
-
-    sf::Uint16               countDialog = 0U;
-
-    sf::Uint16               countEnter = 0U;
+    bool                            isClockStarted = false;
 
 
-    std::wstring             currentString;
+    bool                            isDialogEnd = false;
 
-    sf::Uint16               currentLetter = 0U;
-
-    sf::Uint16               currentDialog = 0U;
+    bool                            isAllDialogEnd = false;
 
 
-    sf::Sprite               dialogSprite;
+    sf::Uint16                      countDialog = 0U;
 
-    sf::Texture              dialogTexture;
-
-
-    sf::Text                 dialogText;
-
-    sf::Font                 dialogFont;
+    sf::Uint16                      countEnter = 0U;
 
 
-    sf::Sprite               dialogEnd;
+    std::wstring                    currentString;
 
-    sf::Texture              dialogEndTexture;
+    sf::Uint16                      currentLetter = 0U;
 
-
-    bool                     endPosition = false;
-
-
-    sf::Vector2f            windowScale;
+    sf::Uint16                      currentDialog = 0U;
 
 
-    std::vector<std::wstring> dialogStrings;
+    sf::Sprite                      dialogSprite;
+
+    sf::Texture                     dialogTexture;
+
+
+    sf::Text                        dialogText;
+
+    sf::Font                        dialogFont;
+
+
+    sf::Sprite                      dialogEnd;
+
+    sf::Texture                     dialogEndTexture;
+
+
+    bool                            endPosition = false;
+
+
+    sf::Vector2f                    windowScale;
+
+
+    std::vector<std::wstring>       dialogStrings;
 
 public:
 
@@ -63,19 +63,27 @@ public:
     Pdialog(sf::RenderWindow* window, sf::Event* event, sf::String texturePath, sf::String fontPath, sf::Color color, sf::Uint16 size);
 
 
-    void Update(float timeInterval);
+    void                            Update(float timeInterval);
 
-    void Events();
-
-
-    void SetPosition(sf::Vector2f position);
-
-    void SetOrigin(sf::Vector2f origin);
-
-    void SetScale(sf::Vector2f scale);
+    void                            Events();
 
 
-    void SetStringFile(const sf::String path, sf::Uint16 countDialog);
+    void                            SetPosition(sf::Vector2f position);
 
-    void Draw() const;
+    void                            SetOrigin(sf::Vector2f origin);
+
+    void                            SetScale(sf::Vector2f scale);
+
+
+    sf::Uint16                      GetCurrentDialog() const;
+
+    bool                            IsDialogEnd() const;
+
+
+    void                            StaticString(const sf::String path, sf::Uint16 numberString);
+
+
+    void                            SetStringFile(const sf::String path, sf::Uint16 countDialog);
+
+    void                            Draw() const;
 };

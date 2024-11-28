@@ -229,6 +229,35 @@ void Pdialog::SetScale(sf::Vector2f scale)
     dialogEnd.setScale(1.2f * (scale.x * windowScale.x), 1.2f * (scale.y * windowScale.y));
 }
 
+sf::Uint16 Pdialog::GetCurrentDialog() const
+{
+    return currentDialog;
+}
+
+bool Pdialog::IsDialogEnd() const
+{
+    return isAllDialogEnd;
+}
+
+void Pdialog::StaticString(const sf::String path, sf::Uint16 numberString)
+{
+    sf::Uint16 numberDialog = 0U;
+
+    while (numberDialog != numberString)
+    {
+        currentString = Config::Read(path.toWideString() + L"/" + Plang::GetLang().toWideString() + L".plang", std::to_wstring(numberDialog));
+
+        numberDialog++;
+    }
+
+    while (currentString.find(L"&") != currentString.npos)
+    {
+        currentString.replace(currentString.find(L"&"), 1, L"\n");
+    }
+
+    dialogText.setString(currentString);
+}
+
 
 void Pdialog::SetStringFile(const sf::String path, sf::Uint16 countDialog)
 {
