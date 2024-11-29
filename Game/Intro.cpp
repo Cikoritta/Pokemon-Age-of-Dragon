@@ -1,4 +1,5 @@
 #include "Intro.h"
+#include "PlayerHome.h"
 
 void Intro::Start()
 {
@@ -14,7 +15,6 @@ void Intro::Start()
     dialog2.SetOrigin({ 0.5f, 1.0f });
     dialog2.SetScale({ 1.5f, 1.5f });
     dialog2.SetPosition({ 0.5f, 1.0f });
-    dialog2.SetStringFile("Data/Lang/Intro/Birch2", 3U);
 
     nameEnterDialog.SetOrigin({ 0.5f, 1.0f });
     nameEnterDialog.SetScale({ 1.5f, 1.5f });
@@ -128,7 +128,7 @@ void Intro::Update()
         {
             music.GetMusic()->stop();
 
-            // LOAD SCENE
+            PsceneManager::SetCurrentScene(new PlayerHome(window, event, L"PlayerHome"));
         }
     }
 }
@@ -150,6 +150,8 @@ void Intro::Events()
                 birchDialogTwo = true;
 
                 Config::Create(L"Saves/Save.psave", L"playerName", name);
+
+                dialog2.SetStringFile("Data/Lang/Intro/Birch2", 3U);
             }
         }
 

@@ -15,7 +15,9 @@ void PanimatedSprite::Animate(sf::Uint16 sizeFrame, sf::Uint16 interval, sf::Uin
 
         currentFrame = startFrame;
 
-        textureRect.left = currentFrame * sizeFrame;
+        textureRect = sprite.getTextureRect();
+
+        textureRect.left = startFrame;
 
         maxLeft = sprite.getTexture()->getSize().x - sizeFrame;
 
@@ -28,6 +30,8 @@ void PanimatedSprite::Animate(sf::Uint16 sizeFrame, sf::Uint16 interval, sf::Uin
     {
         if (clock.getElapsedTime().asSeconds() >= frameTime)
         {
+            textureRect.top = sprite.getTextureRect().top;
+
             if (textureRect.left != maxLeft)
             {
                 currentFrame++;
@@ -38,7 +42,7 @@ void PanimatedSprite::Animate(sf::Uint16 sizeFrame, sf::Uint16 interval, sf::Uin
             {
                 currentFrame = 0U;
 
-                textureRect.left = 0;
+                textureRect.left = startFrame;
             }
             else
             {

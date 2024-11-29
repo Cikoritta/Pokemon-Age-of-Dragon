@@ -219,6 +219,8 @@ void MainMenu::Update()
     {
         if (newGameEvent)
         {
+            std::remove("Saves/Save.psave");
+
             PsceneManager::SetCurrentScene(new Intro(window, event, L"Intro"));
 
             Config::CreateConfig(L"Saves/Save.psave");

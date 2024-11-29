@@ -12,3 +12,4 @@
 #include "Psound.h"
 #include "Peffect.h"
 #include "Pdialog.h"
+#include "Pmap.h"

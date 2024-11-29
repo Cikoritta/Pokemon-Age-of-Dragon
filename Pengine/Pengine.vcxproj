@@ -164,6 +164,7 @@
     <ClInclude Include="Pengine.h" />
     <ClInclude Include="Pinput.h" />
     <ClInclude Include="Plang.h" />
+    <ClInclude Include="Pmap.h" />
     <ClInclude Include="Pmusic.h" />
     <ClInclude Include="PsceneManager.h" />
     <ClInclude Include="Psound.h" />
@@ -187,6 +188,7 @@
     <ClCompile Include="Pcolader.cpp" />
     <ClCompile Include="Pinput.cpp" />
     <ClCompile Include="Plang.cpp" />
+    <ClCompile Include="Pmap.cpp" />
     <ClCompile Include="Pmusic.cpp" />
     <ClCompile Include="Psound.cpp" />
     <ClCompile Include="PsplitSprite.cpp" />

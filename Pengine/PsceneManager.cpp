@@ -144,7 +144,7 @@ void PsceneManager::DebugText(sf::String string, sf::Uint16 position)
         debugText.setScale(windowScale);
     }
 
-    debugText.setPosition(5.0f * windowScale.x, (40.0f * position) * windowScale.y);
+    debugText.setPosition(window->mapPixelToCoords({ int(5 * windowScale.x), 0 }).x, window->mapPixelToCoords({ 5, 0 }).y + ((40.0f * position) * windowScale.y));
     debugText.setString(string);
 
     window->draw(debugText);

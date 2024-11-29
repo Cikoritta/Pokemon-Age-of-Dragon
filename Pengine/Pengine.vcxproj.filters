@@ -46,6 +46,9 @@
     <Filter Include="Dialog">
       <UniqueIdentifier>{f86db26e-d48d-4a01-8488-1478fd3bd773}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{092dcfa6-f0bb-48d0-91fd-7a6b7704ca20}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -97,6 +100,9 @@
     <ClInclude Include="Pdialog.h">
       <Filter>Dialog</Filter>
     </ClInclude>
+    <ClInclude Include="Pmap.h">
+      <Filter>Map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -146,6 +152,9 @@
     </ClCompile>
     <ClCompile Include="Pdialog.cpp">
       <Filter>Dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="Pmap.cpp">
+      <Filter>Map</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -19,6 +19,18 @@
     <Filter Include="Game\Icon">
       <UniqueIdentifier>{e496d48c-f5b4-494d-b8d7-1d551e4b4c77}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Scenes\Homes">
+      <UniqueIdentifier>{ad5a0dcb-4bf8-4dc2-9ecb-e45252bd3719}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scenes\Homes\PlayerHome">
+      <UniqueIdentifier>{e6624e2f-b588-46b9-9f3b-6da555ffa11e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Entites">
+      <UniqueIdentifier>{662c07b0-53b8-4909-8f6a-0aab1d7fad03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Entites\Player">
+      <UniqueIdentifier>{625c7f6b-29b8-40f6-8dd5-5b219a2cedec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -30,6 +42,12 @@
     <ClCompile Include="Intro.cpp">
       <Filter>Game\Scenes\Intro</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerHome.cpp">
+      <Filter>Game\Scenes\Homes\PlayerHome</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Game\Entites\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainMenu.h">
@@ -40,6 +58,12 @@
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Game\Icon</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHome.h">
+      <Filter>Game\Scenes\Homes\PlayerHome</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Game\Entites\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

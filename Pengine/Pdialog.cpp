@@ -255,6 +255,11 @@ void Pdialog::StaticString(const sf::String path, sf::Uint16 numberString)
         currentString.replace(currentString.find(L"&"), 1, L"\n");
     }
 
+    while (currentString.find(L"%p") != currentString.npos)
+    {
+        currentString.replace(currentString.find(L"%p"), 2, Config::Read(L"Saves/Save.psave", L"playerName"));
+    }
+
     dialogText.setString(currentString);
 }
 
@@ -270,6 +275,11 @@ void Pdialog::SetStringFile(const sf::String path, sf::Uint16 countDialog)
         while (currentString.find(L"&") != currentString.npos)
         {
             currentString.replace(currentString.find(L"&"), 1, L"\n");
+        }
+
+        while (currentString.find(L"%p") != currentString.npos)
+        {
+            currentString.replace(currentString.find(L"%p"), 2, Config::Read(L"Saves/Save.psave", L"playerName"));
         }
 
         dialogStrings.push_back(currentString);

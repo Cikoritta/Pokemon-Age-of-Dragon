@@ -1,0 +1,6 @@
+sizeTile = "16";
+texturePath = "Data/Textures/Maps/player_house.png";
+
+mapSize = "30";
+
+mapBody = "21 21 21 21 21,31 31 31 31 31,11 01 01 01 01,11 01 01 01 01,11 01 01 01 01,11 01 01 01 01,11 01 01 01 01";
