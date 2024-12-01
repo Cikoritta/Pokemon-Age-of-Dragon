@@ -1,6 +1,60 @@
-sizeTile = "16";
-texturePath = "Data/Textures/Maps/player_house.png";
+countTile = "49";
 
-mapSize = "30";
+sizeTileX = "16";
+sizeTileY = "16";
 
-mapBody = "21 21 21 21 21,31 31 31 31 31,11 01 01 01 01,11 01 01 01 01,11 01 01 01 01,11 01 01 01 01,11 01 01 01 01";
+sprite1 = "0r0$0x32|no.";
+sprite2 = "1r0$0x32|no.";
+sprite3 = "2r0$0x32|no.";
+sprite4 = "3r0$0x32|no.";
+sprite5 = "4r0$0x32|no.";
+sprite6 = "5r0$0x32|no.";
+sprite7 = "6r0$0x32|no.";
+
+sprite8 = "0r1$0x48|yes.";
+sprite9 = "1r1$0x48|yes.";
+sprite10 = "2r1$0x48|yes.";
+sprite11 = "3r1$0x48|yes.";
+sprite12 = "4r1$0x48|yes.";
+sprite13 = "5r1$0x48|yes.";
+sprite14 = "6r1$0x48|yes.";
+
+sprite15 = "0r2$0x16|no.";
+sprite16 = "1r2$0x0|no.";
+sprite17 = "2r2$0x0|no.";
+sprite18 = "3r2$0x0|no.";
+sprite19 = "4r2$0x0|no.";
+sprite20 = "5r2$0x0|no.";
+sprite21 = "6r2$0x0|no.";
+
+sprite22 = "0r3$0x16|no.";
+sprite23 = "1r3$0x0|no.";
+sprite24 = "2r3$0x0|no.";
+sprite25 = "3r3$0x0|no.";
+sprite26 = "4r3$0x0|no.";
+sprite27 = "5r3$0x0|no.";
+sprite28 = "6r3$0x0|no.";
+
+sprite29 = "0r4$0x16|no.";
+sprite30 = "1r4$0x0|no.";
+sprite31 = "2r4$0x0|no.";
+sprite32 = "3r4$0x0|no.";
+sprite33 = "4r4$0x0|no.";
+sprite34 = "5r4$0x0|no.";
+sprite35 = "6r4$0x0|no.";
+
+sprite36 = "0r5$0x16|no.";
+sprite37 = "1r5$0x0|no.";
+sprite38 = "2r5$0x0|no.";
+sprite39 = "3r5$0x0|no.";
+sprite40 = "4r5$0x0|no.";
+sprite41 = "5r5$0x0|no.";
+sprite42 = "6r5$0x0|no.";
+
+sprite43 = "0r6$0x0|no.";
+sprite44 = "1r6$0x0|no."; 
+sprite45 = "2r6$0x0|no.";
+sprite46 = "3r6$0x0|no.";
+sprite47 = "4r6$0x0|no.";
+sprite48 = "5r6$0x0|no.";
+sprite49 = "6r6$0x0|no.";

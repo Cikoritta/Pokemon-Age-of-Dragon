@@ -6,8 +6,6 @@ class PlayerHome : public Pscene
 {
     Player player = Player(window, event);
 
-    Psprite background = Psprite(window, event, "Data/Textures/Entites/Player/temp.jpg");
-
     Pmap map = Pmap(window, event);
 
 public:

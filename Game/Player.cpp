@@ -1,4 +1,4 @@
-#include "Player.h"
+#include "Player.h" 
 
 Player::Player(sf::RenderWindow* window, sf::Event* event)
 {
@@ -12,9 +12,15 @@ Player::Player(sf::RenderWindow* window, sf::Event* event)
     speed.y = 5.0f * std::stof(Config::Read(L"Config.ini", L"windowScaleHeight"));
 
     playerSprite->SetPosition({ 0.5f, 0.5f });
-    playerSprite->SetScale({ 4.0f, 4.0f });
+    playerSprite->SetScale({ 4.6f, 4.6f });
     playerSprite->SetLoop(true);
     playerSprite->SetFrameTime(0.2f);
+
+    colader = new Pcolader(window, event, playerSprite->GetPosition(), { playerSprite->GetSize().x * 1.25f,  playerSprite->GetSize().y / 2.0f }, "player");
+
+    colader->SetOrigin({ -0.1f, -1.75f });
+
+    colader->SetSprite(playerSprite);
 
     camera.setSize(static_cast<sf::Vector2f>(window->getSize()));
 
@@ -25,11 +31,37 @@ Player::Player(sf::RenderWindow* window, sf::Event* event)
     window->setView(camera);
 }
 
+
+Pcolader* Player::GetColader() const
+{
+    return colader;
+}
+
+PanimatedSprite* Player::GetSprite()
+{
+    return playerSprite;
+}
+
+
+void Player::Collision(std::vector<Pcolader*> solidColader)
+{
+    this->solidColader = solidColader;
+
+    for (sf::Uint16 i = 0; i < solidColader.size(); i++)
+    {
+        colader->IsColision(solidColader[i]);
+    }
+}
+
 void Player::Update()
 {
+    sf::Vector2f position = playerSprite->GetPixelPosition();
+
     if (!isWalking && sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {
         playerSprite->GetSprite()->move(0.0f, -speed.y);
+
+        colader->SetPixelPosition(playerSprite->GetPixelPosition());
 
         if (playerSprite->GetSprite()->getTextureRect().top != 23)
         {
@@ -43,6 +75,8 @@ void Player::Update()
     {
         playerSprite->GetSprite()->move(0.0f, speed.y);
 
+        colader->SetPixelPosition(playerSprite->GetPixelPosition());
+
         if (playerSprite->GetSprite()->getTextureRect().top != 0)
         {
             playerSprite->GetSprite()->setTextureRect(sf::IntRect(0, 0, 16, 23));
@@ -55,6 +89,8 @@ void Player::Update()
     {
         playerSprite->GetSprite()->move(-speed.x, 0.0f);
 
+        colader->SetPixelPosition(playerSprite->GetPixelPosition());
+
         if (playerSprite->GetSprite()->getTextureRect().top != 46)
         {
             playerSprite->GetSprite()->setTextureRect(sf::IntRect(0, 46, 16, 23));
@@ -66,6 +102,8 @@ void Player::Update()
     if (!isWalkingY && sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
         playerSprite->GetSprite()->move(speed.x, 0.0f);
+
+        colader->SetPixelPosition(playerSprite->GetPixelPosition());
 
         if (playerSprite->GetSprite()->getTextureRect().top != 69)
         {
@@ -110,4 +148,9 @@ void Player::Events()
 void Player::Draw() const
 {
     playerSprite->Draw();
+
+    if (debug)
+    {
+        colader->Draw();
+    }
 }

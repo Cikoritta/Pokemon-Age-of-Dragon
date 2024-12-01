@@ -157,8 +157,6 @@ void PsceneManager::RenderScene()
 
 	currentScene->SetEvent(event);
 
-	currentScene->Start();
-
 
 	while (window->isOpen())
 	{
@@ -217,7 +215,7 @@ void PsceneManager::RenderScene()
 		currentScene->Update();
 
 
-        window->clear(sf::Color::White);
+        window->clear(sf::Color::Black);
 
 		currentScene->Draw();
 

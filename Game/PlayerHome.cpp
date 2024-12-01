@@ -4,26 +4,29 @@ void PlayerHome::Start()
 {
     Pinput::SetWindow(window, event);
 
-    background.SetScale({ 3.0f, 3.0f });
-    background.SetOrigin({ 0.5f, 0.5f }, true);
-    background.SetPosition({ 0.5f, 0.5f });
+    map.LoadMap(L"Data/Maps/player_house.pmap", "Data/Textures/Maps/player_house.png");
+    map.SetScale({ 4.6f, 4.6f });
 
-    map.LoadMap(L"Data/Maps/player_house.pmap");
+    player.GetSprite()->SetPixelPosition(map.GetColaders()[24]->GetPixelPosition());
 }
 
 void PlayerHome::Update()
 {
+    map.Update();
+
     player.Update();
+    player.Collision(map.GetSolidColaders());
 }
 
 void PlayerHome::Events()
 {
+    map.Events();
+
     player.Events();
 }
 
 void PlayerHome::Draw() const
 {
-    background.Draw();
     map.Draw();
     player.Draw();
 }
