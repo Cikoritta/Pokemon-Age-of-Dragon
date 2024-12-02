@@ -236,9 +236,21 @@ sf::Vector2f Pcolader::GetRealPosition() const
 	return sf::Vector2f(bounds.getPosition().x - bounds.getOrigin().x, bounds.getPosition().y - bounds.getOrigin().y);
 }
 
-
-void Pcolader::SetSize(sf::Vector2f size)
+sf::Vector2f Pcolader::GetScale() const
 {
+	return bounds.getScale();
+}
+
+
+void Pcolader::SetSize(sf::Vector2f size, bool scale)
+{
+    if (!scale)
+    {
+        bounds.setSize(size);
+
+        return;
+    }
+
     bounds.setSize({ size.x * windowScale.x, size.y * windowScale.y });
 }
 

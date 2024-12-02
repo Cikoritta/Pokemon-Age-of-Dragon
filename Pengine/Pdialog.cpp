@@ -72,9 +72,14 @@ void Pdialog::Update(float timeInterval)
     {
         if (!endPosition)
         {
-            float width = dialogText.getPosition().x + (dialogText.getGlobalBounds().width * 1.01f) - dialogSprite.getOrigin().x;
+            float width = dialogText.getPosition().x + (dialogText.getGlobalBounds().width * 1.01f) + (dialogEnd.getGlobalBounds().width * 4.5f);
 
-            float height = dialogText.getPosition().y + (window->getSize().y / 100.f) - dialogSprite.getOrigin().y;
+            if (dialogText.getLocalBounds().height > dialogText.getCharacterSize())
+            {
+                width -= dialogEnd.getLocalBounds().top * 2.0f;
+            }
+
+            float height = (dialogText.getPosition().y + (window->getSize().y / 100.f) + dialogEnd.getGlobalBounds().height);
             
             countEnter = std::count(dialogStrings[currentDialog].begin(), dialogStrings[currentDialog].end(), '\n');
 
@@ -87,7 +92,7 @@ void Pdialog::Update(float timeInterval)
 
                 text.setString(dialogStrings[currentDialog].substr(dialogStrings[currentDialog].find_last_of(L"\n")));
 
-                width = dialogText.getPosition().x + (text.getGlobalBounds().width * 1.01f) - dialogSprite.getOrigin().x;
+                width = dialogText.getPosition().x + (text.getGlobalBounds().width * 1.01f) + (dialogEnd.getGlobalBounds().width * 4.5f);
             }
             else if(countEnter == 2)
             {
@@ -98,7 +103,7 @@ void Pdialog::Update(float timeInterval)
 
                 text.setString(dialogStrings[currentDialog].substr(dialogStrings[currentDialog].find_last_of(L"\n")));
 
-                width = dialogText.getPosition().x + (text.getGlobalBounds().width * 1.01f) - dialogSprite.getOrigin().x;
+                width = dialogText.getPosition().x + (text.getGlobalBounds().width * 1.01f) + (dialogEnd.getGlobalBounds().width * 4.5f);
             }
 
             dialogEnd.setPosition(width, height);
@@ -209,8 +214,17 @@ void Pdialog::Events()
 }
 
 
-void Pdialog::SetPosition(sf::Vector2f position)
+void Pdialog::SetPosition(sf::Vector2f position, bool maptocord)
 {
+    if (maptocord)
+    {
+        dialogSprite.setPosition(window->mapPixelToCoords({ int(window->getSize().x * position.x), int(window->getSize().y * position.y) }));
+
+        dialogText.setPosition(dialogSprite.getPosition().x + (dialogSprite.getGlobalBounds().getSize().x / 20.0f), dialogSprite.getPosition().y + (dialogSprite.getGlobalBounds().getSize().y / 9.0f));
+
+        return;
+    }
+
     dialogSprite.setPosition(window->getSize().x * position.x, window->getSize().y * position.y);
 
     dialogText.setPosition(dialogSprite.getPosition().x + (dialogSprite.getGlobalBounds().getSize().x / 20.0f), dialogSprite.getPosition().y + (dialogSprite.getGlobalBounds().getSize().y / 9.0f));
@@ -220,6 +234,7 @@ void Pdialog::SetOrigin(sf::Vector2f origin)
 {
     dialogSprite.setOrigin(dialogSprite.getLocalBounds().width * origin.x, dialogSprite.getLocalBounds().height * origin.y);
     dialogText.setOrigin(dialogSprite.getOrigin().x, dialogSprite.getOrigin().y);
+    dialogEnd.setOrigin(dialogSprite.getOrigin().x, dialogSprite.getOrigin().y);
 }
 
 void Pdialog::SetScale(sf::Vector2f scale)
@@ -227,6 +242,21 @@ void Pdialog::SetScale(sf::Vector2f scale)
     dialogSprite.setScale(scale.x * windowScale.x, scale.y * windowScale.y);
     dialogText.setScale(scale.x * windowScale.x, scale.y * windowScale.y);
     dialogEnd.setScale(1.2f * (scale.x * windowScale.x), 1.2f * (scale.y * windowScale.y));
+}
+
+void Pdialog::ResetDialog()
+{
+    currentDialog = 0U;
+
+    currentLetter = 0U;
+
+    isDialogEnd = false;
+
+    isAllDialogEnd = false;
+
+    isClockStarted = false;
+
+    endPosition = false;
 }
 
 sf::Uint16 Pdialog::GetCurrentDialog() const

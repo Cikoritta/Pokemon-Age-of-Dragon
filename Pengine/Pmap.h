@@ -58,9 +58,13 @@ public:
     void SetScale(sf::Vector2f scale);
 
 
-    std::vector<Pcolader*> GetColaders() const;
+    std::vector<Pcolader*> GetColaders();
 
-    std::vector<Pcolader*> GetSolidColaders() const;
+    std::vector<Pcolader*> GetConstColaders() const;
+
+    std::vector<Psprite*> GetTile() const;
+
+    std::vector<Pcolader*> GetSolidColaders();
 
 
     void Update();

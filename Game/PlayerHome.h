@@ -8,6 +8,13 @@ class PlayerHome : public Pscene
 
     Pmap map = Pmap(window, event);
 
+    sf::Vector2f windowScale = sf::Vector2f(0.0f, 0.0f);
+
+
+    bool TV = false;
+
+    Pdialog tvDialog = Pdialog(window, event, "Data/Textures/Other/Dialog/text_box.png", "Data/Fonts/Retron2000/Retron2000.ttf", sf::Color(96U, 96U, 96U), 25U);
+
 public:
 
     PlayerHome() = default;

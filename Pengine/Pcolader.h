@@ -109,7 +109,10 @@ public:
 	sf::Vector2f			GetRealPosition() const;
 
 
-	void					SetSize(sf::Vector2f size);
+    sf::Vector2f            GetScale() const;
+
+
+	void					SetSize(sf::Vector2f size, bool scale = true);
 
 	sf::Vector2f			GetSize() const;
 

@@ -69,7 +69,7 @@ void Pmap::LoadMap(std::wstring pathMap, std::string texturePath)
         tile->SetPixelPosition(positionTile);
 
 
-        Pcolader* colader = new Pcolader(window, event, tile->GetPosition(), {sizeTile.x, sizeTile.y}, L"sprite" + std::to_wstring(numberTile + 1));
+        Pcolader* colader = new Pcolader(window, event, tile->GetPosition(), { sizeTile.x, sizeTile.y }, L"sprite" + std::to_wstring(numberTile + 1));
 
         colader->SetSprite(tile);
 
@@ -105,12 +105,22 @@ void Pmap::SetScale(sf::Vector2f scale)
     }
 }
 
-std::vector<Pcolader*> Pmap::GetColaders() const
+std::vector<Pcolader*> Pmap::GetColaders()
 {
     return coladers;
 }
 
-std::vector<Pcolader*> Pmap::GetSolidColaders() const
+std::vector<Pcolader*> Pmap::GetConstColaders() const
+{
+    return coladers;
+}
+
+std::vector<Psprite*> Pmap::GetTile() const
+{
+    return tiles;
+}
+
+std::vector<Pcolader*> Pmap::GetSolidColaders()
 {
     return solidColaders;
 }
@@ -275,8 +285,6 @@ void Pmap::Events()
 
                 positionTile.y = floor(floor(window->mapPixelToCoords(sf::Mouse::getPosition(*window)).y / (sizeTile.y * windowScale.y)) * originalSizeTile.y * tiles[0]->GetScale().y * windowScale.y);
 
-                printf("%f %f | %f %f\r", positionTile.x, positionTile.y, tiles[3]->GetPixelPosition().x, tiles[3]->GetPixelPosition().y);
-
                 for (sf::Uint16 i = 0; i < tiles.size(); i++)
                 {
                     if (floor(tiles[i]->GetPixelPosition().x) == positionTile.x && floor(tiles[i]->GetPixelPosition().y) == positionTile.y)
@@ -299,17 +307,16 @@ void Pmap::Events()
 
                             while (std::getline(file, line))
                             {
-                                if (line.substr(0, text.find(L" ")) == L"sprite" + std::to_wstring((i + 2)))
-                                {
-
-                                }
-
                                 text += line + L"\n";
                             }
 
-                            for (sf::Uint16 j = (i + 2); j <= (countTile - (i + 2)); j++)
+                            sf::Uint16 j = (i + 2);
+
+                            while (j != (countTile + 2))
                             {
-                                text.replace(text.find(L"sprite" + std::to_wstring(j)), text.find(L" "), L"sprite" + std::to_wstring(j - 1));
+                                text.replace(text.find(L"sprite" + std::to_wstring(j)), text.find(L" ") - 1, L"sprite" + std::to_wstring(j - 1));
+
+                                j++;
                             }
 
                             file.close();
@@ -322,6 +329,23 @@ void Pmap::Events()
                         }
                     }
                 }
+
+                for (sf::Uint16 i = 0; i < coladers.size(); i++)
+                {
+                    if (floor(coladers[i]->GetPixelPosition().x) == positionTile.x && floor(coladers[i]->GetPixelPosition().y) == positionTile.y)
+                    {
+                        coladers.erase(coladers.begin() + i);
+                    }
+                }
+            }
+
+            if (Pinput::IsMouseButtonPressed(sf::Mouse::Right))
+            {
+                sf::Vector2f positionTile;
+
+                positionTile.x = floor(floor(window->mapPixelToCoords(sf::Mouse::getPosition(*window)).x / (sizeTile.x * windowScale.x)) * originalSizeTile.x * tiles[0]->GetScale().x * windowScale.x);
+
+                positionTile.y = floor(floor(window->mapPixelToCoords(sf::Mouse::getPosition(*window)).y / (sizeTile.y * windowScale.y)) * originalSizeTile.y * tiles[0]->GetScale().y * windowScale.y);
 
                 for (sf::Uint16 i = 0; i < coladers.size(); i++)
                 {

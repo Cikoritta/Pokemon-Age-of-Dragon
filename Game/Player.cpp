@@ -16,9 +16,9 @@ Player::Player(sf::RenderWindow* window, sf::Event* event)
     playerSprite->SetLoop(true);
     playerSprite->SetFrameTime(0.2f);
 
-    colader = new Pcolader(window, event, playerSprite->GetPosition(), { playerSprite->GetSize().x * 1.25f,  playerSprite->GetSize().y / 2.0f }, "player");
-
-    colader->SetOrigin({ -0.1f, -1.75f });
+    colader = new Pcolader(window, event, playerSprite->GetPosition(), { 0.0f,  0.0f }, "player");
+    colader->SetSize({ playerSprite->GetSize().x,  playerSprite->GetSize().y * 0.4f}, false);
+    colader->SetOrigin({ 0.0f, -1.4f });
 
     colader->SetSprite(playerSprite);
 

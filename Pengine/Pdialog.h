@@ -68,11 +68,14 @@ public:
     void                            Events();
 
 
-    void                            SetPosition(sf::Vector2f position);
+    void                            SetPosition(sf::Vector2f position, bool maptocord = false);
 
     void                            SetOrigin(sf::Vector2f origin);
 
     void                            SetScale(sf::Vector2f scale);
+
+
+    void                            ResetDialog();
 
 
     sf::Uint16                      GetCurrentDialog() const;
