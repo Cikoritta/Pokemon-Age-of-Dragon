@@ -20,6 +20,11 @@ void PlayerHome::Start()
     map.GetColaders()[70]->SetSize({ map.GetColaders()[70]->GetSize().x, map.GetColaders()[70]->GetSize().y * 0.3f }, false);
     map.GetColaders()[71]->SetSize({ map.GetColaders()[71]->GetSize().x * 0.7f, map.GetColaders()[71]->GetSize().y * 0.3f }, false);
 
+    map.GetColaders()[94]->SetSize({ map.GetColaders()[94]->GetSize().x * 0.8f, map.GetColaders()[94]->GetSize().y}, false);
+    map.GetColaders()[94]->SetOrigin({ -0.2f, 0.0f });
+
+    map.GetColaders()[95]->SetSize({ map.GetColaders()[95]->GetSize().x * 0.9f, map.GetColaders()[95]->GetSize().y }, false);
+
     player.GetSprite()->SetPixelPosition(map.GetColaders()[24]->GetPixelPosition());
 
     tvDialog.SetOrigin({ 0.5f, 1.0f });
