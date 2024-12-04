@@ -15,6 +15,18 @@ class PlayerHome : public Pscene
 
     Pdialog tvDialog = Pdialog(window, event, "Data/Textures/Other/Dialog/text_box.png", "Data/Fonts/Retron2000/Retron2000.ttf", sf::Color(96U, 96U, 96U), 25U);
 
+    bool clock = false;
+
+    Pdialog clockDialog = Pdialog(window, event, "Data/Textures/Other/Dialog/text_box.png", "Data/Fonts/Retron2000/Retron2000.ttf", sf::Color(96U, 96U, 96U), 25U);
+
+    bool magikarp = false;
+
+    Pdialog magikarpDialog = Pdialog(window, event, "Data/Textures/Other/Dialog/text_box.png", "Data/Fonts/Retron2000/Retron2000.ttf", sf::Color(96U, 96U, 96U), 25U);
+
+    bool computer = false;
+
+    Pdialog computerDialog = Pdialog(window, event, "Data/Textures/Other/Dialog/text_box.png", "Data/Fonts/Retron2000/Retron2000.ttf", sf::Color(96U, 96U, 96U), 25U);
+
 public:
 
     PlayerHome() = default;

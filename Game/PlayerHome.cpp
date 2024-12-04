@@ -29,18 +29,31 @@ void PlayerHome::Start()
 
     tvDialog.SetOrigin({ 0.5f, 1.0f });
     tvDialog.SetScale({ 1.5f, 1.5f });
-    tvDialog.SetStringFile("Data/Lang/PlayerHouse", 3U);
+    tvDialog.SetStringFile("Data/Lang/PlayerHouse/TV", 3U);
+
+    clockDialog.SetOrigin({ 0.5f, 1.0f });
+    clockDialog.SetScale({ 1.5f, 1.5f });
+
+    magikarpDialog.SetOrigin({ 0.5f, 1.0f });
+    magikarpDialog.SetScale({ 1.5f, 1.5f });
+    magikarpDialog.SetStringFile("Data/Lang/PlayerHouse/Magikarp", 2U);
+
+    computerDialog.SetOrigin({ 0.5f, 1.0f });
+    computerDialog.SetScale({ 1.5f, 1.5f });
+    computerDialog.SetStringFile("Data/Lang/PlayerHouse/Computer", 2U);
 }
 
 void PlayerHome::Update()
 {
     map.Update();
 
-    if (!TV)
+    if (!TV && !clock && !magikarp && !computer)
     {
         player.Update();
     }
+
     player.Collision(map.GetSolidColaders());
+
 
     if (TV)
     {
@@ -53,19 +66,51 @@ void PlayerHome::Update()
             tvDialog.ResetDialog();
         }
     }
+
+    if (clock)
+    {
+        clockDialog.Update(0.05f);
+
+        if (clockDialog.IsDialogEnd())
+        {
+            clock = false;
+
+            clockDialog.ResetDialog();
+        }
+    }
+
+    if (magikarp)
+    {
+        magikarpDialog.Update(0.05f);
+
+        if (magikarpDialog.IsDialogEnd())
+        {
+            magikarp = false;
+
+            magikarpDialog.ResetDialog();
+        }
+    }
+
+    if (computer)
+    {
+        computerDialog.Update(0.05f);
+
+        if (computerDialog.IsDialogEnd())
+        {
+            computer = false;
+
+            computerDialog.ResetDialog();
+        }
+    }
 }
 
 void PlayerHome::Events()
 {
     map.Events();
 
-    if (!TV)
+    if (!TV && !clock && !magikarp  && !computer)
     {
         player.Events();
-    }
-    else
-    {
-        tvDialog.Events();
     }
     
     if (!TV)
@@ -80,6 +125,68 @@ void PlayerHome::Events()
             }
         }
     }
+    else
+    {
+        tvDialog.Events();
+    }
+
+    if (!clock)
+    {
+        if (Pinput::IsKeyPressed(sf::Keyboard::Enter))
+        {
+            if (player.GetColader()->IsColision(map.GetConstColaders()[100]))
+            {
+                clock = true;
+
+                SYSTEMTIME currentTime;
+                GetLocalTime(&currentTime);
+
+                Config::Write(L"Data/Lang/PlayerHouse/Clock/" + Config::Read(L"Config.ini", L"lang") + L".plang", L"0", std::to_wstring(currentTime.wHour) + L":" + std::to_wstring(currentTime.wMinute) + L" ");
+
+                clockDialog.SetStringFile("Data/Lang/PlayerHouse/Clock", 1U);
+
+                clockDialog.SetPosition({ 0.5f, 1.0f }, true);
+            }
+        }
+    }
+    else
+    {
+        clockDialog.Events();
+    }
+
+    if (!magikarp)
+    {
+        if (Pinput::IsKeyPressed(sf::Keyboard::Enter))
+        {
+            if (player.GetColader()->IsColision(map.GetConstColaders()[214]))
+            {
+                magikarp = true;
+
+                magikarpDialog.SetPosition({ 0.5f, 1.0f }, true);
+            }
+        }
+    }
+    else
+    {
+        magikarpDialog.Events();
+    }
+
+    if (!computer)
+    {
+        if (Pinput::IsKeyPressed(sf::Keyboard::Enter))
+        {
+            if (player.GetColader()->IsColision(map.GetConstColaders()[217]))
+            {
+                computer = true;
+
+                computerDialog.SetPosition({ 0.5f, 1.0f }, true);
+            }
+        }
+    }
+    else
+    {
+        computerDialog.Events();
+    }
 }
 
 void PlayerHome::Draw() const
@@ -89,7 +196,7 @@ void PlayerHome::Draw() const
     player.Draw();
 
 
-    if (map.GetTile()[69]->GetBounds().intersects(player.GetColader()->GetBounds()) || map.GetTile()[68]->GetBounds().intersects(player.GetColader()->GetBounds()))
+    if (map.GetTile()[214]->GetBounds().intersects(player.GetColader()->GetBounds()) || map.GetTile()[68]->GetBounds().intersects(player.GetColader()->GetBounds()))
     {
         map.GetTile()[66]->Draw();
         map.GetTile()[67]->Draw();
@@ -103,5 +210,20 @@ void PlayerHome::Draw() const
         map.GetTile()[97]->Draw();
 
         tvDialog.Draw();
+    }
+
+    if (clock)
+    {
+        clockDialog.Draw();
+    }
+
+    if (magikarp)
+    {
+        magikarpDialog.Draw();
+    }
+
+    if (computer)
+    {
+        computerDialog.Draw();
     }
 }
