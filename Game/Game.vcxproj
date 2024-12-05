@@ -148,12 +148,14 @@
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerHome.cpp" />
+    <ClCompile Include="PlayerHouse2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Intro.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerHome.h" />
+    <ClInclude Include="PlayerHouse2.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>

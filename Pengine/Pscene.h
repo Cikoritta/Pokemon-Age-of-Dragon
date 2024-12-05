@@ -13,6 +13,8 @@ protected:
 
 	sf::String				sceneName = "none";
 
+    bool                    visited = false;
+
 public:
 
 	Pscene() = default;

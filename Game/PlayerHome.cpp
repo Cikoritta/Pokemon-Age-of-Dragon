@@ -1,4 +1,5 @@
 #include "PlayerHome.h"
+#include "PlayerHouse2.h"
 
 void PlayerHome::Start()
 {
@@ -25,7 +26,19 @@ void PlayerHome::Start()
 
     map.GetColaders()[95]->SetSize({ map.GetColaders()[95]->GetSize().x * 0.9f, map.GetColaders()[95]->GetSize().y }, false);
 
-    player.GetSprite()->SetPixelPosition(map.GetColaders()[24]->GetPixelPosition());
+    if (!visited)
+    {
+        player.GetColader()->SetPixelPosition({ map.GetColaders()[65]->GetPixelPosition().x - map.GetColaders()[95]->GetSize().x / 2.0f, map.GetColaders()[65]->GetPixelPosition().y + map.GetColaders()[95]->GetSize().y / 3.0f });
+        player.GetSprite()->SetPixelPosition({ map.GetColaders()[65]->GetPixelPosition().x - map.GetColaders()[95]->GetSize().x / 2.0f, map.GetColaders()[65]->GetPixelPosition().y + map.GetColaders()[95]->GetSize().y / 3.0f });
+
+        visited = true;
+    }
+    else
+    {
+        EffetctBrightening.Start();
+
+        Brightening = true;
+    }
 
     tvDialog.SetOrigin({ 0.5f, 1.0f });
     tvDialog.SetScale({ 1.5f, 1.5f });
@@ -41,19 +54,21 @@ void PlayerHome::Start()
     computerDialog.SetOrigin({ 0.5f, 1.0f });
     computerDialog.SetScale({ 1.5f, 1.5f });
     computerDialog.SetStringFile("Data/Lang/PlayerHouse/Computer", 2U);
+
+
+    toHouseEffetct.Start();
 }
 
 void PlayerHome::Update()
 {
     map.Update();
 
-    if (!TV && !clock && !magikarp && !computer)
+    if (!TV && !clock && !magikarp && !computer && !toHouse && !Brightening)
     {
         player.Update();
     }
 
     player.Collision(map.GetSolidColaders());
-
 
     if (TV)
     {
@@ -102,13 +117,48 @@ void PlayerHome::Update()
             computerDialog.ResetDialog();
         }
     }
+
+
+    if (!toHouse)
+    {
+        if (player.GetColader()->IsColision(map.GetConstColaders()[80]) && player.GetColader()->IsColision(map.GetConstColaders()[79]))
+        {
+            toHouse = true;
+        }
+    }
+    else
+    {
+        toHouseEffetct.Update(0.1f, 3U);
+
+        if (!toHouseEffetct.IsEffectEnd())
+        {
+            toHouseEffetct.Update(0.1f, 3U);
+        }
+        else
+        {
+            PsceneManager::SetCurrentScene(new PlayerHome(window, event, "PlayerHome2"));
+        }
+    }
+
+
+    if (Brightening)
+    {
+        if (!EffetctBrightening.IsEffectEnd())
+        {
+            EffetctBrightening.Update(0.1f, 3U);
+        }
+        else
+        {
+            Brightening = false;
+        }
+    }
 }
 
 void PlayerHome::Events()
 {
     map.Events();
 
-    if (!TV && !clock && !magikarp  && !computer)
+    if (!TV && !clock && !magikarp  && !computer && !toHouse && !Brightening)
     {
         player.Events();
     }
@@ -225,5 +275,15 @@ void PlayerHome::Draw() const
     if (computer)
     {
         computerDialog.Draw();
+    }
+
+    if (toHouse)
+    {
+        toHouseEffetct.Draw();
+    }
+
+    if (Brightening)
+    {
+        EffetctBrightening.Draw();
     }
 }

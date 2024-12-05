@@ -27,6 +27,16 @@ class PlayerHome : public Pscene
 
     Pdialog computerDialog = Pdialog(window, event, "Data/Textures/Other/Dialog/text_box.png", "Data/Fonts/Retron2000/Retron2000.ttf", sf::Color(96U, 96U, 96U), 25U);
 
+
+    bool toHouse = false;
+
+    Peffect toHouseEffetct = Peffect(window, event, Effect::screenDimming);
+
+
+    Peffect EffetctBrightening = Peffect(window, event, Effect::screenBrightening);
+
+    bool Brightening = false;
+
 public:
 
     PlayerHome() = default;

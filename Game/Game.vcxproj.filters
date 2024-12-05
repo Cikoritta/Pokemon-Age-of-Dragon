@@ -31,6 +31,9 @@
     <Filter Include="Game\Entites\Player">
       <UniqueIdentifier>{625c7f6b-29b8-40f6-8dd5-5b219a2cedec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Scenes\Homes\PlayerHouse2">
+      <UniqueIdentifier>{dd454ca2-2d9d-497f-bbf4-1e01dc7c2405}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -48,6 +51,9 @@
     <ClCompile Include="Player.cpp">
       <Filter>Game\Entites\Player</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerHouse2.cpp">
+      <Filter>Game\Scenes\Homes\PlayerHouse2</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainMenu.h">
@@ -64,6 +70,9 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Game\Entites\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHouse2.h">
+      <Filter>Game\Scenes\Homes\PlayerHouse2</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

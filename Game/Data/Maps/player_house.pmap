@@ -1,4 +1,4 @@
-countTile = "219";
+countTile = "221";
 
 sizeTileX = "16";
 sizeTileY = "16";
@@ -222,3 +222,5 @@ sprite216 = "7r7$96x32|yes.";
 sprite217 = "7r4$96x48|yes.";
 sprite218 = "7r5$96x64|yes.";
 sprite219 = "6r5$0x80|no.";
+sprite220 = "1r7$16x80|no.";
+sprite221 = "2r7$32x80|no.";
