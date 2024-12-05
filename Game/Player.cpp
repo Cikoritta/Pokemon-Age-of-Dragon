@@ -42,6 +42,11 @@ PanimatedSprite* Player::GetSprite()
     return playerSprite;
 }
 
+sf::Vector2f* Player::GetPlayerOrigin()
+{
+    return &playerOrigin;
+}
+
 
 void Player::Collision(std::vector<Pcolader*> solidColader)
 {

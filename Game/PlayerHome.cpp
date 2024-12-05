@@ -26,15 +26,33 @@ void PlayerHome::Start()
 
     map.GetColaders()[95]->SetSize({ map.GetColaders()[95]->GetSize().x * 0.9f, map.GetColaders()[95]->GetSize().y }, false);
 
+
+    visited = std::stoi(Config::Read(L"Saves/Save.psave", L"playerHouse"));
+
+    printf("%d", visited);
+
     if (!visited)
     {
         player.GetColader()->SetPixelPosition({ map.GetColaders()[65]->GetPixelPosition().x - map.GetColaders()[95]->GetSize().x / 2.0f, map.GetColaders()[65]->GetPixelPosition().y + map.GetColaders()[95]->GetSize().y / 3.0f });
         player.GetSprite()->SetPixelPosition({ map.GetColaders()[65]->GetPixelPosition().x - map.GetColaders()[95]->GetSize().x / 2.0f, map.GetColaders()[65]->GetPixelPosition().y + map.GetColaders()[95]->GetSize().y / 3.0f });
 
         visited = true;
+
+        Config::Write(L"Saves/Save.psave", L"playerHouse", std::to_wstring(1));
     }
     else
     {
+        player.GetColader()->SetPixelPosition({ map.GetColaders()[220]->GetPixelPosition().x - map.GetColaders()[219]->GetSize().x / 2.0f, map.GetColaders()[219]->GetPixelPosition().y - map.GetColaders()[219]->GetSize().y / 2.0f });
+        player.GetSprite()->SetPixelPosition({ map.GetColaders()[220]->GetPixelPosition().x - map.GetColaders()[219]->GetSize().x / 2.0f, map.GetColaders()[219]->GetPixelPosition().y - map.GetColaders()[219]->GetSize().y / 2.0f });
+
+        player.GetSprite()->GetSprite()->setTextureRect(sf::IntRect(0, 23, 16, 23));
+
+        sf::View camera = window->getView();
+
+        camera.setCenter(player.GetSprite()->GetPixelPosition() + *player.GetPlayerOrigin());
+
+        window->setView(camera);
+
         EffetctBrightening.Start();
 
         Brightening = true;

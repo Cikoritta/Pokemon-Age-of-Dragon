@@ -38,6 +38,8 @@ public:
 
     PanimatedSprite* GetSprite();
 
+    sf::Vector2f* GetPlayerOrigin();
+
 
     void Collision(std::vector<Pcolader*> solidColader);
 
