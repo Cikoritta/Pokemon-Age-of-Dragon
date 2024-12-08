@@ -54,6 +54,9 @@
     <ClCompile Include="PlayerHouse2.cpp">
       <Filter>Game\Scenes\Homes\PlayerHouse2</Filter>
     </ClCompile>
+    <ClCompile Include="SceneList.cpp">
+      <Filter>Game\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainMenu.h">
@@ -73,6 +76,9 @@
     </ClInclude>
     <ClInclude Include="PlayerHouse2.h">
       <Filter>Game\Scenes\Homes\PlayerHouse2</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneList.h">
+      <Filter>Game\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

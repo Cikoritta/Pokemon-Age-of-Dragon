@@ -67,7 +67,7 @@ public:
     void                    SetDebugMode(bool debugMode);
 
 
-	static void				SetCurrentScene(Pscene* scene);
+	static void				SetCurrentScene(Pscene* scene, sf::Uint16 args = 0U);
 
     static Pscene*			GetCurrentScene();
 

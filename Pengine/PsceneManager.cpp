@@ -44,16 +44,16 @@ void PsceneManager::SetDebugMode(bool debugMode)
 }
 
 
-void PsceneManager::SetCurrentScene(Pscene* scene)
+void PsceneManager::SetCurrentScene(Pscene* scene, sf::Uint16 args)
 {
-    delete currentScene;
-
 	currentScene = scene;
 
 
 	currentScene->SetWindow(window);
 
 	currentScene->SetEvent(event);
+
+    currentScene->args = args;
 
 
 	currentScene->Start();

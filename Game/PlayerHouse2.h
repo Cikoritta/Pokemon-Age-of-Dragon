@@ -4,7 +4,9 @@
 
 class PlayerHouse2 : public Pscene
 {
-    
+    Player player = Player(window, event);
+
+    Pmap map = Pmap(window, event);
 
 public:
 

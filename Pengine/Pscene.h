@@ -22,6 +22,9 @@ public:
 	Pscene(sf::RenderWindow* window, sf::Event* event, const sf::String sceneName = "none");
 
 
+    sf::Uint16              args = 0U;
+
+
 	void					SetWindow(sf::RenderWindow* window);
 
 	sf::RenderWindow*		GetWindow() const;

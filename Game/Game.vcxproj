@@ -149,6 +149,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerHome.cpp" />
     <ClCompile Include="PlayerHouse2.cpp" />
+    <ClCompile Include="SceneList.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Intro.h" />
@@ -157,6 +158,7 @@
     <ClInclude Include="PlayerHome.h" />
     <ClInclude Include="PlayerHouse2.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="SceneList.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />

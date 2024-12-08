@@ -52,6 +52,8 @@ public:
     Pmap(sf::RenderWindow* window, sf::Event* event);
 
 
+    bool load = false;
+
     void LoadMap(std::wstring pathMap, std::string texturePath);
 
 
