@@ -41,6 +41,9 @@ public:
     sf::Vector2f* GetPlayerOrigin();
 
 
+    void Wallking(bool state = false);
+
+
     void Collision(std::vector<Pcolader*> solidColader);
 
     void Update();

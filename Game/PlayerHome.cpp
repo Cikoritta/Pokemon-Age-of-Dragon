@@ -45,14 +45,14 @@ void PlayerHome::Start()
         computerDialog.SetScale({ 1.5f, 1.5f });
         computerDialog.SetStringFile("Data/Lang/PlayerHouse/Computer", 2U);
 
-
-        toHouseEffetct.Start();
-
         map.load = true;
     }
     else
     {
         toHouse = false;
+
+        toHouseEffetct.Reset();
+        EffetctBrightening.Reset();
     }
 
     visited = std::stoi(Config::Read(L"Saves/Save.psave", L"playerHouse"));
@@ -79,7 +79,8 @@ void PlayerHome::Start()
 
         window->setView(camera);
 
-        EffetctBrightening.Start();
+        EffetctBrightening.Start(&camera);
+        toHouseEffetct.Start(&camera);
 
         Brightening = true;
     }

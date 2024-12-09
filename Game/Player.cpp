@@ -48,6 +48,14 @@ sf::Vector2f* Player::GetPlayerOrigin()
 }
 
 
+void Player::Wallking(bool state)
+{
+    isWalking = state;
+
+    isWalkingY = state;
+}
+
+
 void Player::Collision(std::vector<Pcolader*> solidColader)
 {
     this->solidColader = solidColader;

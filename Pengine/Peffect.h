@@ -33,11 +33,14 @@ public:
     Peffect(sf::RenderWindow* window, sf::Event* event, Effect effect);
 
 
-    void                    Start();
+    void                    Start(sf::View* camera = nullptr);
 
     void                    Update(float timeInteval = 0.0f, sf::Uint16 interval = 0U);
 
     void                    Draw() const;
+
+
+    void                    Reset();
 
 
     bool                    IsEffectEnd() const;

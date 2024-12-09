@@ -8,6 +8,14 @@ class PlayerHouse2 : public Pscene
 
     Pmap map = Pmap(window, event);
 
+    Peffect EffetctBrightening = Peffect(window, event, Effect::screenBrightening);
+
+    bool Brightening = false;
+
+    bool toHouse = false;
+
+    Peffect toHouseEffetct = Peffect(window, event, Effect::screenDimming);
+
 public:
 
     PlayerHouse2() = default;
