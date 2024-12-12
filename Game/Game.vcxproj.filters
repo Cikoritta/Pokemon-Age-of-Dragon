@@ -34,6 +34,9 @@
     <Filter Include="Game\Scenes\Homes\PlayerHouse2">
       <UniqueIdentifier>{dd454ca2-2d9d-497f-bbf4-1e01dc7c2405}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Entites\NPC">
+      <UniqueIdentifier>{f8cbb750-a9d1-4f09-9af6-afa2864e5030}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -57,6 +60,9 @@
     <ClCompile Include="SceneList.cpp">
       <Filter>Game\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="NPC.cpp">
+      <Filter>Game\Entites\NPC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainMenu.h">
@@ -79,6 +85,9 @@
     </ClInclude>
     <ClInclude Include="SceneList.h">
       <Filter>Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="NPC.h">
+      <Filter>Game\Entites\NPC</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

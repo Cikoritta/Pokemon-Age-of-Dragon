@@ -19,7 +19,7 @@ int main()
 
     InitScenes(&window, window.GetEvent());
 
-	window.GetSceneManager()->SetCurrentScene(SceneList::GetScene(L"PlayerHome"));
+	window.GetSceneManager()->SetCurrentScene(SceneList::GetScene(L"PlayerHouse2"));
 
     window.GetSceneManager()->RenderScene();
 }
