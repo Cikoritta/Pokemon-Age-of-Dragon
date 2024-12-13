@@ -57,22 +57,30 @@ void PlayerHouse2::Start()
 
     IceDialog.SetOrigin({ 0.5f, 1.0f });
     IceDialog.SetScale({ 1.5f, 1.5f });
-    IceDialog.SetStringFile("Data/Lang/PlayerHouse2/Ice", 2U);
+    IceDialog.SetStringFile("Data/Lang/PlayerHouse2/Ice", 1U);
 
     CapDialog.SetOrigin({ 0.5f, 1.0f });
     CapDialog.SetScale({ 1.5f, 1.5f });
     CapDialog.SetStringFile("Data/Lang/PlayerHouse2/Cap", 2U);
+
+    Mom.SetPosition(map.GetConstColaders()[124]->GetPixelPosition());
+    map.GetSolidColaders().push_back(Mom.GetColader());
+
+    MomDialog.SetOrigin({ 0.5f, 1.0f });
+    MomDialog.SetScale({ 1.5f, 1.5f });
+    MomDialog.SetStringFile("Data/Lang/PlayerHouse2/Mom", 2U);
 }
 
 void PlayerHouse2::Update()
 {
     map.Update();
 
-    if (!Brightening && !toHouse && !windowEvent && !Ice)
+    if (!Brightening && !toHouse && !windowEvent && !Ice && !momDialog)
     {
         player.Update();
     }
     player.Collision(map.GetSolidColaders());
+    player.GetColader()->IsColision(Mom.GetColader());
 
     if (!toHouse)
     {
@@ -143,13 +151,32 @@ void PlayerHouse2::Update()
             CapDialog.ResetDialog();
         }
     }
+
+    if (momDialog)
+    {
+        MomDialog.Update(0.05f);
+
+        if (MomDialog.IsDialogEnd())
+        {
+            momDialog = false;
+
+            Mom.isDialog = false;
+
+            Mom.ResetRect();
+
+            MomDialog.ResetDialog();
+        }
+    }
+
+
+    Mom.Walk(map.GetConstColaders()[124]->GetPixelPosition(), map.GetConstColaders()[131]->GetPixelPosition(), true);
 }
 
 void PlayerHouse2::Events()
 {
     map.Events();
 
-    if (!Brightening && !toHouse && !windowEvent && !Ice)
+    if (!Brightening && !toHouse && !windowEvent && !Ice && !momDialog)
     {
         player.Events();
     }
@@ -216,13 +243,30 @@ void PlayerHouse2::Events()
     {
         CapDialog.Events();
     }
+
+    if (!momDialog)
+    {
+        Mom.Dialog(&momDialog, &MomDialog);
+    }
+    else
+    {
+        MomDialog.Events();
+    }
 }
 
 void PlayerHouse2::Draw() const
 {
     map.Draw();
 
+
+    Mom.Draw();
+
+
     player.Draw();
+
+
+    Mom.Draw(true);
+
 
     if (toHouse)
     {
@@ -248,5 +292,10 @@ void PlayerHouse2::Draw() const
     if (Cap)
     {
         CapDialog.Draw();
+    }
+
+    if (momDialog)
+    {
+        MomDialog.Draw();
     }
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include <Pengine.h>
 #include "Player.h"
+#include "NPC.h"
 
 class PlayerHouse2 : public Pscene
 {
@@ -28,6 +29,13 @@ class PlayerHouse2 : public Pscene
     bool Cap = false;
 
     Pdialog CapDialog = Pdialog(window, event, "Data/Textures/Other/Dialog/text_box.png", "Data/Fonts/Retron2000/Retron2000.ttf", sf::Color(96U, 96U, 96U), 25U);
+
+
+    NPC Mom = NPC(window, event, "Data/Textures/Entites/Mom/Mom.png", sf::IntRect(0, 0, 16, 23), &player);
+
+    bool momDialog = false;
+
+    Pdialog MomDialog = Pdialog(window, event, "Data/Textures/Other/Dialog/text_box.png", "Data/Fonts/Retron2000/Retron2000.ttf", sf::Color(96U, 96U, 96U), 25U);
 
 public:
 
