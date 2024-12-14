@@ -69,6 +69,8 @@ void PlayerHouse2::Start()
     MomDialog.SetOrigin({ 0.5f, 1.0f });
     MomDialog.SetScale({ 1.5f, 1.5f });
     MomDialog.SetStringFile("Data/Lang/PlayerHouse2/Mom", 2U);
+
+    music.PlayMusic(true);
 }
 
 void PlayerHouse2::Update()
@@ -84,7 +86,7 @@ void PlayerHouse2::Update()
 
     if (!toHouse)
     {
-        if (player.GetColader()->IsColision(map.GetConstColaders()[108]) && ((player.GetColader()->IsColision(map.GetConstColaders()[109]) + player.GetColader()->IsColision(map.GetConstColaders()[107])) != 1) && args == 0U)
+        if (player.GetColader()->IsColision(map.GetConstColaders()[108]) && args == 0U)
         {
             toHouse = true;
         }
@@ -100,6 +102,8 @@ void PlayerHouse2::Update()
         else
         {
             PsceneManager::SetCurrentScene(SceneList::GetScene(L"PlayerHome"));
+
+            music.GetMusic()->stop();
         }
     }
 
@@ -152,7 +156,7 @@ void PlayerHouse2::Update()
         }
     }
 
-    if (momDialog)
+    if (momDialog && !momFirstDialog)
     {
         MomDialog.Update(0.05f);
 
@@ -161,6 +165,10 @@ void PlayerHouse2::Update()
             momDialog = false;
 
             Mom.isDialog = false;
+
+            momFirstDialog = true;
+
+            Config::Write(L"Saves/Save.psave", L"momFirstDialog", L"1");
 
             Mom.ResetRect();
 
@@ -244,7 +252,7 @@ void PlayerHouse2::Events()
         CapDialog.Events();
     }
 
-    if (!momDialog)
+    if (!momDialog && !momFirstDialog)
     {
         Mom.Dialog(&momDialog, &MomDialog);
     }
@@ -294,7 +302,7 @@ void PlayerHouse2::Draw() const
         CapDialog.Draw();
     }
 
-    if (momDialog)
+    if (momDialog && !momFirstDialog)
     {
         MomDialog.Draw();
     }

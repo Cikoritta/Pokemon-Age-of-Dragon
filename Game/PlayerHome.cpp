@@ -45,6 +45,16 @@ void PlayerHome::Start()
         computerDialog.SetScale({ 1.5f, 1.5f });
         computerDialog.SetStringFile("Data/Lang/PlayerHouse/Computer", 2U);
 
+
+        sf::View camera = window->getView();
+
+        EffetctBrightening.Start(&camera);
+        toHouseEffetct.Start(&camera);
+
+        camera.setCenter(player.GetSprite()->GetPixelPosition() + *player.GetPlayerOrigin());
+
+        window->setView(camera);
+
         map.load = true;
     }
     else
@@ -63,6 +73,14 @@ void PlayerHome::Start()
         player.GetSprite()->SetPixelPosition({ map.GetColaders()[65]->GetPixelPosition().x - map.GetColaders()[95]->GetSize().x / 2.0f, map.GetColaders()[65]->GetPixelPosition().y + map.GetColaders()[95]->GetSize().y / 3.0f });
 
         visited = true;
+
+        startBrightening = true;
+
+        sf::View camera = window->getView();
+
+        camera.setCenter(player.GetSprite()->GetPixelPosition() + *player.GetPlayerOrigin());
+
+        window->setView(camera);
 
         Config::Write(L"Saves/Save.psave", L"playerHouse", std::to_wstring(1));
     }
@@ -84,13 +102,17 @@ void PlayerHome::Start()
 
         Brightening = true;
     }
+
+    player.Wallking(false);
+
+    music.PlayMusic(true);
 }
 
 void PlayerHome::Update()
 {
     map.Update();
 
-    if (!TV && !clock && !magikarp && !computer && !toHouse && !Brightening)
+    if (!TV && !clock && !magikarp && !computer && !toHouse && !Brightening && !startBrightening)
     {
         player.Update();
     }
@@ -164,6 +186,8 @@ void PlayerHome::Update()
         else
         {
             PsceneManager::SetCurrentScene(SceneList::GetScene(L"PlayerHouse2"));
+
+            music.GetMusic()->stop();
         }
     }
 
@@ -176,6 +200,18 @@ void PlayerHome::Update()
         else
         {
             Brightening = false;
+        }
+    }
+
+    if (startBrightening)
+    {
+        if (!EffetctBrighteningStart.IsEffectEnd())
+        {
+            EffetctBrighteningStart.Update(0.1f, 3U);
+        }
+        else
+        {
+            startBrightening = false;
         }
     }
 }
@@ -272,7 +308,7 @@ void PlayerHome::Draw() const
     player.Draw();
 
 
-    if (map.GetTile()[214]->GetBounds().intersects(player.GetColader()->GetBounds()) || map.GetTile()[68]->GetBounds().intersects(player.GetColader()->GetBounds()))
+    if (map.GetTile()[60]->GetBounds().intersects(player.GetColader()->GetBounds()) || map.GetTile()[68]->GetBounds().intersects(player.GetColader()->GetBounds()))
     {
         map.GetTile()[66]->Draw();
         map.GetTile()[67]->Draw();
@@ -311,5 +347,10 @@ void PlayerHome::Draw() const
     if (Brightening)
     {
         EffetctBrightening.Draw();
+    }
+
+    if (startBrightening)
+    {
+        EffetctBrighteningStart.Draw();
     }
 }

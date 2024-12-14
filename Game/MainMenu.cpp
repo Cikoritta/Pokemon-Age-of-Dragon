@@ -1,5 +1,6 @@
 #include "MainMenu.h"
 #include "Intro.h"
+#include "SceneList.h"
 
 void MainMenu::BaseStart()
 {
@@ -14,10 +15,10 @@ void MainMenu::BaseStart()
     logo.ScaleAnimateReset();
 
 	newGame.SetPosition({ 0.5f, 0.5f }, &background);
+    newGame.GetTamplate()->setCharacterSize(45U);
+    newGame.GetTamplate()->setOutlineThickness(5.0f);
+    newGame.GetTamplate()->setOutlineColor(sf::Color::Black);
 	newGame.SetOrigin({ 0.5f, 0.5f }, true);
-	newGame.GetTamplate()->setCharacterSize(45U);
-	newGame.GetTamplate()->setOutlineThickness(5.0f);
-	newGame.GetTamplate()->setOutlineColor(sf::Color::Black);
 
 	loadGame.SetTamplate(newGame.GetTamplate());
 	loadGame.SetOrigin({ 0.5f, 0.5f }, true);
@@ -162,6 +163,17 @@ void MainMenu::SetTempSetting()
     window->setVerticalSyncEnabled(stoi(Config::Read(L"$SettingTemp", L"vsync")));
 
 
+    icon.loadFromFile("Data/Textures/Other/Icon/icon.png");
+
+    window->setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+
+    cursorImage.loadFromFile("Data/Textures/Other/Cursor/cursor.png");
+
+    cursor.loadFromPixels(cursorImage.getPixelsPtr(), cursorImage.getSize(), { 0, 0 });
+
+    window->setMouseCursor(cursor);
+
+
     Config::Write(L"Config.ini", L"createWidth", std::to_wstring(newResolution.x));
     Config::Write(L"Config.ini", L"createHeight", std::to_wstring(newResolution.y));
     Config::Write(L"Config.ini", L"createMode", Config::Read(L"$SettingTemp", L"createMode"));
@@ -177,6 +189,16 @@ void MainMenu::SetTempSetting()
     Start();
 }
 
+void MainMenu::CreateSave()
+{
+    Config::CreateConfig(L"Saves/Save.psave");
+
+
+    Config::Create(L"Saves/Save.psave", L"playerHouse", std::to_wstring(0));
+
+    Config::Create(L"Saves/Save.psave", L"momFirstDialog", std::to_wstring(0));
+}
+
 
 void MainMenu::Start()
 {
@@ -190,8 +212,24 @@ void MainMenu::Start()
 
     WarningResetStart();
 
-
     screenDimming.Start();
+
+
+    window->create(sf::VideoMode(stoi(Config::Read(L"Config.ini", L"createWidth")), stoi(Config::Read(L"Config.ini", L"createHeight"))), "Pokemon Age of Dragon", stoi(Config::Read(L"Config.ini", L"createMode")));
+
+    window->setFramerateLimit(stoi(Config::Read(L"Config.ini", L"frameRate")));
+
+    window->setVerticalSyncEnabled(stoi(Config::Read(L"Config.ini", L"vsync")));
+
+    icon.loadFromFile("Data/Textures/Other/Icon/icon.png");
+
+    window->setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+
+    cursorImage.loadFromFile("Data/Textures/Other/Cursor/cursor.png");
+
+    cursor.loadFromPixels(cursorImage.getPixelsPtr(), cursorImage.getSize(), { 0, 0 });
+
+    window->setMouseCursor(cursor);
 
 
     music.PlayMusic(true);
@@ -221,9 +259,9 @@ void MainMenu::Update()
         {
             std::remove("Saves/Save.psave");
 
-            PsceneManager::SetCurrentScene(new Intro(window, event, L"Intro"));
+            CreateSave();
 
-            Config::CreateConfig(L"Saves/Save.psave");
+            PsceneManager::SetCurrentScene(SceneList::GetScene("Intro"));
         }
         else if (loadGameEvent)
         {
@@ -234,7 +272,7 @@ void MainMenu::Update()
 
 void MainMenu::Events()
 {
-	if (!exitEvent)
+	if (!exitEvent && !settingEvent)
 	{
 		if (Pinput::IsMouseCollision(&logo))
 		{

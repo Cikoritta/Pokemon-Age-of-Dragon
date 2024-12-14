@@ -35,7 +35,12 @@ class PlayerHouse2 : public Pscene
 
     bool momDialog = false;
 
+    bool momFirstDialog = std::stoi(Config::Read(L"Saves/Save.psave", L"momFirstDialog"));
+
     Pdialog MomDialog = Pdialog(window, event, "Data/Textures/Other/Dialog/text_box.png", "Data/Fonts/Retron2000/Retron2000.ttf", sf::Color(96U, 96U, 96U), 25U);
+
+
+    Pmusic                  music = Pmusic("Data/Music/Oldale Town.flac");
 
 public:
 

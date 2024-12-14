@@ -8,7 +8,7 @@ class Pwindow : public sf::RenderWindow
 	PsceneManager		 sceneManager;
 
 
-	sf::String			 configPath = "none";
+    std::string			 configPath = "none";
 
 
     sf::String           title = "none";
@@ -25,7 +25,7 @@ public:
 
 	Pwindow() = default;
 
-	Pwindow(sf::String title , const sf::String configPath = "none", Pscene* startScene = nullptr)
+	Pwindow(sf::String title , std::string configPath = "none", Pscene* startScene = nullptr)
 	{
 		this->configPath = configPath;
 

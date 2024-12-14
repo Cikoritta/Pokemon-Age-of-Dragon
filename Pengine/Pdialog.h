@@ -3,6 +3,7 @@
 #include "Pmusic.h"
 #include "Ptext.h"
 #include "Plang.h"
+#include "Psound.h"
 
 class Pdialog
 {
@@ -46,6 +47,9 @@ class Pdialog
     sf::Sprite                      dialogEnd;
 
     sf::Texture                     dialogEndTexture;
+
+
+    Psound                          plinc = Psound("Data/Effect/Select.flac");
 
 
     bool                            endPosition = false;

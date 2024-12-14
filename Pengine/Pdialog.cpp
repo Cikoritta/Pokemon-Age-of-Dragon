@@ -49,6 +49,8 @@ void Pdialog::Update(float timeInterval)
         {
             clock.restart();
 
+            plinc.PlayEffect();
+
             isClockStarted = true;
         }
 
@@ -81,7 +83,7 @@ void Pdialog::Update(float timeInterval)
 
             float height = (dialogText.getPosition().y + (window->getSize().y / 100.f) + dialogEnd.getGlobalBounds().height);
             
-            countEnter = std::count(dialogStrings[currentDialog].begin(), dialogStrings[currentDialog].end(), '\n');
+            countEnter = static_cast<sf::Uint16>(std::count(dialogStrings[currentDialog].begin(), dialogStrings[currentDialog].end(), '\n'));
 
             if (countEnter == 1)
             {
@@ -139,7 +141,7 @@ void Pdialog::Events()
             {
                 if (currentLetter < dialogStrings[currentDialog].length())
                 {
-                    currentLetter = dialogStrings[currentDialog].length();
+                    currentLetter = static_cast<sf::Uint16>(dialogStrings[currentDialog].length());
 
                     dialogText.setString(dialogStrings[currentDialog].substr(0, currentLetter));
                 }
@@ -154,6 +156,8 @@ void Pdialog::Events()
                     isClockStarted = false;
 
                     endPosition = false;
+
+                    plinc.PlayEffect();
                 }
             }
         }
@@ -161,7 +165,7 @@ void Pdialog::Events()
         {
             if (currentLetter < dialogStrings[currentDialog].length())
             {
-                currentLetter = dialogStrings[currentDialog].length();
+                currentLetter = static_cast<sf::Uint16>(dialogStrings[currentDialog].length());
 
                 dialogText.setString(dialogStrings[currentDialog].substr(0, currentLetter));
             }
@@ -176,6 +180,8 @@ void Pdialog::Events()
                 isClockStarted = false;
 
                 endPosition = false;
+
+                plinc.PlayEffect();
             }
         }
     }
@@ -187,7 +193,7 @@ void Pdialog::Events()
             {
                 if (currentLetter < dialogStrings[currentDialog].length())
                 {
-                    currentLetter = dialogStrings[currentDialog].length();
+                    currentLetter = static_cast<sf::Uint16>(dialogStrings[currentDialog].length());
 
                     dialogText.setString(dialogStrings[currentDialog].substr(0, currentLetter));
                 }
@@ -199,9 +205,9 @@ void Pdialog::Events()
         }
         else if (event->type == event->MouseButtonPressed && event->mouseButton.button == sf::Mouse::Left)
         {
-            if (currentLetter < dialogStrings[currentDialog].length())
+            if (currentLetter < static_cast<sf::Uint16>(dialogStrings[currentDialog].length()))
             {
-                currentLetter = dialogStrings[currentDialog].length();
+                currentLetter = static_cast<sf::Uint16>(dialogStrings[currentDialog].length());
 
                 dialogText.setString(dialogStrings[currentDialog].substr(0, currentLetter));
             }

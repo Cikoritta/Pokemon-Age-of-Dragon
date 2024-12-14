@@ -106,11 +106,21 @@ class MainMenu : public Pscene
 
     bool                    loadGameEvent = false;
 
+    bool                    starting = false;
+
+
+    sf::Image            icon;
+
+    sf::Image            cursorImage;
+
+    sf::Cursor           cursor;
+
+
 public:
 
     MainMenu() = default;
 
-    MainMenu(Pwindow* window, sf::Event* event, const sf::String name) : Pscene(window, event, name) {}
+    MainMenu(sf::RenderWindow* window, sf::Event* event, const sf::String name) : Pscene(window, event, name) {}
 
 
     void                    BaseStart();
@@ -123,6 +133,8 @@ public:
 
 
     void                    SetTempSetting();
+
+    void                    CreateSave();
 
 
     void                    Start() override;

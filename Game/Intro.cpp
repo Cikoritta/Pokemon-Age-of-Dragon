@@ -1,9 +1,12 @@
 #include "Intro.h"
 #include "PlayerHome.h"
+#include "SceneList.h"
 
 void Intro::Start()
 {
     background.SetScale({ 1.0f, 1.0f });
+
+    window->setMouseCursorVisible(false);
 
     nameEnterBackground.SetScale({ 1.0f, 1.0f });
 
@@ -128,7 +131,7 @@ void Intro::Update()
         {
             music.GetMusic()->stop();
 
-            PsceneManager::SetCurrentScene(new PlayerHome(window, event, L"PlayerHome"));
+            PsceneManager::SetCurrentScene(SceneList::GetScene("PlayerHome"));
         }
     }
 }
