@@ -309,11 +309,11 @@ void NPC::Dialog(bool* eventDialog, Pdialog* dialog)
                 {
                     if (player->GetColader()->GetRealPosition().x <= colader->GetRealPosition().x)
                     {
-                        sprite->GetSprite()->setTextureRect(sf::IntRect(0, 46, 16, 23));
+                        sprite->GetSprite()->setTextureRect(sf::IntRect(16, 46, 16, 23));
                     }
                     else
                     {
-                        sprite->GetSprite()->setTextureRect(sf::IntRect(0, 69, 16, 23));
+                        sprite->GetSprite()->setTextureRect(sf::IntRect(16, 69, 16, 23));
                     }
                 }
             }
