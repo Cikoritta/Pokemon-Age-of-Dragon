@@ -18,6 +18,11 @@ class PlayerHouse2 : public Pscene
     Peffect toHouseEffetct = Peffect(window, event, Effect::screenDimming);
 
 
+    bool toWorld = false;
+
+    Peffect toWorldEffetct = Peffect(window, event, Effect::screenDimming);
+
+
     bool windowEvent = false;
 
     Pdialog windowDialog = Pdialog(window, event, "Data/Textures/Other/Dialog/text_box.png", "Data/Fonts/Retron2000/Retron2000.ttf", sf::Color(96U, 96U, 96U), 25U);
@@ -39,6 +44,9 @@ class PlayerHouse2 : public Pscene
 
     Pdialog MomDialog = Pdialog(window, event, "Data/Textures/Other/Dialog/text_box.png", "Data/Fonts/Retron2000/Retron2000.ttf", sf::Color(96U, 96U, 96U), 25U);
 
+    Pdialog MomDialog2 = Pdialog(window, event, "Data/Textures/Other/Dialog/text_box.png", "Data/Fonts/Retron2000/Retron2000.ttf", sf::Color(96U, 96U, 96U), 25U);
+
+    bool momDialog2 = false;
 
     Pmusic                  music = Pmusic("Data/Music/Oldale Town.flac");
 

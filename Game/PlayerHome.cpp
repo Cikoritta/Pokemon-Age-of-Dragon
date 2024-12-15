@@ -10,8 +10,12 @@ void PlayerHome::Start()
         windowScale.x = std::stof(Config::Read(L"Config.ini", L"windowScaleWidth"));
         windowScale.y = std::stof(Config::Read(L"Config.ini", L"windowScaleHeight"));
 
+        printf("SCALE\n");
+
         map.LoadMap(L"Data/Maps/player_house.pmap", "Data/Textures/Maps/player_house.png");
         map.SetScale({ 4.6f, 4.6f });
+
+        printf("MAP\n");
 
         map.GetColaders()[64]->SetSize({ map.GetColaders()[64]->GetSize().x * windowScale.x, map.GetColaders()[64]->GetSize().y * 0.9f }, false);
         map.GetColaders()[65]->SetSize({ map.GetColaders()[65]->GetSize().x * 0.7f, map.GetColaders()[65]->GetSize().y * 0.9f }, false);
@@ -30,6 +34,10 @@ void PlayerHome::Start()
         map.GetColaders()[95]->SetSize({ map.GetColaders()[95]->GetSize().x * 0.9f, map.GetColaders()[95]->GetSize().y }, false);
 
 
+        printf("COLADER\n");
+
+
+
         tvDialog.SetOrigin({ 0.5f, 1.0f });
         tvDialog.SetScale({ 1.5f, 1.5f });
         tvDialog.SetStringFile("Data/Lang/PlayerHouse/TV", 3U);
@@ -44,6 +52,8 @@ void PlayerHome::Start()
         computerDialog.SetOrigin({ 0.5f, 1.0f });
         computerDialog.SetScale({ 1.5f, 1.5f });
         computerDialog.SetStringFile("Data/Lang/PlayerHouse/Computer", 2U);
+
+        printf("STRINGS\n");
 
 
         sf::View camera = window->getView();
@@ -64,6 +74,8 @@ void PlayerHome::Start()
         toHouseEffetct.Reset();
         EffetctBrightening.Reset();
     }
+
+    printf("MAP LOAD\n");
 
     visited = std::stoi(Config::Read(L"Saves/Save.psave", L"playerHouse"));
 
@@ -102,6 +114,8 @@ void PlayerHome::Start()
 
         Brightening = true;
     }
+
+    printf("VISITED\n");
 
     player.Wallking(false);
 

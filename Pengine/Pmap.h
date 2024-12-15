@@ -12,6 +12,9 @@ class Pmap
 
     std::wstring pathMap;
     std::string texturePath;
+    std::wstring tileInfo;
+    sf::Uint16 left = 0U;
+    sf::Uint16 top = 0U;
 
 
     sf::Vector2f sizeTile = { 0.0f, 0.0f };
@@ -73,5 +76,5 @@ public:
 
     void Events();
 
-    void Draw() const;
+    void Draw(bool checkVisible = false, sf::View camera = sf::View()) const;
 };

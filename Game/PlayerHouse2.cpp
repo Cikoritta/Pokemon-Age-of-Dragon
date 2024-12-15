@@ -25,30 +25,42 @@ void PlayerHouse2::Start()
     else
     {
         toHouse = false;
+        toWorld = false;
 
         EffetctBrightening.Reset();
         toHouseEffetct.Reset();
+        toWorldEffetct.Reset();
 
         if (args == 0)
         {
             player.GetSprite()->GetSprite()->setTextureRect(sf::IntRect(0, 0, 16, 23));
+        }
+        else if (args == 2)
+        {
+            player.GetSprite()->GetSprite()->setTextureRect(sf::IntRect(0, 23, 16, 23));
         }
     }
 
     player.Wallking(false);
     Brightening = true;
 
-    sf::View camera = window->getView();
-
-    camera.setCenter(player.GetSprite()->GetPixelPosition() + *player.GetPlayerOrigin());
-
-    window->setView(camera);
-
     if (args == 0U)
     {
         player.GetColader()->SetPixelPosition({ map.GetColaders()[108]->GetPixelPosition().x, map.GetColaders()[108]->GetPixelPosition().y + map.GetColaders()[108]->GetSize().y / 5.0f });
         player.GetSprite()->SetPixelPosition({ map.GetColaders()[108]->GetPixelPosition().x, map.GetColaders()[108]->GetPixelPosition().y + map.GetColaders()[108]->GetSize().y / 5.0f });
     }
+    else if (args == 2)
+    {
+        player.GetColader()->SetPixelPosition({ map.GetColaders()[45]->GetPixelPosition().x + (map.GetColaders()[45]->GetSize().x / 2.0f), map.GetColaders()[45]->GetPixelPosition().y + (map.GetColaders()[45]->GetSize().y / 2.0f) });
+        player.GetSprite()->SetPixelPosition({ map.GetColaders()[45]->GetPixelPosition().x + (map.GetColaders()[45]->GetSize().x / 2.0f), map.GetColaders()[45]->GetPixelPosition().y + (map.GetColaders()[45]->GetSize().y / 2.0f) });
+    }
+
+
+    sf::View camera = window->getView();
+
+    camera.setCenter(player.GetSprite()->GetPixelPosition() + *player.GetPlayerOrigin());
+
+    window->setView(camera);
 
 
     windowDialog.SetOrigin({ 0.5f, 1.0f });
@@ -68,7 +80,11 @@ void PlayerHouse2::Start()
 
     MomDialog.SetOrigin({ 0.5f, 1.0f });
     MomDialog.SetScale({ 1.5f, 1.5f });
-    MomDialog.SetStringFile("Data/Lang/PlayerHouse2/Mom", 2U);
+    MomDialog.SetStringFile("Data/Lang/PlayerHouse2/Mom", 5U);
+
+    MomDialog2.SetOrigin({ 0.5f, 1.0f });
+    MomDialog2.SetScale({ 1.5f, 1.5f });
+    MomDialog2.SetStringFile("Data/Lang/PlayerHouse2/Mom2", 1U);
 
     music.PlayMusic(true);
 }
@@ -77,7 +93,7 @@ void PlayerHouse2::Update()
 {
     map.Update();
 
-    if (!Brightening && !toHouse && !windowEvent && !Ice && !momDialog)
+    if (!Brightening && !toHouse && !windowEvent && !Ice && !momDialog && !momDialog2 && !toWorld)
     {
         player.Update();
     }
@@ -86,7 +102,7 @@ void PlayerHouse2::Update()
 
     if (!toHouse)
     {
-        if (player.GetColader()->IsColision(map.GetConstColaders()[108]) && args == 0U)
+        if (player.GetColader()->IsColision(map.GetConstColaders()[108]))
         {
             toHouse = true;
         }
@@ -102,6 +118,29 @@ void PlayerHouse2::Update()
         else
         {
             PsceneManager::SetCurrentScene(SceneList::GetScene(L"PlayerHome"));
+
+            music.GetMusic()->stop();
+        }
+    }
+
+    if (!toWorld)
+    {
+        if (player.GetColader()->IsColision(map.GetConstColaders()[94]) && player.GetColader()->IsColision(map.GetConstColaders()[95]))
+        {
+            toWorld = true;
+        }
+    }
+    else
+    {
+        toWorldEffetct.Update(0.1f, 3U);
+
+        if (!toWorldEffetct.IsEffectEnd())
+        {
+            toWorldEffetct.Update(0.1f, 3U);
+        }
+        else
+        {
+            PsceneManager::SetCurrentScene(SceneList::GetScene(L"World"), 1U);
 
             music.GetMusic()->stop();
         }
@@ -176,6 +215,21 @@ void PlayerHouse2::Update()
         }
     }
 
+    if (momDialog2 && momFirstDialog)
+    {
+        MomDialog2.Update(0.05f);
+
+        if (MomDialog2.IsDialogEnd())
+        {
+            momDialog2 = false;
+
+            Mom.isDialog = false;
+
+            Mom.ResetRect();
+
+            MomDialog2.ResetDialog();
+        }
+    }
 
     Mom.Walk(map.GetConstColaders()[124]->GetPixelPosition(), map.GetConstColaders()[131]->GetPixelPosition(), true);
 }
@@ -184,12 +238,7 @@ void PlayerHouse2::Events()
 {
     map.Events();
 
-    if (!Brightening && !toHouse && !windowEvent && !Ice && !momDialog)
-    {
-        player.Events();
-    }
-    
-    if (!Brightening && !toHouse)
+    if (!Brightening && !toHouse && !windowEvent && !Ice && !momDialog && !momDialog2 && !toWorld)
     {
         player.Events();
     }
@@ -260,6 +309,15 @@ void PlayerHouse2::Events()
     {
         MomDialog.Events();
     }
+
+    if (!momDialog2 && momFirstDialog)
+    {
+        Mom.Dialog(&momDialog2, &MomDialog2);
+    }
+    else
+    {
+        MomDialog2.Events();
+    }
 }
 
 void PlayerHouse2::Draw() const
@@ -279,6 +337,11 @@ void PlayerHouse2::Draw() const
     if (toHouse)
     {
         toHouseEffetct.Draw();
+    }
+
+    if (toWorld)
+    {
+        toWorldEffetct.Draw();
     }
 
     if (Brightening)
@@ -305,5 +368,10 @@ void PlayerHouse2::Draw() const
     if (momDialog && !momFirstDialog)
     {
         MomDialog.Draw();
+    }
+
+    if (momDialog2 && momFirstDialog)
+    {
+        MomDialog2.Draw();
     }
 }

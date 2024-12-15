@@ -56,13 +56,26 @@ void Player::Wallking(bool state)
 }
 
 
-void Player::Collision(std::vector<Pcolader*> solidColader)
+void Player::Collision(std::vector<Pcolader*> solidColader, bool checkVisible, sf::View camera)
 {
     this->solidColader = solidColader;
 
-    for (sf::Uint16 i = 0; i < solidColader.size(); i++)
+    if (!checkVisible)
     {
-        colader->IsColision(solidColader[i]);
+        for (sf::Uint16 i = 0; i < solidColader.size(); i++)
+        {
+            colader->IsColision(solidColader[i]);
+        }
+    }
+    else
+    {
+        for (sf::Uint16 i = 0; i < solidColader.size(); i++)
+        {
+            if (sf::FloatRect(window->mapPixelToCoords({ 0, 0 }).x, window->mapPixelToCoords({ 0, 0 }).y, camera.getSize().x, camera.getSize().y).intersects(solidColader[i]->GetBounds()))
+            {
+                colader->IsColision(solidColader[i]);
+            }
+        }
     }
 }
 

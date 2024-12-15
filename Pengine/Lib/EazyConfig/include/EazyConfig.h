@@ -5,23 +5,16 @@
 
 class Config
 {
-	static std::string			m_LocateFile;
+	static std::wstring			m_LocateFile;
 
-	static bool					m_log;
-
-	static void					chechLocate();
-	static void					chechLocate(std::wstring locateFile);
-
-	static void					chechOpen(std::wfstream& wfstream);
-	static void					chechOpen(std::wfstream& wfstream, std::wstring locateFile);
+	static void					PooP(std::string* string);
+	static void					PooP(std::wstring* string);
 
 public:
 
-	static void					OnLog(bool value);
+	static void					SetLocate(std::wstring locateFile);
 
-	static void					SetLocate(std::string locateFile);
-
-	static std::string			GetLocate();
+	static std::wstring			GetLocate();
 
 
 	static std::wstring			Read(std::wstring settingName);

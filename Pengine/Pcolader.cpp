@@ -105,7 +105,7 @@ Pcolader::Pcolader(sf::RenderWindow* window, sf::Event* event, sf::Vector2f posi
 
 	textName.setFont(font);
 	textName.setString(coladerName);
-	textName.setCharacterSize(12 * ((windowScale.x + windowScale.y) / 2.0f));
+    textName.setCharacterSize(static_cast<unsigned int>(12 * ((windowScale.x + windowScale.y) / 2.0f)));
 	textName.setFillColor(sf::Color::White);
 	textName.setOutlineThickness(1.0f);
 	textName.setOutlineColor(sf::Color::Black);

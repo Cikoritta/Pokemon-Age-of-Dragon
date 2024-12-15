@@ -28,11 +28,9 @@ Psprite::Psprite(sf::RenderWindow* window, sf::Event* event, sf::String textureP
     }
 
 
-    windowScale.x = std::stof(Config::Read(L"windowScaleWidth"));
+    windowScale = { stof(Config::Read(L"Config.ini", L"windowScaleWidth")), stof(Config::Read(L"Config.ini", L"windowScaleHeight")) };
 
-    windowScale.y = std::stof(Config::Read(L"windowScaleHeight"));
-
-    SetScale({1.0f, 1.0f});
+    SetScale({ 1.0f, 1.0f });
 }
 
 
@@ -111,10 +109,6 @@ sf::Vector2f Psprite::GetScale() const
 void Psprite::SetScale(sf::Vector2f scale)
 {
     this->scale = scale;
-
-    windowScale.x = std::stof(Config::Read(L"windowScaleWidth"));
-
-    windowScale.y = std::stof(Config::Read(L"windowScaleHeight"));
 
     sprite.setScale(windowScale.x * scale.x, windowScale.y * scale.y);
 }

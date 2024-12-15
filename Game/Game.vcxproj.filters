@@ -37,6 +37,12 @@
     <Filter Include="Game\Entites\NPC">
       <UniqueIdentifier>{f8cbb750-a9d1-4f09-9af6-afa2864e5030}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Scenes\SceneList">
+      <UniqueIdentifier>{e4d099ae-091c-49ca-ba73-0d26ed5188cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scenes\World">
+      <UniqueIdentifier>{4e732bca-680b-4708-b998-567a868ef105}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -57,11 +63,14 @@
     <ClCompile Include="PlayerHouse2.cpp">
       <Filter>Game\Scenes\Homes\PlayerHouse2</Filter>
     </ClCompile>
-    <ClCompile Include="SceneList.cpp">
-      <Filter>Game\Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="NPC.cpp">
       <Filter>Game\Entites\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneList.cpp">
+      <Filter>Game\Scenes\SceneList</Filter>
+    </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>Game\Scenes\World</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -83,11 +92,14 @@
     <ClInclude Include="PlayerHouse2.h">
       <Filter>Game\Scenes\Homes\PlayerHouse2</Filter>
     </ClInclude>
-    <ClInclude Include="SceneList.h">
-      <Filter>Game\Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="NPC.h">
       <Filter>Game\Entites\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneList.h">
+      <Filter>Game\Scenes\SceneList</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>Game\Scenes\World</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

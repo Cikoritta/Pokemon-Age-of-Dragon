@@ -33,25 +33,28 @@ void Pmap::LoadMap(std::wstring pathMap, std::string texturePath)
     this->pathMap = pathMap;
     this->texturePath = texturePath;
 
-    sizeTile.x = std::stoi(Config::Read(pathMap, L"sizeTileX"));
-    sizeTile.y = std::stoi(Config::Read(pathMap, L"sizeTileY"));
+    sizeTile.x = std::stof(Config::Read(pathMap, L"sizeTileX"));
+    sizeTile.y = std::stof(Config::Read(pathMap, L"sizeTileY"));
 
-    originalSizeTile.x = std::stoi(Config::Read(pathMap, L"sizeTileX"));
-    originalSizeTile.y = std::stoi(Config::Read(pathMap, L"sizeTileY"));
+    originalSizeTile.x = std::stof(Config::Read(pathMap, L"sizeTileX"));
+    originalSizeTile.y = std::stof(Config::Read(pathMap, L"sizeTileY"));
 
     countTile = std::stoi(Config::Read(pathMap, L"countTile"));
+
+
+    printf("COUNT TILE\n");
 
 
     sf::Vector2f positionTile = sf::Vector2f(0.0f, 0.0f);
 
     for (sf::Uint16 numberTile = 0; numberTile < countTile; numberTile++)
     {
-        std::wstring tileInfo = Config::Read(pathMap, L"sprite" + std::to_wstring(numberTile + 1));
+        tileInfo = Config::Read(pathMap, L"sprite" + std::to_wstring(numberTile + 1));
 
 
-        sf::Uint16 left = 0U;
+        left = 0U;
 
-        sf::Uint16 top = 0U;
+        top = 0U;
 
 
         left = std::stoi(tileInfo.substr(tileInfo.find(L"$") + 1, tileInfo.find(L"x")));
@@ -64,7 +67,7 @@ void Pmap::LoadMap(std::wstring pathMap, std::string texturePath)
         positionTile.y = std::stoi(tileInfo.substr(tileInfo.find(L"r") + 1, tileInfo.find(L"$"))) * sizeTile.y;
 
 
-        Psprite* tile = new Psprite(window, event, texturePath, new sf::IntRect(left, top, sizeTile.x, sizeTile.y));
+        Psprite* tile = new Psprite(window, event, texturePath, new sf::IntRect(left, top, static_cast<int>(sizeTile.x), static_cast<int>(sizeTile.y)));
 
         tile->SetPixelPosition(positionTile);
 
@@ -84,7 +87,11 @@ void Pmap::LoadMap(std::wstring pathMap, std::string texturePath)
         coladers.push_back(colader);
 
         tiles.push_back(tile);
+
+        printf("nomber: %d\n", numberTile);
     }
+
+    printf("COMPLATE\n");
 }
 
 
@@ -240,7 +247,7 @@ void Pmap::Events()
 
                 positionTile.y = std::stoi(tileInfo.substr(tileInfo.find(L"r") + 1, tileInfo.find(L"$"))) * originalSizeTile.y;
 
-                Psprite* tile = new Psprite(window, event, texturePath, new sf::IntRect(left, top, originalSizeTile.x, originalSizeTile.y));
+                Psprite* tile = new Psprite(window, event, texturePath, new sf::IntRect(left, top, static_cast<int>(originalSizeTile.x), static_cast<int>(originalSizeTile.y)));
 
                 tile->SetPixelPosition(positionTile);
 
@@ -359,18 +366,42 @@ void Pmap::Events()
     }
 }
 
-void Pmap::Draw() const
+void Pmap::Draw(bool checkVisible, sf::View camera) const
 {
-    for (sf::Uint16 i = 0; i < tiles.size(); i++)
+    if (!checkVisible)
     {
-        tiles[i]->Draw();
-    }
-
-    if (debug)
-    {
-        for (sf::Uint16 i = 0; i < coladers.size(); i++)
+        for (sf::Uint16 i = 0; i < tiles.size(); i++)
         {
-            coladers[i]->Draw();
+            tiles[i]->Draw();
+        }
+
+        if (debug)
+        {
+            for (sf::Uint16 i = 0; i < coladers.size(); i++)
+            {
+                coladers[i]->Draw();
+            }
+        }
+    }
+    else
+    {
+        for (sf::Uint16 i = 0; i < tiles.size(); i++)
+        {
+            if (sf::FloatRect(window->mapPixelToCoords({ 0, 0 }).x, window->mapPixelToCoords({ 0, 0 }).y, camera.getSize().x, camera.getSize().y).intersects(tiles[i]->GetBounds()))
+            {
+                tiles[i]->Draw();
+            }
+        }
+
+        if (debug)
+        {
+            for (sf::Uint16 i = 0; i < coladers.size(); i++)
+            {
+                if (sf::FloatRect(window->mapPixelToCoords({ 0, 0 }).x, window->mapPixelToCoords({ 0, 0 }).y, camera.getSize().x, camera.getSize().y).intersects(coladers[i]->GetBounds()))
+                {
+                    coladers[i]->Draw();
+                }
+            }
         }
     }
 

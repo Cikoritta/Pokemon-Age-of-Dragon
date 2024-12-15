@@ -44,7 +44,7 @@ public:
     void Wallking(bool state = false);
 
 
-    void Collision(std::vector<Pcolader*> solidColader);
+    void Collision(std::vector<Pcolader*> solidColader, bool checkVisible = false, sf::View camera = sf::View());
 
     void Update();
 

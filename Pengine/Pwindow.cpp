@@ -63,9 +63,9 @@ void Pwindow::ApplyConfig()
         {
             sf::Vector2f tempResolution;
 
-            tempResolution.x = std::stoi(Config::Read(L"ResolutionList.ini", std::to_wstring(numberResolution)).substr(0, 4));
+            tempResolution.x = std::stof(Config::Read(L"ResolutionList.ini", std::to_wstring(numberResolution)).substr(0, 4));
 
-            tempResolution.y = std::stoi(Config::Read(L"ResolutionList.ini", std::to_wstring(numberResolution)).substr(6));
+            tempResolution.y = std::stof(Config::Read(L"ResolutionList.ini", std::to_wstring(numberResolution)).substr(6));
 
             if ((tempResolution.x == stoi(Config::Read(L"createWidth"))) && (tempResolution.y == stoi(Config::Read(L"createHeight"))))
             {

@@ -13,7 +13,7 @@ void Pmusic::PlayMusic(bool loop)
 
     music.setVolume(std::stof(Config::Read(L"Sound.ini", L"Music")));
 
-    if (!music.getStatus() != sf::Music::Playing)
+    if (music.getStatus() != sf::Music::Playing)
     {
         music.play();
     }
